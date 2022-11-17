@@ -23,5 +23,5 @@ app.get('*', (req, res) => {
 
 // 포트 연결
 app.listen(PORT, () => {
-    console.log(`http://localhost${PORT}`);
+    console.log(`http://localhost:${PORT}`);
 })
