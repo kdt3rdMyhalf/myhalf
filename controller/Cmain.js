@@ -14,9 +14,24 @@ exports.getSignup = (req, res) => {
 
 exports.postLogin = (req, res) => {
     console.log(req.body);
-    models.User.findAll().then((result) => {
-        console.log(result);
-    }).catch(err => {
+    models.User.findOne({
+        where: {
+            userId: req.body.userId,
+            userPw : req.body.userPw
+        }
+    })
+    .then((db_result) => {
+        if (db_result === null) {
+            res.send({result: false})
+        }
+        else {
+            res.render('index', {
+                result: true,
+                userName: db_result.userName
+            })
+        }
+    })
+    .catch(err => {
         console.log(err);
     })
 }

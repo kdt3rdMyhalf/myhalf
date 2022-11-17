@@ -24,6 +24,10 @@ const User = function (Sequelize, DataTypes) {
             userBirth: {
                 type: DataTypes.DATE,
                 allowNull: false,
+            },
+            userName: {
+                type: DataTypes.STRING(30),
+                allowNull: false,
             }
         },
         {
