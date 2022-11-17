@@ -11,3 +11,12 @@ exports.getLogin = (req, res) => {
 exports.getSignup = (req, res) => {
     res.render('signup');
 }
+
+exports.postLogin = (req, res) => {
+    console.log(req.body);
+    models.User.findAll().then((result) => {
+        console.log(result);
+    }).catch(err => {
+        console.log(err);
+    })
+}
