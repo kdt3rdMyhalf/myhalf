@@ -1,0 +1,24 @@
+{
+  "name": "myhalf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kdt3rdMyhalf/myhalf.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kdt3rdMyhalf/myhalf/issues"
+  },
+  "homepage": "https://github.com/kdt3rdMyhalf/myhalf#readme",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.2"
+  }
+}
