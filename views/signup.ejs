@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+</head>
+<body>
+    <form name="formSignup" action="/user/signup" method="POST">
+        <label for="userId">ID</label>
+        <input id="userId" type="text" name="userId" required><br/>
+        <label for="password">Password</label>
+        <input id="userPw" type="password" name="userPw" required><br/>
+        <label for="passwordcheck">Password 체크</label>
+        <input id="userPwCheck" type="password" name="userPwCheck" required><br/>
+        <label for="userName">userName</label>
+        <input id="userName" type="text" name="userName" required><br/>
+        <label for="userBirth">userBirth</label>
+        <input id="userBirth" type="date" name="userBirth" required><br/>
+
+        <label for="userImg">userImg</label>
+        <input type="file" name="userImg"><br/>
+       
+        <button type="submit">회원가입</button>
+
+
+    </form>
+    
+
+    <a href="/login"></a>
+</body>
+</html>
