@@ -1,3 +1,4 @@
+const { render } = require('ejs');
 const models = require('../models');
 
 exports.getMain = (req, res) => {
@@ -35,3 +36,17 @@ exports.postLogin = (req, res) => {
         console.log(err);
     })
 }
+
+exports.postSignup = (req, res) => {
+    console.log(req.body);
+    models.User.create({
+        userId: req.body.userId,
+        userPw: req.body.userPw,
+        userBirth: req.body.userBirth,
+        userName: req.body.userName,
+    }).then((result) => {
+        res.render('login');
+    }).catch(err => {
+        console.log(err);
+    })
+};
