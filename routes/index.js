@@ -26,9 +26,18 @@ router.get('/login',controller.getLogin);
 router.post('/user/login', controller.postLogin);
 router.post('/user/signup', uploadDetail.single('userImg'), controller.postSignup);
 
+
+router.post('/user/login/', controller.postLogin);
+
 router.get('/signup', controller.getSignup);
+router.get('/signup/idcheck', controller.getIdCheck);
+
+router.get('/signup/namecheck', controller.getNameCheck);
+
 
 router.post('/signup/imgUpload', uploadDetail.single('userImg'), controller.postImgUpload);
 
+
 router.get('/user/mypage', controller.getMyPage);
+
 module.exports = router;

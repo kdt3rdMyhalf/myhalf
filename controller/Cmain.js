@@ -80,6 +80,7 @@ exports.postSignup = (req, res) => {
     })
 };
 
+
 exports.getMyPage = (req, res) => {
     const userSession = req.session.user;
     console.log("myPage userSession: ", userSession);
@@ -97,3 +98,41 @@ exports.getMyPage = (req, res) => {
         res.render('index', { result: false });
     }
 }
+
+
+exports.getIdCheck = (req, res) => {
+    console.log(req.query);
+    models.User.findOne({
+        where: { userId: req.query.idValue }
+    }).then((result) => {
+        if (result === null) {
+            res.send({result: false})
+        }
+        else {
+            res.send({ result: true });
+        }
+    })
+    .catch(err => {
+        console.log(err);
+    })
+};
+
+exports.getNameCheck = (req, res) => {
+    console.log(req.query);
+    models.User.findOne({
+        where: { userName: req.query.nameValue }
+    }).then((result) => {
+        if (result === null) {
+            res.send({result: false})
+        }
+        else {
+            res.send({ result: true });
+        }
+    })
+    .catch(err => {
+        console.log(err);
+    })
+};
+
+
+
