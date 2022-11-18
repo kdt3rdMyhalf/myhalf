@@ -1,6 +1,8 @@
 const { render } = require('ejs');
 const models = require('../models');
 
+
+
 exports.getMain = (req, res) => {
     res.render('index');
 }
@@ -37,6 +39,17 @@ exports.postLogin = (req, res) => {
     })
 }
 
+
+
+exports.postImgUpload = async (req, res) => {
+    const img = req.file.path;
+    console.log(req.file);
+    if (img === undefined) {
+        return res.send('이미지가 없어용');
+    }
+    res.send({path : req.file.path});
+}
+
 exports.postSignup = (req, res) => {
     console.log(req.body);
     models.User.create({
@@ -50,3 +63,4 @@ exports.postSignup = (req, res) => {
         console.log(err);
     })
 };
+
