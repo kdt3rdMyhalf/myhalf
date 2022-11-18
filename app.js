@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const PORT = 8000;
+const session = require('express-session');
 
 // 뷰 엔진 설정
 app.set('view engine', 'ejs');
@@ -12,6 +13,13 @@ app.use('/uploads', express.static(__dirname + '/uploads'));
 // 파일 인코딩 설정
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
+
+// 세션 옵션 설정
+app.use(session({
+    secret: 'ourSecureKey',
+    resave: false,
+    saveUninitialized: true,
+}))
 
 // 라우터 연결
 const indexRouter = require('./routes/index');

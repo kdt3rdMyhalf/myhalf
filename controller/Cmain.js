@@ -3,8 +3,21 @@ const models = require('../models');
 
 
 
+
 exports.getMain = (req, res) => {
-    res.render('index', {result: false });
+    const userSession = req.session.user;
+    console.log("main userSession: ", userSession);
+    
+    if (userSession !== undefined) {
+        res.render('index', {
+            result : true,
+            userName : userSession.userName,
+            userImg : userSession.userImg,
+        })
+    } 
+    else {
+        res.render('index', { result: false });
+    }
 }
 
 exports.getLogin = (req, res) => {
@@ -16,6 +29,7 @@ exports.getSignup = (req, res) => {
 }
 
 exports.postLogin = (req, res) => {
+    
     console.log(req.body);
     models.User.findOne({
         where: {
@@ -28,11 +42,14 @@ exports.postLogin = (req, res) => {
             res.send({result: false})
         }
         else {
-            res.render('index', {
+            req.session.user = {
                 result: true,
-                userName: db_result.userName,
+                userName : db_result.userName,
                 userImg : db_result.userImg,
-            })
+                userId : db_result.userId,
+                userBirth: db_result.userBirth,
+            }
+            res.redirect('/')
         }
     })
     .catch(err => {
@@ -63,3 +80,20 @@ exports.postSignup = (req, res) => {
     })
 };
 
+exports.getMyPage = (req, res) => {
+    const userSession = req.session.user;
+    console.log("myPage userSession: ", userSession);
+    
+    if (userSession !== undefined) {
+        res.render('mypage', {
+            result : true,
+            userId : userSession.userId,
+            userName : userSession.userName,
+            userBirth : userSession.userBirth,
+            userImg : userSession.userImg,
+        })
+    } 
+    else {
+        res.render('index', { result: false });
+    }
+}
