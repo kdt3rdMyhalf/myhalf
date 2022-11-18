@@ -28,5 +28,7 @@ router.post('/user/signup', uploadDetail.single('userImg'), controller.postSignu
 
 router.get('/signup', controller.getSignup);
 
+
 router.post('/signup/imgUpload', uploadDetail.single('userImg'), controller.postImgUpload);
+
 module.exports = router;
