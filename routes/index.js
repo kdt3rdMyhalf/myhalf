@@ -22,7 +22,12 @@ router.get('/', controller.getMain);
 
 
 router.get('/login',controller.getLogin);
+
+router.post('/user/login', controller.postLogin);
+router.post('/user/signup', controller.postSignup);
+
 router.post('/user/login/', controller.postLogin);
+
 router.get('/signup',controller.getSignup);
 
 router.post('/signup/imgUpload', uploadDetail.single('userImg'), controller.postImgUpload);

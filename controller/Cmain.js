@@ -1,3 +1,4 @@
+const { render } = require('ejs');
 const models = require('../models');
 
 
@@ -39,6 +40,7 @@ exports.postLogin = (req, res) => {
 }
 
 
+
 exports.postImgUpload = async (req, res) => {
     const img = req.file.path;
     console.log(req.file);
@@ -47,3 +49,18 @@ exports.postImgUpload = async (req, res) => {
     }
     res.send({path : req.file.path});
 }
+
+exports.postSignup = (req, res) => {
+    console.log(req.body);
+    models.User.create({
+        userId: req.body.userId,
+        userPw: req.body.userPw,
+        userBirth: req.body.userBirth,
+        userName: req.body.userName,
+    }).then((result) => {
+        res.render('login');
+    }).catch(err => {
+        console.log(err);
+    })
+};
+
