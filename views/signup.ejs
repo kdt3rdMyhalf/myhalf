@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- axios cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>회원가입</title>
 </head>
 <body>
-    <form name="formSignup" action="/user/signup" method="POST">
+    <form name="formSignup" action="/user/signup" method="POST" enctype="multipart/form-data">
         <label for="userId">ID</label>
         <input id="userId" type="text" name="userId" required><br/>
         <label for="password">Password</label>
@@ -20,13 +22,37 @@
         <input id="userBirth" type="date" name="userBirth" required><br/>
 
         <label for="userImg">userImg</label>
-        <input type="file" name="userImg"><br/>
+        <input type="file" name="userImg" id="userImg"><br/>
+        <button type="button" onclick="fileUpload()">업로드</button><br>
         <button type="submit">회원가입</button>
-
-
     </form>
+    <img src="" alt="" width="200">
+
     
 
     <a href="/login"></a>
+    <script>
+        function fileUpload() {
+            console.log("uploading~!");
+            const formData = new FormData(); // 멀티미디어 데이터는 폼데이터에 넣어서 전달
+            const file = document.getElementById('userImg');
+            formData.append('userImg', file.files[0]);
+            console.log(formData);
+
+            axios({
+                method: "POST",
+                url : '/signup/imgUpload',
+                data : formData,
+                headers: {
+                    // 멀티미디어 파일 통신시 유의!
+                    'Content-Type' : 'multipart/form-data',
+                },
+            })
+            .then(function (res) {
+                console.log(res);
+                document.querySelector('img').src = res.data.path;
+            })
+        }
+    </script>
 </body>
 </html>
