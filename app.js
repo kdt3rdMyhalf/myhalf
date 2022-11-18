@@ -7,6 +7,7 @@ app.set('view engine', 'ejs');
 // 스태틱 파일 설정
 app.use('/views', express.static(__dirname + '/views'));
 app.use('/static', express.static(__dirname + '/static'));
+app.use('/uploads', express.static(__dirname + '/uploads'));
 
 // 파일 인코딩 설정
 app.use(express.urlencoded({extended:true}));

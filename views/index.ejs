@@ -8,6 +8,13 @@
 </head>
 <body>
     <h1>Main</h1>
-    <div><%# userName %></div>
+    <% if(result) { %>
+        <div><%= userName %></div>
+        <img src='<%= userImg %>'' alt="" width="200">
+    <% } else { %>
+        <a href="/login">로그인</a>
+        <a href="/signup">회원가입</a>
+    <% } %>
+    
 </body>
 </html>
