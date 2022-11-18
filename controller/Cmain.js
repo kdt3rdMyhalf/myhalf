@@ -11,3 +11,6 @@ exports.getLogin = (req, res) => {
 exports.getSignup = (req, res) => {
     res.render('signup');
 }
+exports.getPost = (req, res) => {
+    res.render('post');
+}

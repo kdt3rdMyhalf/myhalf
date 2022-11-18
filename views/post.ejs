@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>게시물 등록 페이지</h1>
+    <form name="posting">
+    <label for="userId" type="text">아이디</label>
+    <input id="userId" type="text" name="userId"><br/>
+    <label for="title" type="text">제목</label>
+    <input id="title" type="text" name="title" size="35" required></br>
+    <label for="contents" type="text"></label>
+    <br>
+    <div id="contents" contentEditable="true"
+    id="contents" 
+    type="text"
+    name="contents"
+    style="width:50%; height:300px;font-size:20px;overflow-y:scroll;"
+    maxlength="500"
+    placeholder="내용을 입력해주세요">
+    </div>
+    <br>
+    <br>
+    
+    <button type="button" onclick="changeFont()">글꼴</button>
+    <button type="button" onclick="changeColor()">색깔</button>
+    <button type="button">게시</button>
+    <input type="file" id="real-input" class="image_inputType_file" accept="img/*" required multiple>
+    <button class="browse-btn">사진업로드</botton>
+
+    <h3>이미지 미리보기</h3>
+    <div id="imagePreview">
+        <img id="img"/>
+    </div>    
+    </form>
+
+    <script>
+        function changeFont() {
+            textarea.style.fontFamily = 'Nanum Pen Script', cursive;
+        }
+        var textarea = document.querySelector('#contents')
+        
+        function changeColor() {
+            textarea.style.color = 'red';
+        }
+        // image Input js
+        const browseBtn = document.querySelector('.browse-btn');
+        const realInput = document.querySelector('#real-input');
+
+        browseBtn.addEventListener('click',()=>{
+	    realInput.click();
+        });
+      
+    
+    </script>
+
+
+</body>
+</html>
