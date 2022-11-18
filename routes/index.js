@@ -37,4 +37,7 @@ router.get('/signup/namecheck', controller.getNameCheck);
 
 router.post('/signup/imgUpload', uploadDetail.single('userImg'), controller.postImgUpload);
 
+
+router.get('/user/mypage', controller.getMyPage);
+
 module.exports = router;
