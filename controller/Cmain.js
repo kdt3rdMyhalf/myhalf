@@ -4,7 +4,7 @@ const models = require('../models');
 
 
 exports.getMain = (req, res) => {
-    res.render('index');
+    res.render('index', {result: false });
 }
 
 exports.getLogin = (req, res) => {
@@ -30,7 +30,8 @@ exports.postLogin = (req, res) => {
         else {
             res.render('index', {
                 result: true,
-                userName: db_result.userName
+                userName: db_result.userName,
+                userImg : db_result.userImg,
             })
         }
     })
@@ -42,21 +43,19 @@ exports.postLogin = (req, res) => {
 
 
 exports.postImgUpload = async (req, res) => {
-    const img = req.file.path;
     console.log(req.file);
-    if (img === undefined) {
-        return res.send('이미지가 없어용');
-    }
     res.send({path : req.file.path});
 }
 
 exports.postSignup = (req, res) => {
-    console.log(req.body);
+    console.log("req.body: ", req.body);
+    console.log("req.file: ", req.file);
     models.User.create({
         userId: req.body.userId,
         userPw: req.body.userPw,
         userBirth: req.body.userBirth,
         userName: req.body.userName,
+        userImg: "/" + req.file.path,
     }).then((result) => {
         res.render('login');
     }).catch(err => {
