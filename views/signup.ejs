@@ -5,17 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <form name="formSignup" action="/user/signup" method="POST">
         <label for="userId">ID</label>
-        <input id="userId" type="text" name="userId" required><br/>
+        <input id="userId" type="email" name="userId" placeholder="E-mail 주소" required>
+        <button type="button" name="userId" onclick="idCheck()">ID 중복확인</button><br/>
+        <div class="idCheck"></div>
         <label for="password">Password</label>
         <input id="userPw" type="password" name="userPw" required><br/>
         <label for="passwordcheck">Password 체크</label>
         <input id="userPwCheck" type="password" name="userPwCheck" required><br/>
         <label for="userName">userName</label>
         <input id="userName" type="text" name="userName" required><br/>
+        <button type="button" name="userName" onclick="nameCheck()">유저네임 중복확인</button><br/>
+        <div class="nameCheck"></div>
         <label for="userBirth">userBirth</label>
         <input id="userBirth" type="date" name="userBirth" required><br/>
 
@@ -24,12 +29,72 @@
 
 
 
-        <button type="submit">회원가입</button>
+        <button type="submit" disabled="true" class="btnSignup">회원가입</button>
 
 
     </form>
     
 
     <a href="/login"></a>
+
+    <!-- 아이디 중복 체크 axios -->
+    <script>
+
+        function idCheck() {
+            const idValue = document.querySelector('#userId').value
+            console.log(idValue)
+            if(idValue === ''){
+            alert('아이디를 입력해주세요.');
+            document.querySelector('.idCheck').textContent = ''
+            return
+        };
+
+        axios({
+            method: 'GET',
+            url: '/signup/idcheck',
+            params: { idValue: idValue }
+        }).then((res) => {
+            console.log(res.data.result);
+            if (res.data.result === false) {
+                document.querySelector('.idCheck').textContent = '아이디 사용 가능!'
+                document.querySelector('.idCheck').style.color = 'green'
+            }
+            else {
+                document.querySelector('.idCheck').textContent = '사용중인 아이디입니다.'
+                document.querySelector('.idCheck').style.color = 'red'
+            }
+        });
+    };
+
+    // 유저네임 중복 체크 axios
+    function nameCheck() {
+            const nameValue = document.querySelector('#userName').value
+            console.log(nameValue)
+        if(nameValue === ''){
+            alert('유저네임을 입력해주세요.');
+            document.querySelector('.nameCheck').textContent = ''
+            return
+        };
+
+        axios({
+            method: 'GET',
+            url: '/signup/namecheck',
+            params: { nameValue: nameValue }
+        }).then((res) => {
+            console.log(res.data.result);
+            if (res.data.result === false) {
+                document.querySelector('.nameCheck').textContent = '유저네임 사용 가능!'
+                document.querySelector('.nameCheck').style.color = 'green'
+                document.querySelector('.btnSignup').removeAttribute('disabled')
+            }
+            else {
+                document.querySelector('.nameCheck').textContent = '사용중인 유저네임입니다.'
+                document.querySelector('.nameCheck').style.color = 'red'
+            }
+        });
+    };
+
+
+    </script>
 </body>
 </html>

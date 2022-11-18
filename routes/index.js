@@ -12,6 +12,9 @@ router.post('/user/signup', controller.postSignup);
 
 router.post('/user/login/', controller.postLogin);
 
-router.get('/signup',controller.getSignup);
+router.get('/signup', controller.getSignup);
+router.get('/signup/idcheck', controller.getIdCheck);
+
+router.get('/signup/namecheck', controller.getNameCheck);
 
 module.exports = router;
