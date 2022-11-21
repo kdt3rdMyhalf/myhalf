@@ -57,16 +57,23 @@ exports.postLogin = (req, res) => {
     })
 }
 
+exports.getLogout = (req, res) => {
+    let session = req.session;
+    if (session.user){
+        session.destroy();
+        res.redirect('/');
+    }
+    else {
+        res.redirect('/');
+    }
+}
 
 
 exports.postImgUpload = async (req, res) => {
-    console.log(req.file);
     res.send({path : req.file.path});
 }
 
 exports.postSignup = (req, res) => {
-    console.log("req.body: ", req.body);
-    console.log("req.file: ", req.file);
     models.User.create({
         userId: req.body.userId,
         userPw: req.body.userPw,
@@ -83,7 +90,6 @@ exports.postSignup = (req, res) => {
 
 exports.getMyPage = (req, res) => {
     const userSession = req.session.user;
-    console.log("myPage userSession: ", userSession);
     
     if (userSession !== undefined) {
         res.render('mypage', {
@@ -101,7 +107,6 @@ exports.getMyPage = (req, res) => {
 
 
 exports.getIdCheck = (req, res) => {
-    console.log(req.query);
     models.User.findOne({
         where: { userId: req.query.idValue }
     }).then((result) => {
