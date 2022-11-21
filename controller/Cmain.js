@@ -57,33 +57,55 @@ exports.postLogin = (req, res) => {
     })
 }
 
+exports.getLogout = (req, res) => {
+    let session = req.session;
+    if (session.user){
+        session.destroy();
+        res.redirect('/');
+    }
+    else {
+        res.redirect('/');
+    }
+}
 
 
 exports.postImgUpload = async (req, res) => {
-    console.log(req.file);
     res.send({path : req.file.path});
 }
 
 exports.postSignup = (req, res) => {
-    console.log("req.body: ", req.body);
-    console.log("req.file: ", req.file);
-    models.User.create({
-        userId: req.body.userId,
-        userPw: req.body.userPw,
-        userBirth: req.body.userBirth,
-        userName: req.body.userName,
-        userImg: "/" + req.file.path,
-    }).then((result) => {
-        res.render('login');
-    }).catch(err => {
-        console.log(err);
-    })
+    if(req.file === undefined){
+        models.User.create({
+            userId: req.body.userId,
+            userPw: req.body.userPw,
+            userBirth: req.body.userBirth,
+            userName: req.body.userName,
+            userImg: 'https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927',
+        }).then((result) => {
+            res.render('login');
+        }).catch(err => {
+            console.log(err);
+        })    
+    } else {
+        models.User.create({
+            userId: req.body.userId,
+            userPw: req.body.userPw,
+            userBirth: req.body.userBirth,
+            userName: req.body.userName,
+            userImg: "/" + req.file.path,
+        }).then((result) => {
+            res.render('login');
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+    
+
 };
 
 
 exports.getMyPage = (req, res) => {
     const userSession = req.session.user;
-    console.log("myPage userSession: ", userSession);
     
     if (userSession !== undefined) {
         res.render('mypage', {
@@ -101,7 +123,6 @@ exports.getMyPage = (req, res) => {
 
 
 exports.getIdCheck = (req, res) => {
-    console.log(req.query);
     models.User.findOne({
         where: { userId: req.query.idValue }
     }).then((result) => {
@@ -135,4 +156,6 @@ exports.getNameCheck = (req, res) => {
 };
 
 
-
+exports.getCommunity = (req, res) => {
+    res.render('community');
+}
