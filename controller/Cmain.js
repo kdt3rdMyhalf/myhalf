@@ -74,17 +74,33 @@ exports.postImgUpload = async (req, res) => {
 }
 
 exports.postSignup = (req, res) => {
-    models.User.create({
-        userId: req.body.userId,
-        userPw: req.body.userPw,
-        userBirth: req.body.userBirth,
-        userName: req.body.userName,
-        userImg: "/" + req.file.path,
-    }).then((result) => {
-        res.render('login');
-    }).catch(err => {
-        console.log(err);
-    })
+    if(req.file === undefined){
+        models.User.create({
+            userId: req.body.userId,
+            userPw: req.body.userPw,
+            userBirth: req.body.userBirth,
+            userName: req.body.userName,
+            userImg: 'https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927',
+        }).then((result) => {
+            res.render('login');
+        }).catch(err => {
+            console.log(err);
+        })    
+    } else {
+        models.User.create({
+            userId: req.body.userId,
+            userPw: req.body.userPw,
+            userBirth: req.body.userBirth,
+            userName: req.body.userName,
+            userImg: "/" + req.file.path,
+        }).then((result) => {
+            res.render('login');
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+    
+
 };
 
 
@@ -140,4 +156,6 @@ exports.getNameCheck = (req, res) => {
 };
 
 
-
+exports.getCommunity = (req, res) => {
+    res.render('community');
+}
