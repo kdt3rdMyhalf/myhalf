@@ -108,13 +108,24 @@ exports.getMyPage = (req, res) => {
     const userSession = req.session.user;
     
     if (userSession !== undefined) {
-        res.render('mypage', {
-            result : true,
-            userId : userSession.userId,
-            userName : userSession.userName,
-            userBirth : userSession.userBirth,
-            userImg : userSession.userImg,
+        models.Community.findAll({
+            where: {userName: userSession.userName}
+        }).then((result) => {
+            console.log(result);
+            res.render('mypage', {
+                result : true,
+                userId : userSession.userId,
+                userName : userSession.userName,
+                userBirth : userSession.userBirth,
+                userImg : userSession.userImg,
+                userPost: result,
+            })
         })
+        .catch(err => {
+            console.log(err);
+        })
+
+        
     } 
     else {
         res.render('index', { result: false });
@@ -157,5 +168,45 @@ exports.getNameCheck = (req, res) => {
 
 
 exports.getCommunity = (req, res) => {
-    res.render('community');
+    res.render('commu');
 }
+
+exports.getCommunityPost = (req, res) => {
+    const userSession = req.session.user;
+    console.log(userSession)
+    if (userSession !== undefined) {
+        res.render('communityPost', {
+            result : true,
+            userId : userSession.userId,
+            userName : userSession.userName,
+            userBirth : userSession.userBirth,
+            userImg : userSession.userImg,
+        })
+    }
+    else {
+        res.render('commu', { result: false });
+    }
+}
+
+exports.postCommunityPost = (req, res) => {
+    const userSession = req.session.user;
+    let now = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    console.log('post commu', userSession);
+    console.log(req.body);
+    models.Community.create({
+        userName: userSession.userName,
+        postDate: now,
+        postTitle: req.body.title,
+        postDoc: req.body.doc,
+        postViews: 0,
+        postLikes: 0,
+        postCategory: req.body.category,
+        postTag: req.body.tag,
+        // userImg: ,
+    }).then((result) => {
+        res.render('commu');
+    }).catch(err => {
+        console.log(err);
+    })
+}
+
