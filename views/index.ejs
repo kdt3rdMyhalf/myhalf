@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
@@ -24,6 +23,8 @@
     <link rel="stylesheet" href="/static/css/index.css" />
   </head>
   <body>
+    <h1>Main</h1>
+
     <%- include ('footer.ejs') %> <% if(result) { %>
     <div><%= userName %></div>
     <img src='<%= userImg %>'' alt="" width="200"> <% } else { %>
@@ -252,5 +253,6 @@
         </div>
       </div>
     </article>
+    <%- include ('footer.ejs') %>
   </body>
 </html>
