@@ -24,6 +24,12 @@
     <link rel="stylesheet" href="/static/css/index.css" />
   </head>
   <body>
+    <%- include ('footer.ejs') %> <% if(result) { %>
+    <div><%= userName %></div>
+    <img src='<%= userImg %>'' alt="" width="200"> <% } else { %>
+    <a href="/login">로그인</a>
+    <a href="/signup">회원가입</a>
+    <% } %>
     <header>
       <img src="/static/img/logo.png" alt="" />
       <div class="userBox">
