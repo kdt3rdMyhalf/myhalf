@@ -22,7 +22,7 @@ db.Sequelize = Sequelize;
 // 테이블 등록
 // db.뭐시기 = require('./모델파일')(sequelize, Sequelize);
 db.User = require('./User')(sequelize, Sequelize);
-db.User = require('./Community')(sequelize, Sequelize);
+db.Community = require('./Community')(sequelize, Sequelize);
 
 
 module.exports = db;
