@@ -21,7 +21,9 @@ const uploadDetail = multer({
 router.get('/', controller.getMain);
 
 
-router.get('/login',controller.getLogin);
+router.get('/login', controller.getLogin);
+router.get('/logout', controller.getLogout);
+
 
 router.post('/user/login', controller.postLogin);
 router.post('/user/signup', uploadDetail.single('userImg'), controller.postSignup);
