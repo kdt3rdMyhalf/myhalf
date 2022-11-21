@@ -1,27 +1,27 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 const PORT = 8000;
 
 // 뷰 엔진 설정
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 // 스태틱 파일 설정
-app.use('/views', express.static(__dirname + '/views'));
-app.use('/static', express.static(__dirname + '/static'));
+app.use("/views", express.static(__dirname + "/views"));
+app.use("/static", express.static(__dirname + "/static"));
 
 // 파일 인코딩 설정
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // 라우터 연결
-const indexRouter = require('./routes/index');
-app.use('/', indexRouter);
+const indexRouter = require("./routes/index");
+app.use("/", indexRouter);
 
 // 잘못된 url 경로 처리
-app.get('*', (req, res) => {
-    res.render('404');
-})
+app.get("*", (req, res) => {
+  res.render("404");
+});
 
 // 포트 연결
 app.listen(PORT, () => {
-    console.log(`http://localhost${PORT}`);
-})
+  console.log(`http://localhost:${PORT}`);
+});
