@@ -24,8 +24,7 @@
   </head>
   <body>
     <h1>Main</h1>
-
-    <%- include ('footer.ejs') %> <% if(result) { %>
+    <% if(result) { %>
     <div><%= userName %></div>
     <img src='<%= userImg %>'' alt="" width="200"> <% } else { %>
     <a href="/login">로그인</a>
@@ -253,6 +252,5 @@
         </div>
       </div>
     </article>
-    <%- include ('footer.ejs') %>
   </body>
 </html>
