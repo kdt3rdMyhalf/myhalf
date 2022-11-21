@@ -10,26 +10,15 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <%- include ('footer.ejs') %>
     <form name="formSignup" action="/user/signup" method="POST" enctype="multipart/form-data">
         <label for="userId">ID</label>
         <input id="userId" type="email" name="userId" placeholder="E-mail 주소" required>
         <button type="button" name="userId" onclick="idCheck()">ID 중복확인</button><br/>
         <div class="idCheck"></div>
         <label for="password">Password</label>
-        <input id="userPw"
-        pattern="^([a-z0-9]){8,12}$"
-        title="비밀번호는 소문자, 숫자로 8자리 이상 12자리 이하로해주세요!!"
-        type="password"
-        name="userPw"
-        required><br/>
+        <input id="userPw" type="password" name="userPw" required><br/>
         <label for="passwordcheck">Password 체크</label>
-        <input id="userPwCheck"
-        pattern="^([a-z0-9]){8,12}$"
-        title="비밀번호는 소문자, 숫자로 8자리 이상 12자리 이하로해주세요!!"
-        type="password" 
-        name="userPwCheck"
-        required><br/>
+        <input id="userPwCheck" type="password" name="userPwCheck" required><br/>
         <label for="userName">userName</label>
         <input id="userName" type="text" name="userName" required><br/>
         <button type="button" name="userName" onclick="nameCheck()">유저네임 중복확인</button><br/>
@@ -40,52 +29,31 @@
 
         <input type="file" name="userImg" id="userImg"><br/>
         <button type="button" onclick="fileUpload()">업로드</button><br>
-
-        <img src="" alt="" width="200"> 
-        <button type="submit" class="btnSignup" disabled onclick="signup()">회원가입</button>
-        
+        <img src="" alt="" width="200">
+        <button type="submit" class="btnSignup" disabled>회원가입</button>
 
     </form>
-    <a href="/login">login</a>
+
+
+    
+
+    <a href="/login"></a>
+
+    <!-- 아이디 중복 체크 axios -->
     <script>
 
-    function signup() {
-    var userPw = document.getElementById('userPw').value;
-    var userPwCheck = document.getElementById('userPwCheck').value;
-    
-    if(userPw.length < 8) {
-            alert('비밀번호는 소문자, 숫자로 8자리 이상 12자리 이하로해주세요!!')
-            event.preventDefault();
-            return false;
-        }
-        
-        if( userPw != userPwCheck ) {
-            alert("비밀번호불일치");
-            console.log('비밀번호불일치');
-            return false;
-        } 
-    else{
-            alert("회원가입이 완료되었습니다");
-            console.log('비밀번호 일치');
-            return true;
-        }
-        
-    }
-
-    // 아이디 중복 체크 axios
-    function idCheck() {
-        const idValue = document.querySelector('#userId').value
-        console.log(idValue)
-        if(idValue === ''){
-        alert('정확한 아이디를 입력해주세요.');
-        document.querySelector('.idCheck').textContent = ''
-        return
-        // 이메일 형식이 아니면 alert 창 띄우게 하기 구현중
-        // }else if(idValue.str.includes('&#64;') === false){
-        //     alert('이메일 형식으로 아이디를 입력해주세요.');
-        // document.querySelector('.idCheck').textContent = ''
-        // return
-        };
+        function idCheck() {
+            const idValue = document.querySelector('#userId').value
+            console.log(idValue)
+            if(idValue === ''){
+            alert('정확한 아이디를 입력해주세요.');
+            document.querySelector('.idCheck').textContent = ''
+            return}
+            // 이메일 형식이 아니면 alert 창 띄우게 하기 구현중
+            // }else if(idValue.str.includes('&#64;') === false){
+            //     alert('이메일 형식으로 아이디를 입력해주세요.');
+            // document.querySelector('.idCheck').textContent = ''
+            // return
 
         axios({
             method: 'GET',
@@ -159,6 +127,5 @@
         }
 
     </script>
-
 </body>
 </html>
