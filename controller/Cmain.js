@@ -63,6 +63,7 @@ exports.postSignup = (req, res) => {
     })
 };
 
+
 exports.getIdCheck = (req, res) => {
     console.log(req.query);
     models.User.findOne({
@@ -96,4 +97,5 @@ exports.getNameCheck = (req, res) => {
         console.log(err);
     })
 };
+
 
