@@ -30,7 +30,7 @@
         <input type="file" name="userImg" id="userImg"><br/>
         <button type="button" onclick="fileUpload()">업로드</button><br>
         <img src="" alt="" width="200">
-        <button type="submit">회원가입</button>
+        <button type="submit" class="btnSignup" disabled>회원가입</button>
 
     </form>
 
@@ -46,9 +46,14 @@
             const idValue = document.querySelector('#userId').value
             console.log(idValue)
             if(idValue === ''){
-            alert('아이디를 입력해주세요.');
+            alert('정확한 아이디를 입력해주세요.');
             document.querySelector('.idCheck').textContent = ''
             return
+            // 이메일 형식이 아니면 alert 창 띄우게 하기 구현중
+            // }else if(idValue.str.includes('&#64;') === false){
+            //     alert('이메일 형식으로 아이디를 입력해주세요.');
+            // document.querySelector('.idCheck').textContent = ''
+            // return
         };
 
         axios({
@@ -61,7 +66,10 @@
                 document.querySelector('.idCheck').textContent = '아이디 사용 가능!'
                 document.querySelector('.idCheck').style.color = 'green'
             }
-            else {
+            else if (res.data.result.str.includes('&#64;') === false){
+                document.querySelector('.idCheck').textContent = '아이디 사용 가능!'
+                document.querySelector('.idCheck').style.color = 'green'
+            }else {
                 document.querySelector('.idCheck').textContent = '사용중인 아이디입니다.'
                 document.querySelector('.idCheck').style.color = 'red'
             }
