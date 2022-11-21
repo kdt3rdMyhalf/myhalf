@@ -44,7 +44,7 @@
 
         function idCheck() {
             const idValue = document.querySelector('#userId').value
-            if(idValue === '' || idValue.indexOf('@') === -1 && idValue.indexOf('.') === -1){
+            if(idValue === '' || idValue.indexOf('@') === -1 || idValue.indexOf('.') === -1){
             alert('이메일 형식으로 아이디를 입력해주세요.');
             document.querySelector('#userId').value = '';
             return}
@@ -56,10 +56,6 @@
         }).then((res) => {
             console.log(res.data.result);
             if (res.data.result === false) {
-                document.querySelector('.idCheck').textContent = '아이디 사용 가능!'
-                document.querySelector('.idCheck').style.color = 'green'
-            }
-            else if (res.data.result.str.includes('&#64;') === false){
                 document.querySelector('.idCheck').textContent = '아이디 사용 가능!'
                 document.querySelector('.idCheck').style.color = 'green'
             }else {
