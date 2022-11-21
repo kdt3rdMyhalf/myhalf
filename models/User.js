@@ -18,7 +18,7 @@ const User = function (Sequelize, DataTypes) {
                 allowNull: false,
             },
             userImg: {
-                type: DataTypes.BLOB('long'),
+                type: DataTypes.TEXT('long'),
                 allowNull: true,
             },
             userBirth: {
