@@ -5,7 +5,11 @@ header {
   justify-content: space-between;
 }
 
-.header > img {
+header > a {
+  text-decoration: none;
+}
+
+header > img {
   cursor: pointer;
 }
 

@@ -1,27 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>login 페이지</title>
-</head>
-<body>
+  </head>
+  <body>
     <form name="formLogin" action="/user/login" method="POST">
-        <label for="userId" >ID</label>
-        <input id="userId" type="text" name="userId" required/><br/>
-        <label for="userPw">Password</label>
-        <input id="userPw" type="password" name="userPw" required><br/>
-        <button>Login</button>
+      <label for="userId">ID</label>
+      <input id="userId" type="text" name="userId" required /><br />
+      <label for="userPw">Password</label>
+      <input id="userPw" type="password" name="userPw" required /><br />
+      <button>Login</button>
     </form>
-
-    
 
     <%- include ('footer.ejs') %>
 
-
     <a href="/signup">회원가입</a>
-
-
-</body>
+  </body>
 </html>
