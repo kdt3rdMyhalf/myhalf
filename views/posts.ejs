@@ -33,7 +33,7 @@
       <p>게시물 번호: <%= data[i].postId %></p>
       <p>작성일: <%= data[i].postDate %></p>
       <p>제목: <%= data[i].postTitle %></p>
-      <p>내용: <%= data[i].postDoc %></p>
+      <p>내용: <%= data[i].postDoc.substr(0, 150) %></p>
       <p>첨부파일: <%= data[i].postImg %></p>
       <p>조회수: <%= data[i].postViews %></p>
       <p>좋아요: <%= data[i].postLikes %></p>
