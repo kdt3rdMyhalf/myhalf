@@ -188,6 +188,15 @@ exports.getCommunityPost = (req, res) => {
     }
 }
 
+
+exports.getPosts = (req, res) => {
+    models.Community.findAll()
+        .then((result) => {
+            res.render('posts', { data: result });
+            })
+
+}
+
 exports.postCommunityPost = (req, res) => {
     const userSession = req.session.user;
     let now = new Date().toISOString().slice(0, 19).replace('T', ' ');
