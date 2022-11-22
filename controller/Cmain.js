@@ -159,3 +159,11 @@ exports.getNameCheck = (req, res) => {
 exports.getCommunity = (req, res) => {
     res.render('community');
 }
+
+exports.getPosts = (req, res) => {
+    models.Community.findAll()
+        .then((result) => {
+            res.render('posts', { data: result });
+            })
+
+}
