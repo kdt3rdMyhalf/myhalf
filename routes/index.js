@@ -37,7 +37,9 @@ router.post('/signup/imgUpload', uploadDetail.single('userImg'), controller.post
 
 router.get('/user/mypage', controller.getMyPage);
 
-router.get('/community', controller.getCommunity);
+router.get('/commu', controller.getCommunity);
+router.get('/commu/post', controller.getCommunityPost);
+router.post('/commu/post', controller.postCommunityPost);
 
 router.get('/commu/posts', controller.getPosts);
 
