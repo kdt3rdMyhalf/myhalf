@@ -57,42 +57,75 @@ exports.postLogin = (req, res) => {
     })
 }
 
+exports.getLogout = (req, res) => {
+    let session = req.session;
+    if (session.user){
+        session.destroy();
+        res.redirect('/');
+    }
+    else {
+        res.redirect('/');
+    }
+}
 
 
 exports.postImgUpload = async (req, res) => {
-    console.log(req.file);
     res.send({path : req.file.path});
 }
 
 exports.postSignup = (req, res) => {
-    console.log("req.body: ", req.body);
-    console.log("req.file: ", req.file);
-    models.User.create({
-        userId: req.body.userId,
-        userPw: req.body.userPw,
-        userBirth: req.body.userBirth,
-        userName: req.body.userName,
-        userImg: "/" + req.file.path,
-    }).then((result) => {
-        res.render('login');
-    }).catch(err => {
-        console.log(err);
-    })
+    if(req.file === undefined){
+        models.User.create({
+            userId: req.body.userId,
+            userPw: req.body.userPw,
+            userBirth: req.body.userBirth,
+            userName: req.body.userName,
+            userImg: 'https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927',
+        }).then((result) => {
+            res.render('login');
+        }).catch(err => {
+            console.log(err);
+        })    
+    } else {
+        models.User.create({
+            userId: req.body.userId,
+            userPw: req.body.userPw,
+            userBirth: req.body.userBirth,
+            userName: req.body.userName,
+            userImg: "/" + req.file.path,
+        }).then((result) => {
+            res.render('login');
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+    
+
 };
 
 
 exports.getMyPage = (req, res) => {
     const userSession = req.session.user;
-    console.log("myPage userSession: ", userSession);
     
     if (userSession !== undefined) {
-        res.render('mypage', {
-            result : true,
-            userId : userSession.userId,
-            userName : userSession.userName,
-            userBirth : userSession.userBirth,
-            userImg : userSession.userImg,
+        models.Community.findAll({
+            where: {userName: userSession.userName}
+        }).then((result) => {
+            console.log(result);
+            res.render('mypage', {
+                result : true,
+                userId : userSession.userId,
+                userName : userSession.userName,
+                userBirth : userSession.userBirth,
+                userImg : userSession.userImg,
+                userPost: result,
+            })
         })
+        .catch(err => {
+            console.log(err);
+        })
+
+        
     } 
     else {
         res.render('index', { result: false });
@@ -101,7 +134,6 @@ exports.getMyPage = (req, res) => {
 
 
 exports.getIdCheck = (req, res) => {
-    console.log(req.query);
     models.User.findOne({
         where: { userId: req.query.idValue }
     }).then((result) => {
@@ -135,4 +167,55 @@ exports.getNameCheck = (req, res) => {
 };
 
 
+exports.getCommunity = (req, res) => {
+    res.render('commu');
+}
+
+exports.getCommunityPost = (req, res) => {
+    const userSession = req.session.user;
+    console.log(userSession)
+    if (userSession !== undefined) {
+        res.render('communityPost', {
+            result : true,
+            userId : userSession.userId,
+            userName : userSession.userName,
+            userBirth : userSession.userBirth,
+            userImg : userSession.userImg,
+        })
+    }
+    else {
+        res.render('commu', { result: false });
+    }
+}
+
+
+exports.getPosts = (req, res) => {
+    models.Community.findAll()
+        .then((result) => {
+            res.render('posts', { data: result });
+            })
+
+}
+
+exports.postCommunityPost = (req, res) => {
+    const userSession = req.session.user;
+    let now = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    console.log('post commu', userSession);
+    console.log(req.body);
+    models.Community.create({
+        userName: userSession.userName,
+        postDate: now,
+        postTitle: req.body.title,
+        postDoc: req.body.doc,
+        postViews: 0,
+        postLikes: 0,
+        postCategory: req.body.category,
+        postTag: req.body.tag,
+        // userImg: ,
+    }).then((result) => {
+        res.render('commu');
+    }).catch(err => {
+        console.log(err);
+    })
+}
 

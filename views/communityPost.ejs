@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>community Post</title>
+</head>
+<body>
+    <h1>community Post</h1>
+    <form action="/commu/post" method="post">
+    <label for="title">
+        Title: <input type="text" name="title" id="title">
+    </label><br>
+    <label for="category">
+        Category:  <input type="text" name="category" id="category">
+    </label><br>
+    <label for="doc">
+        Doc:
+        <textarea name="doc" id="doc" cols="30" rows="10"></textarea>
+    </label><br>
+    <label for="tag">
+        Tag: <input type="text" name="tag" id="tag">
+    </label>
+    <button>게시글 작성</button>
+    </form>
+
+</body>
+</html>

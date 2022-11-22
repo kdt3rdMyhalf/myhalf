@@ -21,23 +21,30 @@ const uploadDetail = multer({
 router.get('/', controller.getMain);
 
 
-router.get('/login',controller.getLogin);
+router.get('/login', controller.getLogin);
+router.get('/logout', controller.getLogout);
+
 
 router.post('/user/login', controller.postLogin);
 router.post('/user/signup', uploadDetail.single('userImg'), controller.postSignup);
 
 
-router.post('/user/login/', controller.postLogin);
-
 router.get('/signup', controller.getSignup);
 router.get('/signup/idcheck', controller.getIdCheck);
-
 router.get('/signup/namecheck', controller.getNameCheck);
-
-
 router.post('/signup/imgUpload', uploadDetail.single('userImg'), controller.postImgUpload);
 
 
 router.get('/user/mypage', controller.getMyPage);
+
+router.get('/commu', controller.getCommunity);
+router.get('/commu/post', controller.getCommunityPost);
+router.post('/commu/post', controller.postCommunityPost);
+
+router.get('/commu/posts', controller.getPosts);
+
+// router.patch('/commu/post/edit', controller.patchPost); // 하나 수정
+
+// router.delete('/commu/post/delete', controller.deletePost); // 하나 삭제
 
 module.exports = router;
