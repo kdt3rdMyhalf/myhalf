@@ -8,11 +8,12 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>회원가입</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- bootstrap cdn -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
 </head>
-
-    <%- include ('footer.ejs') %>
-
-
     <form name="formSignup" action="/user/signup" method="POST" enctype="multipart/form-data">
         <label for="userId">ID</label>
         <input id="userId" type="email" name="userId" placeholder="E-mail 주소" required>
@@ -41,14 +42,18 @@
 
     </form>
 
-     <a href="/login">login</a>
+
+
+    <a href="/login">login</a>
+    <%- include ('footer.ejs') %>
+
     <script>
 
     function signup() {
     var userPw = document.getElementById('userPw').value;
     var userPwCheck = document.getElementById('userPwCheck').value;
     
-   
+
         
         if( userPw != userPwCheck ) {
         
@@ -57,18 +62,18 @@
         } 
     else{
             userPwCheck.setCustomValidity('');
-        
+            // location.href = 'login';
         }
         
     }
 
 
 
-    // <!-- 아이디 중복 체크 axios -->
     
-
-
-
+    
+    
+    
+    // 아이디 중복 체크 axios
         function idCheck() {
             const idValue = document.querySelector('#userId').value
             console.log(idValue)
