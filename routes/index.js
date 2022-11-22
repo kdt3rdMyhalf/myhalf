@@ -41,4 +41,10 @@ router.get('/commu', controller.getCommunity);
 router.get('/commu/post', controller.getCommunityPost);
 router.post('/commu/post', controller.postCommunityPost);
 
+router.get('/commu/posts', controller.getPosts);
+
+// router.patch('/commu/post/edit', controller.patchPost); // 하나 수정
+
+// router.delete('/commu/post/delete', controller.deletePost); // 하나 삭제
+
 module.exports = router;
