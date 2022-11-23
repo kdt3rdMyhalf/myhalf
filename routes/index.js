@@ -42,6 +42,7 @@ router.get('/commu/post', controller.getCommunityPost);
 router.post('/commu/post', controller.postCommunityPost);
 
 router.get('/commu/posts', controller.getPosts);
+router.get('/commu/posts/{postId}', controller.getPost)
 
 // router.patch('/commu/post/edit', controller.patchPost); // 하나 수정
 

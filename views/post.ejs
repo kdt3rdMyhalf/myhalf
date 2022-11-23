@@ -29,29 +29,21 @@
 </head>
 <body>
   <div>
-    <% for (let i = 0; i < data.length; i++) { %>
-    <p id="postId">게시물 번호: <%= data[i].postId %></p>
-    <p>작성일: <%= data[i].postDate %></p>
-    <p>제목: <%= data[i].postTitle %></p>
-    <p>내용: <%= data[i].postDoc.substr(0, 150) %></p>
-    <p>첨부파일: <%= data[i].postImg %></p>
-    <p>조회수: <%= data[i].postViews %></p>
-    <p>좋아요: <%= data[i].postLikes %></p>
-    <p>카테고리: <%= data[i].postCategory %></p>
-    <p>태그: <%= data[i].postTag %> </p>
-    <button type="button" name="getPost" onclick="getPost()">글 상세보기</button>
+      <p>게시물 번호: <%= data[i].postId %></p>
+      <p>작성일: <%= data[i].postDate %></p>
+      <p>제목: <%= data[i].postTitle %></p>
+      <p>내용: <%= data[i].postDoc %></p>
+      <p>첨부파일: <%= data[i].postImg %></p>
+      <p>조회수: <%= data[i].postViews %></p>
+      <p>좋아요: <%= data[i].postLikes %></p>
+      <p>카테고리: <%= data[i].postCategory %></p>
+      <p>태그: <%= data[i].postTag %> </p>
+
     <% } %>
-  
+
   </div>
   
   <script>
-    // 글 상세보기 페이지 렌더
-    function getPost() {
-    axios({
-      method: 'GET',
-      url: '/commu/posts/{postId}'
-    })
-    }
   </script>
 
 </body>
