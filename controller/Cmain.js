@@ -199,9 +199,16 @@ exports.postCommunityPost = (req, res) => {
     .then((result) => {    
     }).catch(err => {
         console.log(err);
-
     })
-    .catch((err) => {
-      console.log(err);
-    });
+};
+
+exports.getPost = (req, res) => {
+    models.Community.findOne({
+        where: { postId: req.params.postId }
+    }).then((result) => {
+        res.render('post', { data: result });
+    })
+        .catch(err => {
+            console.log(err);
+        })
 };
