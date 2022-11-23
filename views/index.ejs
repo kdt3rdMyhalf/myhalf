@@ -26,8 +26,11 @@
     <header>
       <img src="/static/img/logo.png" alt="" />
       <div class="userBox">
-        <% if(result) { %> <img src='<%= userImg %>'' alt="" width="200"> <% }
-        else { %>
+        <% if(result) { %> 
+          <img src='<%= userImg %>'' alt="" width="200"> 
+          <a href="/user/mypage" class="mypage">마이페이지</a>
+          <a href="/logout" class="logout">로그아웃</a>
+        <% } else { %>
         <a href="/signup" class="signin">회원가입</a>
         <a href="/login" class="login">로그인</a>
         <% } %>
