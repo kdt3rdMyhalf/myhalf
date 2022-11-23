@@ -29,6 +29,7 @@ router.post(
   uploadDetail.single("userImg"),
   controller.postSignup
 );
+router.get('/user/delete', controller.getUserDelete)
 
 router.get("/signup", controller.getSignup);
 router.get("/signup/idcheck", controller.getIdCheck);
@@ -40,6 +41,8 @@ router.post(
 );
 
 router.get("/user/mypage", controller.getMyPage);
+router.get('/mypage-post', controller.getMyPagePost);
+router.post('/mypage-post', uploadDetail.single("userImg"), controller.postMyPagePost)
 
 router.get("/commu", controller.getCommunity);
 router.get("/commu/post", controller.getCommunityPost);
@@ -50,6 +53,10 @@ router.get("/commu/posts", controller.getCommunityPosts);
 
 // 커뮤니티 게시글 상세 조회
 router.get("/commu/posts/:postId", controller.getCommunityPostId);
+
+
+router.get('/commu/posts', controller.getPosts);
+router.get('/commu/posts/{postId}', controller.getPost)
 
 // 반려장터 페이지
 
