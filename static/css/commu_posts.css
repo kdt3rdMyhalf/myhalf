@@ -133,10 +133,12 @@ fieldset {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  flex-grow: 1;
 }
 
 .postTitle {
   font-size: 2vw;
+  margin-top: 1vw;
   margin-bottom: 1vw;
   margin-left: 1vw;
 }
