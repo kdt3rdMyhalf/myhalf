@@ -1,42 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- axios cdn -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <title>회원가입</title>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
-    <form name="formSignup" action="/user/signup" method="POST" enctype="multipart/form-data">
-        <label for="userId">ID</label>
-        <input id="userId" type="email" name="userId" placeholder="E-mail 주소" required>
-        <button type="button" name="userId" onclick="idCheck()">ID 중복확인</button><br/>
-        <div class="idCheck"></div>
-        <label for="password">Password</label>
-        <input id="userPw"
-        pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$" title="비밀번호는 최소 8자리에서 최대 16자리까지 숫자, 영문, 특수문자 각 1개 이상 포함시켜 주세요." type="password" name="userPw" required><br/>
-        <label for="passwordcheck">Password 체크</label>
-        <input id="userPwCheck"
-        pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$" title="패스워드 불일치" type="password"  name="userPwCheck" required><br/>
-        <label for="userName">userName</label>
-        <input id="userName" type="text" name="userName" required><br/>
-        <button type="button" name="userName" onclick="nameCheck()">유저네임 중복확인</button><br/>
-        <div class="nameCheck"></div>
-        <label for="userBirth">userBirth</label>
-        <input id="userBirth" type="date" name="userBirth" required><br/>
-        <label for="userImg">userImg</label>
-        <input type="file" name="userImg" id="userImg"><br/>
-        <button type="button" onclick="fileUpload()">업로드</button><br>
-        <img src="" alt="" width="200">
-        <button type="submit" class="btnSignup" disabled>회원가입</button>
-    </form>
-     <a href="/login">login</a>
-    <%- include ('footer.ejs') %>
+const modal = document.querySelector('#myModal');
+const modalBtn = document.querySelector('#modalBtn');
+const closeBtn = document.querySelector('.close');
 
-    <script>
-    function signup() {
+// Events
+modalBtn.addEventListener('click', openModal);
+closeBtn.addEventListener('click', closeModal);
+window.addEventListener('click', outsideClick);
+
+// Open
+function openModal() {
+  modal.style.display = 'block';
+}
+
+// Close
+function closeModal() {
+  modal.style.display = 'none';
+}
+
+// Close If Outside Click
+function outsideClick(e) {
+  if (e.target == modal) {
+    modal.style.display = 'none';
+  }
+}
+
+function signup() {
     var userPw = document.getElementById('userPw').value;
     var userPwCheck = document.getElementById('userPwCheck').value;
         if( userPw != userPwCheck ) {
@@ -114,6 +102,3 @@
                 document.querySelector('img').src = res.data.path;
             })
         }
-    </script>
-</body>
-</html>

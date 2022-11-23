@@ -5,28 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login 페이지</title>
-    <link rel="stylesheet" href="/static/css/footer.css">
 
 </head>
 <body>
 
     <form name="formLogin" action="/user/login" method="POST">
-        <label for="userId" >ID</label>
+        <label for="userId2" >ID</label>
         <input id="userId" type="text" name="userId" required/><br/>
-        <label for="userPw">Password</label>
+        <label for="userPw2">Password</label>
         <input id="userPw" type="password" name="userPw" required><br/>
         <button>Login</button>
         
     </form>
+</div>
+</div>
+</div>
 
     
 
 
 
-
-    <a id="modalBtn" class="button" href="/signup">회원가입</a>
-    <%- include ('footer.ejs') %>
-    </script>
+    <a class="button" href="/signup">회원가입</a>
 </tbody>
 </body>
 </html>
