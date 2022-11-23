@@ -44,7 +44,7 @@ router.get("/user/mypage", controller.getMyPage);
 router.get('/mypage-post', controller.getMyPagePost);
 router.post('/mypage-post', uploadDetail.single("userImg"), controller.postMyPagePost)
 
-router.get("/commu", controller.getCommunity);
+
 router.get("/commu/post", controller.getCommunityPost);
 router.post("/commu/post", controller.postCommunityPost);
 
@@ -55,8 +55,6 @@ router.get("/commu/posts", controller.getCommunityPosts);
 router.get("/commu/posts/:postId", controller.getCommunityPostId);
 
 
-router.get('/commu/posts', controller.getPosts);
-router.get('/commu/posts/{postId}', controller.getPost)
 
 // 반려장터 페이지
 

@@ -232,9 +232,9 @@ exports.getCommunityPostId = (req, res) => {
     where: { postId: req.params.postId },
   }).then((result) => {
     // res.send(result);
+    res.render('commu_post', { result : result})
     console.log("result console>>>", result);
 
-    res.render("commu_post", { data: result });
   });
 };
 
