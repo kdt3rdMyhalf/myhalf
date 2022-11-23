@@ -45,7 +45,10 @@ router.get("/commu", controller.getCommunity);
 router.get("/commu/post", controller.getCommunityPost);
 router.post("/commu/post", controller.postCommunityPost);
 
+// 커뮤니티 페이지
 router.get("/commu/posts", controller.getPosts);
+
+// 반려장터 페이지
 
 // router.patch('/commu/post/edit', controller.patchPost); // 하나 수정
 
