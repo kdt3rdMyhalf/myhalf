@@ -183,23 +183,23 @@ exports.getPosts = (req, res) => {
 };
 
 exports.postCommunityPost = (req, res) => {
-  const userSession = req.session.user;
-  let now = new Date().toISOString().slice(0, 19).replace("T", " ");
-  console.log("post commu", userSession);
-  console.log(req.body);
-  models.Community.create({
-    userName: userSession.userName,
-    postDate: now,
-    postTitle: req.body.title,
-    postDoc: req.body.doc,
-    postViews: 0,
-    postLikes: 0,
-    postCategory: req.body.category,
-    postTag: req.body.tag,
-    // userImg: ,
-  })
-    .then((result) => {
-      res.render("commu");
+    const userSession = req.session.user;
+    let now = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    models.Community.create({
+        userName: userSession.userName,
+        postDate: now,
+        postTitle: req.body.title,
+        postDoc: req.body.doc,
+        postViews: 0,
+        postLikes: 0,
+        postCategory: req.body.category,
+        postTag: req.body.tag,
+        // userImg: ,
+    })
+    .then((result) => {    
+    }).catch(err => {
+        console.log(err);
+
     })
     .catch((err) => {
       console.log(err);
