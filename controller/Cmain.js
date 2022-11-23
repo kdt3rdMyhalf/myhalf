@@ -34,7 +34,7 @@ exports.postLogin = (req, res) => {
   })
     .then((db_result) => {
       if (db_result === null) {
-        res.send({ result: false });
+        res.render('login' ,{ result: false });
       } else {
         req.session.user = {
           result: true,
@@ -60,6 +60,12 @@ exports.getLogout = (req, res) => {
     res.redirect("/");
   }
 };
+
+exports.getUserDelete = (req, res) => {
+  models.User.destroy({ where : { userId : req.session.user.userId}});
+  req.session.destroy();
+  res.redirect('/');
+}
 
 exports.postImgUpload = async (req, res) => {
   res.send({ path: req.file.path });
@@ -123,7 +129,55 @@ exports.getMyPage = (req, res) => {
 };
 
 exports.getMyPagePost = (req, res) => {
-  res.render('mypage_post');
+  const userSession = req.session.user;
+  if (userSession !== undefined) {
+        res.render("mypage_post", {
+          result: true,
+          userId: userSession.userId,
+          userName: userSession.userName,
+          userBirth: userSession.userBirth,
+          userImg: userSession.userImg,
+        })
+      }
+  else {
+    res.redirect('/');
+  }
+}
+// mypage의 유저 정보 수정 POST 
+exports.postMyPagePost = (req, res) => {
+  const userSession = req.session.user;
+  console.log("req.body", req.body);
+  console.log("req.file", req.file);
+  if (req.file === undefined) {
+    models.User.update({
+      userId : req.body.userId,
+      userName : req.body.userName,
+      userBirth : req.body.userBirth,
+    },
+    {where: {userId : userSession.userId}})
+    .then(result => {
+      res.redirect('/');
+      req.session.destroy();
+    })
+    .catch(err => {
+      console.error(err);
+    });
+  } else {
+    models.User.update({
+      userId : req.body.userId,
+      userName : req.body.userName,
+      userBirth : req.body.userBirth,
+      userImg : req.file.path,
+    },
+    {where: {userId : userSession.userId}})
+    .then(result => {
+      res.redirect('/');
+      req.session.destroy();
+    })
+    .catch(err => {
+      console.error(err);
+    });
+  }
 }
 
 exports.getIdCheck = (req, res) => {
