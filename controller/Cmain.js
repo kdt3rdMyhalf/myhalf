@@ -1,4 +1,3 @@
-const { render } = require("ejs");
 const models = require("../models");
 
 exports.getMain = (req, res) => {
@@ -34,7 +33,7 @@ exports.postLogin = (req, res) => {
   })
     .then((db_result) => {
       if (db_result === null) {
-        res.render('login' ,{ result: false });
+        res.render("login", { result: false });
       } else {
         req.session.user = {
           result: true,
@@ -62,10 +61,10 @@ exports.getLogout = (req, res) => {
 };
 
 exports.getUserDelete = (req, res) => {
-  models.User.destroy({ where : { userId : req.session.user.userId}});
+  models.User.destroy({ where: { userId: req.session.user.userId } });
   req.session.destroy();
-  res.redirect('/');
-}
+  res.redirect("/");
+};
 
 exports.postImgUpload = async (req, res) => {
   res.send({ path: req.file.path });
@@ -131,54 +130,57 @@ exports.getMyPage = (req, res) => {
 exports.getMyPagePost = (req, res) => {
   const userSession = req.session.user;
   if (userSession !== undefined) {
-        res.render("mypage_post", {
-          result: true,
-          userId: userSession.userId,
-          userName: userSession.userName,
-          userBirth: userSession.userBirth,
-          userImg: userSession.userImg,
-        })
-      }
-  else {
-    res.redirect('/');
+    res.render("mypage_post", {
+      result: true,
+      userId: userSession.userId,
+      userName: userSession.userName,
+      userBirth: userSession.userBirth,
+      userImg: userSession.userImg,
+    });
+  } else {
+    res.redirect("/");
   }
-}
-// mypage의 유저 정보 수정 POST 
+};
+// mypage의 유저 정보 수정 POST
 exports.postMyPagePost = (req, res) => {
   const userSession = req.session.user;
   console.log("req.body", req.body);
   console.log("req.file", req.file);
   if (req.file === undefined) {
-    models.User.update({
-      userId : req.body.userId,
-      userName : req.body.userName,
-      userBirth : req.body.userBirth,
-    },
-    {where: {userId : userSession.userId}})
-    .then(result => {
-      res.redirect('/');
-      req.session.destroy();
-    })
-    .catch(err => {
-      console.error(err);
-    });
+    models.User.update(
+      {
+        userId: req.body.userId,
+        userName: req.body.userName,
+        userBirth: req.body.userBirth,
+      },
+      { where: { userId: userSession.userId } }
+    )
+      .then((result) => {
+        res.redirect("/");
+        req.session.destroy();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   } else {
-    models.User.update({
-      userId : req.body.userId,
-      userName : req.body.userName,
-      userBirth : req.body.userBirth,
-      userImg : req.file.path,
-    },
-    {where: {userId : userSession.userId}})
-    .then(result => {
-      res.redirect('/');
-      req.session.destroy();
-    })
-    .catch(err => {
-      console.error(err);
-    });
+    models.User.update(
+      {
+        userId: req.body.userId,
+        userName: req.body.userName,
+        userBirth: req.body.userBirth,
+        userImg: req.file.path,
+      },
+      { where: { userId: userSession.userId } }
+    )
+      .then((result) => {
+        res.redirect("/");
+        req.session.destroy();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
-}
+};
 
 exports.getIdCheck = (req, res) => {
   models.User.findOne({
@@ -217,19 +219,18 @@ exports.getCommunity = (req, res) => {
   res.render("commu");
 };
 
-// 커뮤니티 게시글 전체 조회
+// 커뮤니티 게시글 전체 조회 GET
 exports.getCommunityPosts = (req, res) => {
   models.Community.findAll().then((result) => {
     res.render("commu_posts", { data: result });
   });
 };
 
-// 커뮤니티 게시글 상세 조회
+// 커뮤니티 게시글 상세 조회 GET
 exports.getCommunityPostId = (req, res) => {
-  //   res.render("commu_post", { postId: req.query.postId });
-  console.log("@@@@ req 콘솔!!!@@@@@", req.params);
   models.Community.findOne({
     where: { postId: req.params.postId },
+    raw: true,
   }).then((result) => {
     // res.send(result);
     res.render('commu_post', { result : result})
@@ -239,11 +240,11 @@ exports.getCommunityPostId = (req, res) => {
 };
 
 // 커뮤니티 게시글 작성 GET
-exports.getCommunityPost = (req, res) => {
+exports.getCommunityPostWrite = (req, res) => {
   const userSession = req.session.user;
   console.log(userSession);
   if (userSession !== undefined) {
-    res.render("communityPost", {
+    res.render("commu_post_write", {
       result: true,
       userId: userSession.userId,
       userName: userSession.userName,
@@ -251,38 +252,41 @@ exports.getCommunityPost = (req, res) => {
       userImg: userSession.userImg,
     });
   } else {
-    res.render("commu", { result: false });
+    models.Community.findAll().then((result) => {
+      res.render("commu_posts", { data: result, result: false });
+    });
   }
 };
 
 // 커뮤니티 게시글 작성 POST
 exports.postCommunityPost = (req, res) => {
-    const userSession = req.session.user;
-    let now = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    models.Community.create({
-        userName: userSession.userName,
-        postDate: now,
-        postTitle: req.body.title,
-        postDoc: req.body.doc,
-        postViews: 0,
-        postLikes: 0,
-        postCategory: req.body.category,
-        postTag: req.body.tag,
-        // userImg: ,
-    })
-    .then((result) => {    
-    }).catch(err => {
-        console.log(err);
-    })
+  const userSession = req.session.user;
+  let now = new Date().toISOString().slice(0, 19).replace("T", " ");
+  models.Community.create({
+    userName: userSession.userName,
+    postDate: now,
+    postTitle: req.body.title,
+    postDoc: req.body.doc,
+    postViews: 0,
+    postLikes: 0,
+    postCategory: req.body.category,
+    postTag: req.body.tag,
+    // userImg: ,
+  })
+    .then((result) => {})
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 exports.getPost = (req, res) => {
-    models.Community.findOne({
-        where: { postId: req.params.postId }
-    }).then((result) => {
-        res.render('post', { data: result });
+  models.Community.findOne({
+    where: { postId: req.params.postId },
+  })
+    .then((result) => {
+      res.render("post", { data: result });
     })
-        .catch(err => {
-            console.log(err);
-        })
+    .catch((err) => {
+      console.log(err);
+    });
 };
