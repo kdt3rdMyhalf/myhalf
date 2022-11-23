@@ -1,0 +1,198 @@
+.searchForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1vw;
+}
+
+.searchInput {
+  width: 50vw;
+  height: 5vw;
+  border: 3px solid #ffeac7;
+  border-radius: 20px;
+  padding: 1vw;
+  background-repeat: no-repeat;
+}
+
+.searchInput::-webkit-input-placeholder {
+  background-image: url(https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-256.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-align: center;
+  text-indent: 0;
+}
+
+.searchForm > button {
+  display: none;
+}
+
+fieldset {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  margin: 1vw;
+}
+
+[type="radio"],
+[type="checkbox"] {
+  vertical-align: middle;
+  appearance: none;
+  border: max(2px, 0.1em) solid gray;
+  border-radius: 50%;
+  width: 1.25em;
+  height: 1.25em;
+  margin: 1vw;
+  transition: border 0.5s ease-in-out;
+}
+
+[type="radio"]:checked,
+[type="checkbox"]:checked {
+  border: 0.4em solid #ffeac7;
+}
+
+[type="radio"]:focus-visible,
+[type="checkbox"]:focus-visible {
+  outline-offset: max(2px, 0.1em);
+  outline: max(2px, 0.1em) dotted #ffeac7;
+}
+
+[type="radio"]:hover,
+[type="checkbox"]:hover {
+  box-shadow: 0 0 0 max(4px, 0.2em) lightgray;
+  cursor: pointer;
+}
+
+.checkBox2Span {
+  font-weight: bold;
+  margin-right: 1vw;
+}
+
+#searchCheckBtn {
+  width: 4vw;
+  border-radius: 20px;
+  background-color: #ffeac7;
+  border: none;
+  margin-left: 2vw;
+}
+
+.hotPostBox {
+  width: 90vw;
+  margin: 0 auto;
+  overflow-x: scroll;
+}
+
+.hotPostWrapBox {
+  margin: 1vw;
+  display: flex;
+  flex-direction: row;
+}
+
+.hotPostWrap {
+  width: 25vw;
+  height: 12vw;
+  border: 1px solid #ffeac7;
+  border-radius: 20px;
+  box-shadow: 0px 4px 10px rgba(113, 113, 113, 0.25);
+  min-width: 25vw;
+  margin-right: 2vw;
+  flex-grow: 1;
+}
+
+#postBtn {
+  border: none;
+  border-radius: 100%;
+  width: 5vw;
+  height: 5vw;
+  background-color: #ffeac7;
+  position: fixed;
+  bottom: 1vw;
+  right: 1vw;
+}
+
+.postList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 1vw;
+}
+
+.postCard {
+  width: 80vw;
+  display: flex;
+}
+
+.postCard > img {
+  width: 15vw;
+  margin: 1vw;
+  border-radius: 20px;
+}
+
+.postDesc1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.postTitle {
+  font-size: 2vw;
+  margin-top: 1vw;
+  margin-bottom: 1vw;
+  margin-left: 1vw;
+}
+
+.postTitle:hover {
+  color: #ffeac7;
+}
+
+.postDoc {
+  font-size: 0.5vw;
+  margin-bottom: 1vw;
+  margin-left: 1vw;
+  color: rgb(185, 185, 185);
+}
+
+.postDesces1 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.postDescComment {
+  margin: 1vw;
+}
+
+.postHashtag {
+  width: 5vw;
+  margin: 1vw;
+  text-align: center;
+  background-color: #ffeac7;
+  color: white;
+  border-radius: 20px;
+  font-size: 0.8vw;
+}
+
+.postDescComment,
+.postDescLikes {
+  font-size: 0.9vw;
+}
+
+.postDesces2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.postDesces2-1 {
+  display: flex;
+  margin-top: 1vw;
+  font-size: 0.8vw;
+}
+
+.postDescWriter,
+.postDescDate,
+.postDescViews,
+.postDescLikes {
+  margin-left: 1vw;
+  margin-right: 1vw;
+}
