@@ -143,6 +143,10 @@ fieldset {
   margin-left: 1vw;
 }
 
+.postTitle:hover {
+  color: #ffeac7;
+}
+
 .postDoc {
   font-size: 0.5vw;
   margin-bottom: 1vw;
@@ -164,6 +168,7 @@ fieldset {
   margin: 1vw;
   text-align: center;
   background-color: #ffeac7;
+  color: white;
   border-radius: 20px;
   font-size: 0.8vw;
 }

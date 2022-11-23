@@ -113,8 +113,8 @@
     </div>
 
     <div class="postList">
+      <% for (let i = 0; i < data.length; i++) { %>
       <div class="postCard">
-        <% for (let i = 0; i < data.length; i++) { %>
         <img src="<%= data[i].postImg %>" alt="게시글 이미지" />
         <div class="postDesc1">
           <div class="postTitle"><%= data[i].postTitle %></div>
@@ -130,10 +130,10 @@
               <div class="postDescViews"><%= data[i].postViews %></div>
             </div>
             <div class="postDescLikes">♥︎ <%= data[i].postLikes %></div>
-            <% } %>
           </div>
         </div>
       </div>
+      <% } %>
       <div class="postCard">
         <img src="/static/img/logo.png" alt="" />
         <div class="postDesc1">
@@ -175,5 +175,6 @@
         />
       </svg>
     </button>
+    <script src="/static/js/commu_posts.js"></script>
   </body>
 </html>
