@@ -105,7 +105,6 @@ exports.getMyPage = (req, res) => {
       where: { userName: userSession.userName },
     })
       .then((result) => {
-        console.log(result);
         res.render("mypage", {
           result: true,
           userId: userSession.userId,
@@ -122,6 +121,10 @@ exports.getMyPage = (req, res) => {
     res.render("index", { result: false });
   }
 };
+
+exports.getMyPagePost = (req, res) => {
+  res.render('mypage_post');
+}
 
 exports.getIdCheck = (req, res) => {
   models.User.findOne({
