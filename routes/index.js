@@ -48,8 +48,11 @@ router.get("/commu", controller.getCommunity);
 router.get("/commu/post", controller.getCommunityPost);
 router.post("/commu/post", controller.postCommunityPost);
 
-// 커뮤니티 페이지
-router.get("/commu/posts", controller.getPosts);
+// 커뮤니티 게시글 전체 조회
+router.get("/commu/posts", controller.getCommunityPosts);
+
+// 커뮤니티 게시글 상세 조회
+router.get("/commu/posts/:postId", controller.getCommunityPostId);
 
 
 router.get('/commu/posts', controller.getPosts);

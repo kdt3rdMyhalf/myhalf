@@ -114,7 +114,7 @@
 
     <div class="postList">
       <% for (let i = 0; i < data.length; i++) { %>
-      <div class="postCard">
+      <a href="/commu/posts/<%= data[i].postId %>" class="postCard">
         <img src="<%= data[i].postImg %>" alt="게시글 이미지" />
         <div class="postDesc1">
           <div class="postTitle"><%= data[i].postTitle %></div>
@@ -132,7 +132,7 @@
             <div class="postDescLikes">♥︎ <%= data[i].postLikes %></div>
           </div>
         </div>
-      </div>
+      </a>
       <% } %>
       <div class="postCard">
         <img src="/static/img/logo.png" alt="" />
