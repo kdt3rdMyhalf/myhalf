@@ -40,6 +40,7 @@ router.post(
 );
 
 router.get("/user/mypage", controller.getMyPage);
+router.get('/mypage-post', controller.getMyPagePost);
 
 router.get("/commu", controller.getCommunity);
 router.get("/commu/post", controller.getCommunityPost);
