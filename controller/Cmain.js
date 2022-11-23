@@ -191,8 +191,6 @@ exports.getCommunityPost = (req, res) => {
 exports.postCommunityPost = (req, res) => {
     const userSession = req.session.user;
     let now = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    console.log('post commu', userSession);
-    console.log(req.body);
     models.Community.create({
         userName: userSession.userName,
         postDate: now,
@@ -203,8 +201,8 @@ exports.postCommunityPost = (req, res) => {
         postCategory: req.body.category,
         postTag: req.body.tag,
         // userImg: ,
-    }).then((result) => {
-        res.render('commu');
+    })
+    .then((result) => {    
     }).catch(err => {
         console.log(err);
     })
