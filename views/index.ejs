@@ -23,28 +23,19 @@
     <link rel="stylesheet" href="/static/css/index.css" />
   </head>
   <body>
-    <h1>Main</h1>
-    <% if(result) { %>
-        <div><%= userName %></div>
-        <img src='<%= userImg %>'' alt="" width="200">
-        <a href="/user/mypage">마이페이지</a>
-        <form action="/logout" method="get">
-            <button>로그아웃</button>
-        </form>
-    <% } else { %>
-        <a href="/login">로그인</a>
-        <a href="/signup">회원가입</a>
-    <% } %>
     <header>
       <img src="/static/img/logo.png" alt="" />
       <div class="userBox">
-        <div class="signin">회원가입</div>
-        <div class="login">로그인</div>
+        <% if(result) { %> <img src='<%= userImg %>'' alt="" width="200"> <% }
+        else { %>
+        <a href="/signup" class="signin">회원가입</a>
+        <a href="/login" class="login">로그인</a>
+        <% } %>
       </div>
     </header>
     <nav>
       <div class="navHome">홈</div>
-      <a href="/commu" class="navCommu">커뮤니티</a>
+      <a href="/commu/posts" class="navCommu">커뮤니티</a>
       <div class="navMarket">반려장터</div>
     </nav>
     <section>
