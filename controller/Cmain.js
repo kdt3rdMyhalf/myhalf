@@ -160,6 +160,28 @@ exports.getCommunity = (req, res) => {
   res.render("commu");
 };
 
+// 커뮤니티 게시글 전체 조회
+exports.getCommunityPosts = (req, res) => {
+  models.Community.findAll().then((result) => {
+    res.render("commu_posts", { data: result });
+  });
+};
+
+// 커뮤니티 게시글 상세 조회
+exports.getCommunityPostId = (req, res) => {
+  //   res.render("commu_post", { postId: req.query.postId });
+  console.log("@@@@ req 콘솔!!!@@@@@", req.params);
+  models.Community.findOne({
+    where: { postId: req.params.postId },
+  }).then((result) => {
+    // res.send(result);
+    console.log("result console>>>", result);
+
+    res.render("commu_post", { data: result });
+  });
+};
+
+// 커뮤니티 게시글 작성 GET
 exports.getCommunityPost = (req, res) => {
   const userSession = req.session.user;
   console.log(userSession);
@@ -176,30 +198,24 @@ exports.getCommunityPost = (req, res) => {
   }
 };
 
-exports.getPosts = (req, res) => {
-  models.Community.findAll().then((result) => {
-    res.render("commu_posts", { data: result });
-  });
-};
-
+// 커뮤니티 게시글 작성 POST
 exports.postCommunityPost = (req, res) => {
-    const userSession = req.session.user;
-    let now = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    models.Community.create({
-        userName: userSession.userName,
-        postDate: now,
-        postTitle: req.body.title,
-        postDoc: req.body.doc,
-        postViews: 0,
-        postLikes: 0,
-        postCategory: req.body.category,
-        postTag: req.body.tag,
-        // userImg: ,
-    })
-    .then((result) => {    
-    }).catch(err => {
-        console.log(err);
-
+  const userSession = req.session.user;
+  let now = new Date().toISOString().slice(0, 19).replace("T", " ");
+  models.Community.create({
+    userName: userSession.userName,
+    postDate: now,
+    postTitle: req.body.title,
+    postDoc: req.body.doc,
+    postViews: 0,
+    postLikes: 0,
+    postCategory: req.body.category,
+    postTag: req.body.tag,
+    // userImg: ,
+  })
+    .then((result) => {})
+    .catch((err) => {
+      console.log(err);
     })
     .catch((err) => {
       console.log(err);
