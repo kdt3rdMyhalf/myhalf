@@ -1,5 +1,7 @@
 const models = require("../models");
 
+
+
 exports.getMain = (req, res) => {
   const userSession = req.session.user;
   console.log("main userSession: ", userSession);
@@ -226,15 +228,39 @@ exports.getCommunityPosts = (req, res) => {
   });
 };
 
+// cookie value로 설정할 사용자 ip주소 얻어오는 함수
+function getUserIP(req) {
+  const addr = req.headers['x-forwarded-for'] || req.connection.remoteAddress
+  return addr
+}
+
 // 커뮤니티 게시글 상세 조회 GET
 exports.getCommunityPostId = (req, res) => {
   models.Community.findOne({
     where: { postId: req.params.postId },
     raw: true,
   }).then((result) => {
+    // res.send(result);
+    res.render('commu_post', { result : result})
     console.log("result console>>>", result);
-    res.render("commu_post", result);
   });
+
+  // 쿠키 설정
+  if (req.cookies['C' + req.params.postId] == undefined) {
+    // key, value, 옵션을 설정해준다.
+    res.cookie('C' + req.params.postId, getUserIP(req), {
+      // 유효시간 : 360분     
+      maxAge: 1000 * 60 * 60 * 60
+    })
+    models.Community.increment({ postViews: 1, }, { where : { postId : req.params.postId }})
+    .then((result) => {
+      console.log('포스트뷰 증가!: ', result);
+      // 조회수 증가 쿼리
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+}
 };
 
 // 커뮤니티 게시글 작성 GET
