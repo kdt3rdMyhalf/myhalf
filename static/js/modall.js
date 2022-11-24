@@ -22,29 +22,4 @@ function outsideClick(e) {
   if (e.target == modal2) {
     modal2.style.display = 'none';
   }
-}
-
-// function signup() {
-//   var userPw = document.getElementById('userPw').value;
-//   var userPwCheck = document.getElementById('userPwCheck').value;
-  
-
-      
-//       if( userPw != userPwCheck ) {
-      
-//           userPwCheck.setCustomValidity("패스워드 불일치");
-      
-//       } 
-//   else{
-//           userPwCheck.setCustomValidity('');
-//           // location.href = 'login';
-//       }
-      
-//   }
-
-
-
-  
-  
-  
-  
+}  

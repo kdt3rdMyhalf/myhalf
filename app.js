@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const PORT = 8000;
 const session = require("express-session");
+const cookieParser = require("cookie-parser");
 
 // 뷰 엔진 설정
 app.set("view engine", "ejs");
@@ -22,9 +23,12 @@ app.use(
     saveUninitialized: true,
   })
 );
+// 쿠키 사용 
+app.use(cookieParser());
 
 // 라우터 연결
 const indexRouter = require("./routes/index");
+
 app.use("/", indexRouter);
 
 // 잘못된 url 경로 처리

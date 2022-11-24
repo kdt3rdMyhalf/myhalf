@@ -10,7 +10,7 @@
     <ul>
         <li>ID : <%= userId %></li>
         <li>Nick Name : <%= userName %></li>
-        <li>BithDay: <%= userBirth %></li>
+        <li>BirthDay: <%= userBirth %></li>
         <li>userImg: <img src="<%= userImg %>" width="200" alt=""></li>
         <li>userPosts: <br><% for (i=0; i< userPost.length; i++) { %>
                         작성시간: <%= userPost[i].dataValues.postDate %>
@@ -23,5 +23,7 @@
             <%}%>
         </li>
     </ul>
+    <a href="/mypage-post">내 정보 수정</a>
+    <a href="/user/delete">회원 탈퇴</a>
 </body>
 </html>
