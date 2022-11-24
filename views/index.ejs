@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="ko">
 
 <head>
@@ -30,21 +29,6 @@
     <div class="userBox">
       <% if(result) { %>
         <img src='<%= userImg %>'' alt="" width="200"> 
-    <!-- CSS 연결 -->
-    <link rel="stylesheet" href="/static/css/index.css" />
-    <link rel="stylesheet" href="/static/css/modal.css">
-    <link rel="stylesheet" href="/static/css/modal2.css">
-  </head>
-  <body>
-    <header>
-      <img src="/static/img/logo.png" alt="" />
-      <div class="userBox">
-        <div class="signin">회원가입</div>
-        <div class="login">로그인</div>
-      </div>
-      <div class="userBox">
-        <% if(result) { %> 
-          <img src='<%= userImg %>'' alt="" width="200"> 
           <a href="/user/mypage" class="mypage">마이페이지</a>
           <a href="/logout" class="logout">로그아웃</a>
         <% } else { %>
@@ -68,17 +52,13 @@
           </div>
           <div class="modal-footer">
             <div class="signin" data-bs-toggle="modal" data-bs-target="#secondModal">회원가입</div>
-
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
           </div>
           <!-- <div class="modal-footer"> -->
-
         </div>
       </div>
     </div>
     </div>
-
     <div class="modal fade" id="secondModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -92,7 +72,6 @@
           </div>
           <div class="modal-footer">
             <div class="signin" data-bs-toggle="modal" data-bs-target="#firstModal">로그인</div>
-
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
@@ -343,9 +322,4 @@
       </div>
     </article>
 </body>
-
-    <%- include ('footer.ejs') %>
-    <script src="/static/js/modall.js"></script>
-    <script src="/static/js/modals.js"></script>
-  </body>
 </html>

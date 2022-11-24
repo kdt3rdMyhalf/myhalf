@@ -22,4 +22,13 @@ function outsideClick(e) {
   if (e.target == modal2) {
     modal2.style.display = 'none';
   }
-}  
+}
+
+
+
+
+
+  
+  
+  
+  
