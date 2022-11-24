@@ -39,6 +39,9 @@ router.post(
   controller.postImgUpload
 );
 
+// 카카오
+router.post("/kakaologin", controller.getKakao);
+
 router.get("/user/mypage", controller.getMyPage);
 router.get('/mypage-post', controller.getMyPagePost);
 

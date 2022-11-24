@@ -24,6 +24,53 @@ exports.getSignup = (req, res) => {
   res.render("signup");
 };
 
+// 카카오
+exports.getKakao = (req, res) => {
+  console.log(req.body);
+  models.User.findOne({
+    where: {
+      userId: req.body.userId,
+    },
+  }).then((db_result) => {
+    if (db_result === null) {
+      //카카오 회원가입
+      models.User.create({
+        userId: req.body.userId,
+        userPw: req.body.userId,
+        userBirth: "2222-02-22",
+        userName: req.body.userName,
+        userImg: req.body.userImg
+      })
+        .then(() => {
+          //세션
+          req.session.user = {
+            result: true,
+            userName: req.body.userName,
+            userImg: req.body.userImg,
+            userId: req.body.userId,
+            userBirth: req.body.userBirth,
+          };
+
+          res.redirect("/");
+        })
+    } else {
+      req.session.user = {
+        result: true,
+        userName: db_result.userName,
+        userImg: db_result.userImg,
+        userId: db_result.userId,
+        userBirth: db_result.userBirth,
+      };
+
+      res.redirect("/");
+    }
+  })
+    .catch((err) => {
+      console.log(err);
+    });
+
+}
+
 exports.postLogin = (req, res) => {
   console.log(req.body);
   models.User.findOne({
@@ -75,7 +122,7 @@ exports.postSignup = (req, res) => {
       userImg: "https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927",
     })
       .then((result) => {
-        res.render("login");
+        res.redirect("/");
       })
       .catch((err) => {
         console.log(err);
@@ -86,10 +133,10 @@ exports.postSignup = (req, res) => {
       userPw: req.body.userPw,
       userBirth: req.body.userBirth,
       userName: req.body.userName,
-      userImg: "/" + req.file.path,
+      userImg: "/" + req.file.path
     })
       .then((result) => {
-        res.render("login");
+        res.redirect("/");
       })
       .catch((err) => {
         console.log(err);
@@ -186,32 +233,32 @@ exports.getPosts = (req, res) => {
 };
 
 exports.postCommunityPost = (req, res) => {
-    const userSession = req.session.user;
-    let now = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    models.Community.create({
-        userName: userSession.userName,
-        postDate: now,
-        postTitle: req.body.title,
-        postDoc: req.body.doc,
-        postViews: 0,
-        postLikes: 0,
-        postCategory: req.body.category,
-        postTag: req.body.tag,
-        // userImg: ,
-    })
-    .then((result) => {    
+  const userSession = req.session.user;
+  let now = new Date().toISOString().slice(0, 19).replace('T', ' ');
+  models.Community.create({
+    userName: userSession.userName,
+    postDate: now,
+    postTitle: req.body.title,
+    postDoc: req.body.doc,
+    postViews: 0,
+    postLikes: 0,
+    postCategory: req.body.category,
+    postTag: req.body.tag,
+    // userImg: ,
+  })
+    .then((result) => {
     }).catch(err => {
-        console.log(err);
+      console.log(err);
     })
 };
 
 exports.getPost = (req, res) => {
-    models.Community.findOne({
-        where: { postId: req.params.postId }
-    }).then((result) => {
-        res.render('post', { data: result });
+  models.Community.findOne({
+    where: { postId: req.params.postId }
+  }).then((result) => {
+    res.render('post', { data: result });
+  })
+    .catch(err => {
+      console.log(err);
     })
-        .catch(err => {
-            console.log(err);
-        })
 };
