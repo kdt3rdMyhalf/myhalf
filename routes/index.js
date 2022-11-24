@@ -29,6 +29,7 @@ router.post(
   uploadDetail.single("userImg"),
   controller.postSignup
 );
+router.get("/user/delete", controller.getUserDelete);
 
 router.get("/signup", controller.getSignup);
 router.get("/signup/idcheck", controller.getIdCheck);
@@ -43,18 +44,23 @@ router.post(
 router.post("/kakaologin", controller.getKakao);
 
 router.get("/user/mypage", controller.getMyPage);
-router.get('/mypage-post', controller.getMyPagePost);
+router.get("/mypage-post", controller.getMyPagePost);
+router.post(
+  "/mypage-post",
+  uploadDetail.single("userImg"),
+  controller.postMyPagePost
+);
 
-router.get("/commu", controller.getCommunity);
-router.get("/commu/post", controller.getCommunityPost);
+// 커뮤니티 게시글 쓰기 GET
+router.get("/commu/post", controller.getCommunityPostWrite);
+// 커뮤니티 게시글 쓰기 POST
 router.post("/commu/post", controller.postCommunityPost);
 
-// 커뮤니티 페이지
-router.get("/commu/posts", controller.getPosts);
+// 커뮤니티 게시글 전체 조회 GET
+router.get("/commu/posts", controller.getCommunityPosts);
 
-
-router.get('/commu/posts', controller.getPosts);
-router.get('/commu/posts/{postId}', controller.getPost)
+// 커뮤니티 게시글 상세 조회 GET
+router.get("/commu/posts/:postId", controller.getCommunityPostId);
 
 // 반려장터 페이지
 
