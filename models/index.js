@@ -24,6 +24,8 @@ db.Sequelize = Sequelize;
 db.User = require('./User')(sequelize, Sequelize);
 db.Community = require('./Community')(sequelize, Sequelize);
 db.Likes = require('./Likes')(sequelize, Sequelize);
+db.Comment = require('./Comment')(sequelize, Sequelize);
+db.Market = require('./Market')(sequelize, Sequelize);
 
 // db 관계 정의
 // user - community
@@ -53,6 +55,7 @@ db.Likes.belongsTo(db.User, {
   foreignKey: 'userName',
   targetKey: 'userName',
 });
+
 
 
 

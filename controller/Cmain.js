@@ -26,6 +26,53 @@ exports.getSignup = (req, res) => {
   res.render("signup");
 };
 
+// 카카오
+exports.getKakao = (req, res) => {
+  console.log(req.body);
+  models.User.findOne({
+    where: {
+      userId: req.body.userId,
+    },
+  }).then((db_result) => {
+    if (db_result === null) {
+      //카카오 회원가입
+      models.User.create({
+        userId: req.body.userId,
+        userPw: req.body.userId,
+        userBirth: "2222-02-22",
+        userName: req.body.userName,
+        userImg: req.body.userImg
+      })
+        .then(() => {
+          //세션
+          req.session.user = {
+            result: true,
+            userName: req.body.userName,
+            userImg: req.body.userImg,
+            userId: req.body.userId,
+            userBirth: req.body.userBirth,
+          };
+
+          res.redirect("/");
+        })
+    } else {
+      req.session.user = {
+        result: true,
+        userName: db_result.userName,
+        userImg: db_result.userImg,
+        userId: db_result.userId,
+        userBirth: db_result.userBirth,
+      };
+
+      res.redirect("/");
+    }
+  })
+    .catch((err) => {
+      console.log(err);
+    });
+
+}
+
 exports.postLogin = (req, res) => {
   console.log(req.body);
   models.User.findOne({
@@ -94,10 +141,10 @@ exports.postSignup = (req, res) => {
       userPw: req.body.userPw,
       userBirth: req.body.userBirth,
       userName: req.body.userName,
-      userImg: "/" + req.file.path,
+      userImg: "/" + req.file.path
     })
       .then((result) => {
-        res.render("login");
+        res.redirect("/");
       })
       .catch((err) => {
         console.log(err);
@@ -241,6 +288,7 @@ exports.getCommunityPostId = (req, res) => {
   let result = {} 
   
   // 조회수 기능
+
   // 쿠키 설정
   if (req.cookies['C' + req.params.postId] == undefined) {
     // key, value, 옵션을 설정해준다.
@@ -351,6 +399,7 @@ exports.getCommunityPostWrite = (req, res) => {
 exports.postCommunityPost = (req, res) => {
   const userSession = req.session.user;
   let now = new Date().toISOString().slice(0, 19).replace("T", " ");
+
   models.Community.create({
     userName: userSession.userName,
     postDate: now,
@@ -367,16 +416,55 @@ exports.postCommunityPost = (req, res) => {
     .catch((err) => {
       console.log(err);
     });
+
 };
 
-exports.getPost = (req, res) => {
-  models.Community.findOne({
-    where: { postId: req.params.postId },
+
+// 커뮤니티 게시글 댓글보기 GET
+exports.getCommentsGet = (req, res) => {
+  const userSession = req.session.user;
+  console.log(userSession);
+  console.log('comment >>>>>>', req.params);
+  models.Comment.findAll().then((result) => {
+    res.send(result)
+  });
+};
+
+// 커뮤니티 게시글 댓글 쓰기 POST
+exports.postCommentPost = (req, res) => {
+  const userSession = req.session.user;
+  let now = new Date().toISOString().slice(0, 19).replace("T", " ");
+  console.log(req.body);
+  models.Comment.create({
+    userName: userSession.userName,
+    commDate: now,
+    commDoc: req.body.doc,
+    commViews: 0,
+    commCount: 0,
   })
     .then((result) => {
-      res.render("post", { data: result });
+      console.log(result);
+      res.send(result);
     })
     .catch((err) => {
       console.log(err);
     });
+};
+
+// 반려장터 게시글 전체조회 GET
+exports.getMarketPosts = (req, res) => {
+  models.Market.findAll().then((result) => {
+    res.render("market_posts", { data: result });
+  });
+};
+
+// 반려장터 게시글 상세조회 GET
+exports.getMarketMarketId = (req, res) => {
+  const userSession = req.session.user;
+  models.Market.findOne({
+    where: { marketId: req.params.marketId },
+    raw: true,
+  }).then((result) => {
+    res.render("market_post", { data: result });
+  });
 };
