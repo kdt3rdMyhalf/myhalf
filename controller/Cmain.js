@@ -114,7 +114,10 @@ exports.getUserDelete = (req, res) => {
 };
 
 exports.postImgUpload = async (req, res) => {
-  res.send({ path: req.file.path });
+  if (req.file === undefined) {
+  } else {
+    res.send({ path: req.file.path });
+  }
 };
 
 exports.postSignup = (req, res) => {
@@ -157,6 +160,7 @@ exports.getMyPage = (req, res) => {
       where: { userName: userSession.userName },
     })
       .then((result) => {
+        console.log(result);
         res.render("mypage", {
           result: true,
           userId: userSession.userId,
@@ -339,11 +343,11 @@ exports.getCommunityPostId = (req, res) => {
         (post_result) => {
           result["likes"] = post_result.length;
           console.log("게시글 좋아요 기록: ", post_result);
+          // 댓글 조회
           models.Comment.findOne({
             where: { postId: req.params.postId },
             raw: true,
           }).then((db_result) => {
-            // id 조건 추가
             result["commentData"] = db_result;
             // 게시글 조회
             models.Community.findOne({

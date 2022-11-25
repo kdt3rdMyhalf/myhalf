@@ -107,6 +107,22 @@
           댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용
         </div>
       </div> -->
+      <% if (result.commentData === null) { %>
+        <div class="comments">
+          <div class="commentInfoBox">
+            <div class="commentInfoDiv1">
+              <div class="commentWriter"></div>
+              <div class="commentDate"></div>
+            </div>
+            <div class="commentInfoDiv2">
+              <button type="button" class="commentEditBtn">수정</button>
+              <button type="button" class="commentDeleteBtn">삭제</button>
+            </div>
+          </div>
+          <div class="commentsContent">
+          </div>
+        </div>
+        <% } else { %>
       <div class="comments">
         <% for (let i = 0; i < result.commentData.length; i++) { %>
         <div class="commentInfoBox">
@@ -124,7 +140,19 @@
         <button type="button">등록</button>
       </form>
       <div class="comments">
-      <% for (let i = 0; i < result.commentData[i].length; i++) { %>
+          <div class="commentInfoBox">
+            <div class="commentInfoDiv1">
+              <div class="commentWriter"></div>
+              <div class="commentDate"></div>
+            </div>
+            <div class="commentInfoDiv2">
+              <button type="button" class="commentEditBtn">수정</button>
+              <button type="button" class="commentDeleteBtn">삭제</button>
+            </div>
+          </div>
+          <div class="commentsContent">
+          </div>
+        </div>      <% for (let i = 0; i < result.commentData[i].length; i++) { %>
         <div class="commentInfoBox">
           <div class="commentWriter"><%= result.commentData[i].userName %></div>
           <div class="commentDate"><%= result.commentData[i].commDate %></div>
@@ -136,25 +164,9 @@
         </div>
       </div>
       <% } %>
+      <% } %>
     </div>
     <hr />
-
-    좋아요 수: <div class="resultLikes"><%= result.likes %></div>
-    <% if (result.isUserSession) { %>
-      <% if (result.userLikes == 1) { %>
-        <div class="btn">
-          <button onclick="likesOff()" class="likesBtn">❤하트 이미 누름!</button>
-        </div>
-      <% } else { %>
-        <div class="btn">
-          <button onclick="likesOn()" class="likesBtn">❤하트 안 누름!</button>
-        </div>
-      <% } %>
-    <% } else { %>
-      <div class="btn">
-        <button class="likesBtn">❤하트 못 누름!</button>
-      </div>
-    <% } %>
     
     <script src="/static/js/commu_post.js"></script>
   </body>
