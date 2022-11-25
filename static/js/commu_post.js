@@ -63,6 +63,43 @@ function commentPost(postId) {
     });
 }
 
+// 좋아요, 조회수 기능
+function likesOff() {
+  let btn = document.querySelector(".btn");
+  let postId = parseInt(document.querySelector(".postId").innerText);
+  btn.innerHTML =
+    '<button onclick="likesOn()" class="likesBtn">❤하트 안 누름!</button>';
+  axios({
+    method: "post",
+    url: "/commu/post/likesOff",
+    data: {
+      ClientPostId: postId,
+    },
+  }).then((result) => {
+    console.log(result);
+    document.querySelector(".resultLikes").innerText =
+      parseInt(document.querySelector(".resultLikes").innerText, 10) - 1;
+  });
+}
+function likesOn() {
+  let totalLikes = document.querySelector(".resultLikes").innerText;
+  let btn = document.querySelector(".btn");
+  let postId = parseInt(document.querySelector(".postId").innerText);
+  btn.innerHTML =
+    '<button onclick="likesOff()" class="likesBtn">❤하트 이미 누름!</button>';
+  axios({
+    method: "post",
+    url: "/commu/post/likesOn",
+    data: {
+      ClientPostId: postId,
+    },
+  }).then((result) => {
+    console.log(result);
+    document.querySelector(".resultLikes").innerText =
+      parseInt(document.querySelector(".resultLikes").innerText, 10) + 1;
+  });
+}
+
 // comment input 초기화
 function clearInput() {
   const form = document.forms["commentForm"];

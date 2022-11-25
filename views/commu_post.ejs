@@ -33,30 +33,45 @@
   </head>
   <body>
     <div class="tagBox">
-      <div class="categoryTag"><%= postData.postCategory %></div>
-      <div class="hashTag"><%= postData.postTag %></div>
+      <div class="categoryTag"><%= result.postInfo.postCategory %></div>
+      <div class="hashTag"><%= result.postInfo.postTag %></div>
     </div>
-    <div class="postTitle"><%= postData.postTitle %></div>
+    <div class="postTitle"><%= result.postInfo.postTitle %></div>
     <div class="postInfoBox">
       <div class="infoBoxDiv1">
         <img
-          src="<%= postData.postImg %>"
+          src="<%= result.postInfo.postImg %>"
           alt="작성자 프로필 사진"
           class="postWriterImg"
         />
         <div class="postInfoDiv2">
-          <div class="postWriter"><%= postData.userName %></div>
-          <div class="postDate"><%= postData.postDate %></div>
+          <div class="postWriter"><%= result.postInfo.userName %></div>
+          <div class="postDate"><%= result.postInfo.postDate %></div>
         </div>
       </div>
-      <div class="postViews">조회수 <%= postData.postViews %></div>
+      <div class="postViews">조회수 <%= result.postInfo.postViews %></div>
     </div>
     <hr />
-    <div class="postContent"><%= postData.postDoc %></div>
+    <div class="postContent"><%= result.postInfo.postDoc %></div>
     <div class="postLikesDiv">
       <div class="postLikesBox">
         <div class="postLikesHeart">♡</div>
-        <div class="postLikes"><%= postData.postLikes %></div>
+        <% if (result.isUserSession) { %>
+          <% if (result.userLikes == 1) { %>
+            <div class="btn">
+              <button onclick="likesOff()" class="likesBtn">❤하트 이미 누름!</button>
+            </div>
+          <% } else { %>
+            <div class="btn">
+              <button onclick="likesOn()" class="likesBtn">❤하트 안 누름!</button>
+            </div>
+          <% } %>
+        <% } else { %>
+          <div class="btn">
+            <button class="likesBtn">❤하트 못 누름!</button>
+          </div>
+        <% } %>
+        <div class="postLikes"><%= result.likes %></div>
       </div>
     </div>
     <hr />
@@ -72,7 +87,7 @@
         <button
           type="button"
           id="commentBtn"
-          onclick="commentPost(Number('<%= result.postId %>'))"
+          onclick="commentPost(Number('<%= result.postInfo.postId %>'))"
         >
           등록
         </button>
@@ -93,17 +108,16 @@
         </div>
       </div> -->
       <div class="comments">
-        <% for (let i = 0; i < commentData.length; i++) { %>
+        <% for (let i = 0; i < result.commentData.length; i++) { %>
         <div class="commentInfoBox">
           <div class="commentInfoDiv1">
-            <div class="commentWriter"><%= commentData[i].userName %></div>
-            <div class="commentDate"><%= commentData[i].commDate %></div>
+            <div class="commentWriter"><%= result.commentData[i].userName %></div>
+            <div class="commentDate"><%= result.commentData[i].commDate %></div>
           </div>
           <div class="commentInfoDiv2">
             <button type="button" class="commentEditBtn">수정</button>
             <button type="button" class="commentDeleteBtn">삭제</button>
           </div>
-
       <% for (let i = 0; i < result.length; i++) { %>
       <div class="commentsCount"><%= result[i].commCount %></div>
       <form name="comment">
@@ -111,24 +125,23 @@
         <button type="button">등록</button>
       </form>
       <div class="comments">
-      <% for (let i = 0; i < result.length; i++) { %>
+      <% for (let i = 0; i < result.commentData[i].length; i++) { %>
         <div class="commentInfoBox">
-          <div class="commentWriter"><%= result[i].userName %></div>
-          <div class="commentDate"><%= result[i].commDate %></div>
+          <div class="commentWriter"><%= result.commentData[i].userName %></div>
+          <div class="commentDate"><%= result.commentData[i].commDate %></div>
         </div>
         <div class="commentsContent">
           <%= result[i].commDoc %>
           <% } %>
         <% } %>
-
 </div>
-        <div class="commentsContent"><%= commentData[i].commDoc %></div>
+        <div class="commentsContent"><%= result.commentData[i].commDoc %></div>
       </div>
       <% } %>
     </div>
     <div class="postId"><%= result.postInfo.postId %></div>
     <hr />
-    <script src="/static/js/commu_post.js"></script>
+
     좋아요 수: <div class="resultLikes"><%= result.likes %></div>
     <% if (result.isUserSession) { %>
       <% if (result.userLikes == 1) { %>
@@ -146,44 +159,6 @@
       </div>
     <% } %>
     
-
+    <script src="/static/js/commu_post.js"></script>
   </body>
-
-  <script>
-    function likesOff() {
-      let btn = document.querySelector('.btn');
-      let postId = parseInt(document.querySelector('.postId').innerText)
-      btn.innerHTML = '<button onclick="likesOn()" class="likesBtn">❤하트 안 누름!</button>'
-      axios({
-        method : 'post',
-        url : '/commu/post/likesOff',
-        data : {
-          ClientPostId : postId,
-        }
-      })
-      .then((result) => {
-        console.log(result);
-        document.querySelector('.resultLikes').innerText = parseInt(document.querySelector('.resultLikes').innerText, 10) - 1;
-
-      })
-    }
-
-    function likesOn() {
-      let totalLikes = document.querySelector('.resultLikes').innerText;
-      let btn = document.querySelector('.btn');
-      let postId = parseInt(document.querySelector('.postId').innerText)
-      btn.innerHTML = '<button onclick="likesOff()" class="likesBtn">❤하트 이미 누름!</button>'
-      axios({
-        method : 'post',
-        url : '/commu/post/likesOn',
-        data : {
-          ClientPostId : postId,
-        }
-      })
-      .then((result) => {
-        console.log(result);
-        document.querySelector('.resultLikes').innerText = parseInt(document.querySelector('.resultLikes').innerText, 10) + 1;
-      })
-    }
-  </script>
 </html>
