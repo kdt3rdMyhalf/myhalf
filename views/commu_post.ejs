@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>반쪽-게시글 상세 페이지</title>
+    <title>반쪽</title>
 
     <!-- bootstrap -->
     <link
@@ -33,29 +33,77 @@
   </head>
   <body>
     <div class="tagBox">
-      <div class="categoryTag"></div>
-      <div class="hashtag"></div>
+      <div class="categoryTag"><%= postData.postCategory %></div>
+      <div class="hashTag"><%= postData.postTag %></div>
     </div>
-    <div class="postTitle"></div>
+    <div class="postTitle"><%= postData.postTitle %></div>
     <div class="postInfoBox">
-      <img src="" alt="작성자 프로필 사진" class="postWriterImg" />
       <div class="infoBoxDiv1">
-        <div class="postWriter">작성자</div>
-        <div class="postDate">2022-11-23 10:22</div>
+        <img
+          src="<%= postData.postImg %>"
+          alt="작성자 프로필 사진"
+          class="postWriterImg"
+        />
+        <div class="postInfoDiv2">
+          <div class="postWriter"><%= postData.userName %></div>
+          <div class="postDate"><%= postData.postDate %></div>
+        </div>
       </div>
-      <div class="postViews">조회수 20</div>
+      <div class="postViews">조회수 <%= postData.postViews %></div>
     </div>
     <hr />
-    <div class="postContent">
-      내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-    </div>
+    <div class="postContent"><%= postData.postDoc %></div>
     <div class="postLikesDiv">
-      <div class="postLikesHeart">♡</div>
-      <div class="postLikes">2</div>
+      <div class="postLikesBox">
+        <div class="postLikesHeart">♡</div>
+        <div class="postLikes"><%= postData.postLikes %></div>
+      </div>
     </div>
-
     <hr />
     <div class="comment">
+
+<div class="commentsCount">댓글 1</div>
+      <form name="commentForm" id="commentForm">
+        <input
+          type="textarea"
+          id="commentInput"
+          placeholder="댓글을 작성해 주세요"
+        />
+        <button
+          type="button"
+          id="commentBtn"
+          onclick="commentPost(Number('<%= result.postId %>'))"
+        >
+          등록
+        </button>
+      </form>
+      <!-- <div class="comments">
+        <div class="commentInfoBox">
+          <div class="commentInfoDiv1">
+            <div class="commentWriter">댓글 작성자</div>
+            <div class="commentDate">2022-11-23 11:22</div>
+          </div>
+          <div class="commentInfoDiv2">
+            <button type="button" class="commentEditBtn">수정</button>
+            <button type="button" class="commentDeleteBtn">삭제</button>
+          </div>
+        </div>
+        <div class="commentsContent">
+          댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용
+        </div>
+      </div> -->
+      <div class="comments">
+        <% for (let i = 0; i < commentData.length; i++) { %>
+        <div class="commentInfoBox">
+          <div class="commentInfoDiv1">
+            <div class="commentWriter"><%= commentData[i].userName %></div>
+            <div class="commentDate"><%= commentData[i].commDate %></div>
+          </div>
+          <div class="commentInfoDiv2">
+            <button type="button" class="commentEditBtn">수정</button>
+            <button type="button" class="commentDeleteBtn">삭제</button>
+          </div>
+
       <% for (let i = 0; i < result.length; i++) { %>
       <div class="commentsCount"><%= result[i].commCount %></div>
       <form name="comment">
@@ -72,11 +120,15 @@
           <%= result[i].commDoc %>
           <% } %>
         <% } %>
-        </div>
+
+</div>
+        <div class="commentsContent"><%= commentData[i].commDoc %></div>
       </div>
+      <% } %>
     </div>
     <div class="postId"><%= result.postInfo.postId %></div>
     <hr />
+    <script src="/static/js/commu_post.js"></script>
     좋아요 수: <div class="resultLikes"><%= result.likes %></div>
     <% if (result.isUserSession) { %>
       <% if (result.userLikes == 1) { %>

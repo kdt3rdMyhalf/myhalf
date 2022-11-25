@@ -62,6 +62,11 @@ router.get("/commu/posts", controller.getCommunityPosts);
 // 커뮤니티 게시글 상세 조회 GET
 router.get("/commu/posts/:postId", controller.getCommunityPostId);
 
+// 커뮤니티 게시글 댓글 전체 조회 GET * 수정해야 함
+router.get("/commu/posts/:postId/comments", controller.getCommentsGet);
+
+// 게시글 댓글 쓰기 POST
+router.post("/commu/posts/:postId/postcomment", controller.postCommentPost);
 
 // 커뮤니티 게시글 좋아요 GET
 router.post('/commu/post/likesOn', controller.postLikesOn);

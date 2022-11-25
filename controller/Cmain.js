@@ -283,6 +283,8 @@ function getUserIP(req) {
 }
 
 // 커뮤니티 게시글 상세 조회 GET
+
+
 exports.getCommunityPostId = (req, res) => {
   const userSession = req.session.user
   let result = {} 
@@ -310,8 +312,10 @@ exports.getCommunityPostId = (req, res) => {
     models.Likes.findAll({ where : { postId : req.params.postId }})
         .then((post_result) => {
           result['likes'] = post_result.length
-          console.log('게시글 좋아요 기록: ', post_result);
-          models.Community.findOne({
+          models.Comment.findAll({ raw: true })
+          .then((db_result) => {
+            result['commentData'] = db_result
+            models.Community.findOne({
             where: { postId: req.params.postId },
             raw: true,
           }).then((db_result) => {
@@ -321,6 +325,8 @@ exports.getCommunityPostId = (req, res) => {
             res.render('commu_post', {result : result});
           });
         })
+          })
+          
   }
   //  유저 세션이 존재하면 
   else {
@@ -336,6 +342,8 @@ exports.getCommunityPostId = (req, res) => {
         .then((post_result) => {
           result['likes'] = post_result.length
           console.log('게시글 좋아요 기록: ', post_result);
+          models.Comment.findAll({ raw: true }).then((db_result) => { // id 조건 추가
+          result['commentData'] = db_result
           // 게시글 조회
           models.Community.findOne({
             where: { postId: req.params.postId },
@@ -346,6 +354,7 @@ exports.getCommunityPostId = (req, res) => {
             console.log('최종 보내는 result객체: ', result);
             res.render('commu_post', {result : result});
           });
+           })
         })
       })
   }
@@ -421,26 +430,38 @@ exports.postCommunityPost = (req, res) => {
 
 
 // 커뮤니티 게시글 댓글보기 GET
+// exports.getCommentsGet = (req, res) => {
+//  const userSession = req.session.user;
+//  console.log(userSession);
+//  console.log('comment >>>>>>', req.params);
+//  models.Comment.findAll().then((result) => {
+//    res.send(result)
+//  });
+// };
+
+// 커뮤니티 게시글 댓글보기 GET
 exports.getCommentsGet = (req, res) => {
   const userSession = req.session.user;
   console.log(userSession);
-  console.log('comment >>>>>>', req.params);
+  console.log("comment >>>>>>", req.params);
+
   models.Comment.findAll().then((result) => {
-    res.send(result)
+    res.send({ commentData: result });
+    // res.render("commu_post", { commentData: result });
   });
 };
 
 // 커뮤니티 게시글 댓글 쓰기 POST
 exports.postCommentPost = (req, res) => {
   const userSession = req.session.user;
+  console.log("userSession >>>", userSession);
   let now = new Date().toISOString().slice(0, 19).replace("T", " ");
-  console.log(req.body);
+  console.log("req.body >>>> ", req.body.comment);
   models.Comment.create({
     userName: userSession.userName,
     commDate: now,
-    commDoc: req.body.doc,
-    commViews: 0,
-    commCount: 0,
+    commDoc: req.body.comment,
+    postId: 1,
   })
     .then((result) => {
       console.log(result);
