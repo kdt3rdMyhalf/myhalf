@@ -333,3 +333,21 @@ exports.postCommentPost = (req, res) => {
       console.log(err);
     });
 };
+
+// 반려장터 게시글 전체조회 GET
+exports.getMarketPosts = (req, res) => {
+  models.Market.findAll().then((result) => {
+    res.render("market_posts", { data: result });
+  });
+};
+
+// 반려장터 게시글 상세조회 GET
+exports.getMarketMarketId = (req, res) => {
+  const userSession = req.session.user;
+  models.Market.findOne({
+    where: { marketId: req.params.marketId },
+    raw: true,
+  }).then((result) => {
+    res.render("market_post", { data: result });
+  });
+};
