@@ -156,7 +156,6 @@ exports.postSignup = (req, res) => {
 
 exports.getMyPage = (req, res) => {
   const userSession = req.session.user;
-
   if (userSession !== undefined) {
     models.Community.findAll({
       where: { userName: userSession.userName },
@@ -334,6 +333,7 @@ exports.getCommunityPostId = (req, res) => {
   //  유저 세션이 존재하면
   else {
     result["isUserSession"] = true;
+    result['userName'] = userSession.userName;
     // 접속 유저 좋아요 기록 확인
     models.Likes.findAll({
       where: { userName: userSession.userName, postId: req.params.postId },
@@ -363,6 +363,8 @@ exports.getCommunityPostId = (req, res) => {
       );
     });
   }
+  
+
 };
 
 exports.postLikesOff = (req, res) => {
@@ -403,7 +405,7 @@ exports.getCommunityPostWrite = (req, res) => {
     });
   } else {
     models.Community.findAll().then((result) => {
-      res.render("commu_posts", { data: result, result: false });
+      res.redirect("/commu/posts");
     });
   }
 };
@@ -428,6 +430,15 @@ exports.postCommunityPost = (req, res) => {
       console.log(err);
     });
 };
+
+// 커뮤니티 게시글 삭제 POST
+exports.postCommunityDelete = (req, res) => {
+  models.Community.destroy({ where : { postId : req.params.postId}})
+  .then((db_result) => {
+    console.log(db_result);
+    res.redirect('/commu/posts')
+  })
+}
 
 // 커뮤니티 게시글 댓글보기 GET
 // exports.getCommentsGet = (req, res) => {
