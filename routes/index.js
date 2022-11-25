@@ -79,6 +79,6 @@ router.post("/commu/posts/:postId/postcomment", controller.postCommentPost);
 router.get("/market/posts", controller.getMarketPosts);
 
 // 반려장터 게시글 상세 조회 GET
-router.get("/market/posts/:marketId", controller.getMarketMarketId);
+router.get("/market/posts/:marketId", controller.getMarketId);
 
 module.exports = router;

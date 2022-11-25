@@ -391,7 +391,7 @@ exports.getMarketPosts = (req, res) => {
 };
 
 // 반려장터 게시글 상세조회 GET
-exports.getMarketMarketId = (req, res) => {
+exports.getMarketId = (req, res) => {
   const userSession = req.session.user;
   models.Market.findOne({
     where: { marketId: req.params.marketId },
