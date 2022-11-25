@@ -40,6 +40,9 @@ router.post(
   controller.postImgUpload
 );
 
+// 카카오
+router.post("/kakaologin", controller.getKakao);
+
 router.get("/user/mypage", controller.getMyPage);
 router.get("/mypage-post", controller.getMyPagePost);
 router.post(
@@ -65,10 +68,31 @@ router.get("/commu/posts/:postId/comments", controller.getCommentsGet);
 // 게시글 댓글 쓰기 POST
 router.post("/commu/posts/:postId/postcomment", controller.postCommentPost);
 
+// 커뮤니티 게시글 좋아요 GET
+router.post('/commu/post/likesOn', controller.postLikesOn);
+router.post('/commu/post/likesOff', controller.postLikesOff);
+
+
 // 반려장터 페이지
+
 
 // router.patch('/commu/post/edit', controller.patchPost); // 하나 수정
 
 // router.delete('/commu/post/delete', controller.deletePost); // 하나 삭제
+
+// 댓글 쓰기 POST
+// router.get("/commu/post/:postId/postcomment", controller.postCommentPostId);
+
+// 게시글 댓글 조회 GET
+router.get("/commu/posts/:postId/comments", controller.getCommentsGet);
+
+// 게시글 댓글 쓰기 POST
+router.post("/commu/posts/:postId/postcomment", controller.postCommentPost);
+
+// 반려장터 게시글 전체 조회 GET
+router.get("/market/posts", controller.getMarketPosts);
+
+// 반려장터 게시글 상세 조회 GET
+router.get("/market/posts/:marketId", controller.getMarketMarketId);
 
 module.exports = router;

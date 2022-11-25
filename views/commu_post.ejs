@@ -25,6 +25,11 @@
 
     <!-- CSS 연결 -->
     <link rel="stylesheet" href="/static/css/commu_post.css" />
+    <style>
+      .checked {
+        color: red;
+      }
+    </style>
   </head>
   <body>
     <div class="tagBox">
@@ -56,7 +61,8 @@
     </div>
     <hr />
     <div class="comment">
-      <div class="commentsCount">댓글 1</div>
+
+<div class="commentsCount">댓글 1</div>
       <form name="commentForm" id="commentForm">
         <input
           type="textarea"
@@ -66,7 +72,7 @@
         <button
           type="button"
           id="commentBtn"
-          onclick="commentPost(Number('<%= postData.postId %>'))"
+          onclick="commentPost(Number('<%= result.postId %>'))"
         >
           등록
         </button>
@@ -97,12 +103,87 @@
             <button type="button" class="commentEditBtn">수정</button>
             <button type="button" class="commentDeleteBtn">삭제</button>
           </div>
+
+      <% for (let i = 0; i < result.length; i++) { %>
+      <div class="commentsCount"><%= result[i].commCount %></div>
+      <form name="comment">
+        <input type="text" placeholder="댓글을 남겨 주세요." />
+        <button type="button">등록</button>
+      </form>
+      <div class="comments">
+      <% for (let i = 0; i < result.length; i++) { %>
+        <div class="commentInfoBox">
+          <div class="commentWriter"><%= result[i].userName %></div>
+          <div class="commentDate"><%= result[i].commDate %></div>
         </div>
+        <div class="commentsContent">
+          <%= result[i].commDoc %>
+          <% } %>
+        <% } %>
+
+</div>
         <div class="commentsContent"><%= commentData[i].commDoc %></div>
       </div>
       <% } %>
     </div>
+    <div class="postId"><%= result.postInfo.postId %></div>
     <hr />
     <script src="/static/js/commu_post.js"></script>
+    좋아요 수: <div class="resultLikes"><%= result.likes %></div>
+    <% if (result.isUserSession) { %>
+      <% if (result.userLikes == 1) { %>
+        <div class="btn">
+          <button onclick="likesOff()" class="likesBtn">❤하트 이미 누름!</button>
+        </div>
+      <% } else { %>
+        <div class="btn">
+          <button onclick="likesOn()" class="likesBtn">❤하트 안 누름!</button>
+        </div>
+      <% } %>
+    <% } else { %>
+      <div class="btn">
+        <button class="likesBtn">❤하트 못 누름!</button>
+      </div>
+    <% } %>
+    
+
   </body>
+
+  <script>
+    function likesOff() {
+      let btn = document.querySelector('.btn');
+      let postId = parseInt(document.querySelector('.postId').innerText)
+      btn.innerHTML = '<button onclick="likesOn()" class="likesBtn">❤하트 안 누름!</button>'
+      axios({
+        method : 'post',
+        url : '/commu/post/likesOff',
+        data : {
+          ClientPostId : postId,
+        }
+      })
+      .then((result) => {
+        console.log(result);
+        document.querySelector('.resultLikes').innerText = parseInt(document.querySelector('.resultLikes').innerText, 10) - 1;
+
+      })
+    }
+
+    function likesOn() {
+      let totalLikes = document.querySelector('.resultLikes').innerText;
+      let btn = document.querySelector('.btn');
+      let postId = parseInt(document.querySelector('.postId').innerText)
+      btn.innerHTML = '<button onclick="likesOff()" class="likesBtn">❤하트 이미 누름!</button>'
+      axios({
+        method : 'post',
+        url : '/commu/post/likesOn',
+        data : {
+          ClientPostId : postId,
+        }
+      })
+      .then((result) => {
+        console.log(result);
+        document.querySelector('.resultLikes').innerText = parseInt(document.querySelector('.resultLikes').innerText, 10) + 1;
+      })
+    }
+  </script>
 </html>

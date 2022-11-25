@@ -1,8 +1,8 @@
-const Community = function (Sequelize, DataTypes) {
+const Market  = function (Sequelize, DataTypes) {
     const model = Sequelize.define(
-        'Community',
+        'Market',
         {
-            postId: {
+            marketId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 primaryKey: true,
@@ -12,37 +12,37 @@ const Community = function (Sequelize, DataTypes) {
                 type: DataTypes.STRING(30),
                 allowNull: false,
             },
-            postDate: {
+            marketDate: {
                 type: DataTypes.DATE,
                 allowNull: false,
             },
-            postTitle: {
+            marketTitle: {
                 type: DataTypes.STRING(100),
                 allowNull: false,
             },
-            postDoc: {
+            marketDoc: {
                 type: DataTypes.TEXT('long'),
                 allowNull: false,
             },
-            postImg: {
+            marketImg: {
                 type: DataTypes.TEXT('long'),
                 allowNull: true,
             },
-            postViews: {
+            marketViews: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
-            postCategory: {
+            marketCategory: {
                 type: DataTypes.STRING(30),
                 allowNull: false,
             },
-            postTag: {
+            marketTag: {
                 type: DataTypes.STRING(30),
                 allowNull: true,
             },
         },
         {
-            tableName: 'community',
+            tableName: 'market',
             freezeTableName: true,
             timestamps: false,
         }
@@ -50,4 +50,4 @@ const Community = function (Sequelize, DataTypes) {
     return model;
 };
 
-module.exports = Community;
+module.exports = Market;
