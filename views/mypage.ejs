@@ -12,15 +12,23 @@
         <li>Nick Name : <%= userName %></li>
         <li>BirthDay: <%= userBirth %></li>
         <li>userImg: <img src="<%= userImg %>" width="200" alt=""></li>
-        <li>userPosts: <br><% for (i=0; i< userPost.length; i++) { %>
+        <li>userPosts: <br>
+            <ul>
+            <% for (i=0; i< userPost.length; i++) { %>
+            <li>
+            <a href="/commu/posts/<%= userPost[i].dataValues.postId %>">
+                        게시번호: <%= userPost[i].dataValues.postId %>
                         작성시간: <%= userPost[i].dataValues.postDate %>
                         제목: <%= userPost[i].dataValues.postTitle%>
                         조회수: <%= userPost[i].dataValues.postViews%>
                         좋아요 수: 
                         카테고리: <%= userPost[i].dataValues.postCategory%>
                         해시 태그: <%= userPost[i].dataValues.postTag%>
-                        <br>
+            </a>
+            </li>
+            <br>
             <%}%>
+            </ul>
         </li>
     </ul>
     <a href="/mypage-post">내 정보 수정</a>

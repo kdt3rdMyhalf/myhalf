@@ -141,23 +141,6 @@
     </div>
     <div class="postId"><%= result.postInfo.postId %></div>
     <hr />
-
-    좋아요 수: <div class="resultLikes"><%= result.likes %></div>
-    <% if (result.isUserSession) { %>
-      <% if (result.userLikes == 1) { %>
-        <div class="btn">
-          <button onclick="likesOff()" class="likesBtn">❤하트 이미 누름!</button>
-        </div>
-      <% } else { %>
-        <div class="btn">
-          <button onclick="likesOn()" class="likesBtn">❤하트 안 누름!</button>
-        </div>
-      <% } %>
-    <% } else { %>
-      <div class="btn">
-        <button class="likesBtn">❤하트 못 누름!</button>
-      </div>
-    <% } %>
     
     <script src="/static/js/commu_post.js"></script>
   </body>
