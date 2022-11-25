@@ -76,6 +76,13 @@
     </div>
     <hr />
     <div class="comment">
+      <% if (result.isUserSession && result.userName === result.postInfo.userName) { %>
+          <button>수정</button>
+          <form action="/commu/posts/<%= result.postInfo.postId %>/delete" onsubmit="return confirm('진짜 진짜 삭제 하실건가요?')" method="post">
+            <button>삭제</button>
+          </form>
+      <% } else { %>
+      <% } %>
 
 <div class="commentsCount">댓글 1</div>
       <form name="commentForm" id="commentForm">
