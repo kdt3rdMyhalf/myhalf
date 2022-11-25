@@ -32,10 +32,6 @@ const Community = function (Sequelize, DataTypes) {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
-            postLikes: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-            },
             postCategory: {
                 type: DataTypes.STRING(30),
                 allowNull: false,

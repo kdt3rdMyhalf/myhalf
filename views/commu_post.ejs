@@ -20,8 +20,16 @@
       crossorigin="anonymous"
     ></script>
 
+    <!-- axios cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <!-- CSS 연결 -->
     <link rel="stylesheet" href="/static/css/commu_post.css" />
+    <style>
+      .checked {
+        color: red;
+      }
+    </style>
   </head>
   <body>
     <div class="tagBox">
@@ -63,6 +71,63 @@
         </div>
       </div>
     </div>
+    <div class="postId"><%= result.postInfo.postId %></div>
     <hr />
+    좋아요 수: <div class="resultLikes"><%= result.likes %></div>
+    <% if (result.isUserSession) { %>
+      <% if (result.userLikes == 1) { %>
+        <div class="btn">
+          <button onclick="likesOff()" class="likesBtn">❤하트 이미 누름!</button>
+        </div>
+      <% } else { %>
+        <div class="btn">
+          <button onclick="likesOn()" class="likesBtn">❤하트 안 누름!</button>
+        </div>
+      <% } %>
+    <% } else { %>
+      <div class="btn">
+        <button class="likesBtn">❤하트 못 누름!</button>
+      </div>
+    <% } %>
+    
+
   </body>
+
+  <script>
+    function likesOff() {
+      let btn = document.querySelector('.btn');
+      let postId = parseInt(document.querySelector('.postId').innerText)
+      btn.innerHTML = '<button onclick="likesOn()" class="likesBtn">❤하트 안 누름!</button>'
+      axios({
+        method : 'post',
+        url : '/commu/post/likesOff',
+        data : {
+          ClientPostId : postId,
+        }
+      })
+      .then((result) => {
+        console.log(result);
+        document.querySelector('.resultLikes').innerText = parseInt(document.querySelector('.resultLikes').innerText, 10) - 1;
+
+      })
+    }
+
+    function likesOn() {
+      let totalLikes = document.querySelector('.resultLikes').innerText;
+      let btn = document.querySelector('.btn');
+      let postId = parseInt(document.querySelector('.postId').innerText)
+      btn.innerHTML = '<button onclick="likesOff()" class="likesBtn">❤하트 이미 누름!</button>'
+      axios({
+        method : 'post',
+        url : '/commu/post/likesOn',
+        data : {
+          ClientPostId : postId,
+        }
+      })
+      .then((result) => {
+        console.log(result);
+        document.querySelector('.resultLikes').innerText = parseInt(document.querySelector('.resultLikes').innerText, 10) + 1;
+      })
+    }
+  </script>
 </html>

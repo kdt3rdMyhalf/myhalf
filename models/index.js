@@ -23,6 +23,37 @@ db.Sequelize = Sequelize;
 // db.뭐시기 = require('./모델파일')(sequelize, Sequelize);
 db.User = require('./User')(sequelize, Sequelize);
 db.Community = require('./Community')(sequelize, Sequelize);
+db.Likes = require('./Likes')(sequelize, Sequelize);
+
+// db 관계 정의
+// user - community
+db.User.hasMany(db.Community, {
+  foreignKey: 'userName',
+  sourceKey: 'userName',
+});
+db.Community.belongsTo(db.User, {
+  foreignKey: 'userName',
+  targetKey: 'userName',
+});
+// community - likes
+db.Community.hasMany(db.Likes, {
+  foreignKey: 'postId',
+  sourceKey: 'postId',
+});
+db.Likes.belongsTo(db.Community, {
+  foreignKey: 'postId',
+  targetKey: 'postId',
+});
+// user - likes
+db.User.hasMany(db.Likes, {
+  foreignKey: 'userName',
+  sourceKey: 'userName',
+});
+db.Likes.belongsTo(db.User, {
+  foreignKey: 'userName',
+  targetKey: 'userName',
+});
+
 
 
 module.exports = db;

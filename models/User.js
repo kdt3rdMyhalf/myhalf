@@ -28,6 +28,7 @@ const User = function (Sequelize, DataTypes) {
       userName: {
         type: DataTypes.STRING(30),
         allowNull: false,
+        unique: true,
       },
     },
     {
