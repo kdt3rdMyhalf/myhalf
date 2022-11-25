@@ -339,7 +339,10 @@ exports.getCommunityPostId = (req, res) => {
         (post_result) => {
           result["likes"] = post_result.length;
           console.log("게시글 좋아요 기록: ", post_result);
-          models.Comment.findAll({ raw: true }).then((db_result) => {
+          models.Comment.findOne({
+            where: { postId: req.params.postId },
+            raw: true,
+          }).then((db_result) => {
             // id 조건 추가
             result["commentData"] = db_result;
             // 게시글 조회
@@ -448,7 +451,6 @@ exports.getCommentsGet = (req, res) => {
 // 커뮤니티 게시글 댓글 쓰기 POST
 exports.postCommentPost = (req, res) => {
   const userSession = req.session.user;
-  console.log("userSession >>>", userSession);
   let now = new Date().toISOString().slice(0, 19).replace("T", " ");
   console.log("req.body >>>> ", req.body.comment);
   models.Comment.create({
