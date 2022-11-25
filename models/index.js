@@ -23,6 +23,8 @@ db.Sequelize = Sequelize;
 // db.뭐시기 = require('./모델파일')(sequelize, Sequelize);
 db.User = require('./User')(sequelize, Sequelize);
 db.Community = require('./Community')(sequelize, Sequelize);
+db.Comment = require('./Comment')(sequelize, Sequelize);
+db.Market = require('./Market')(sequelize, Sequelize);
 
 
 module.exports = db;

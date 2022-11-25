@@ -1,8 +1,8 @@
-const Community = function (Sequelize, DataTypes) {
+const Comment = function (Sequelize, DataTypes) {
     const model = Sequelize.define(
-        'Community',
+        'Comment',
         {
-            postId: {
+            commId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 primaryKey: true,
@@ -12,37 +12,21 @@ const Community = function (Sequelize, DataTypes) {
                 type: DataTypes.STRING(30),
                 allowNull: false,
             },
-            postDate: {
+            commDate: {
                 type: DataTypes.DATE,
                 allowNull: false,
             },
-            postTitle: {
-                type: DataTypes.STRING(100),
-                allowNull: false,
-            },
-            postDoc: {
+            commDoc: {
                 type: DataTypes.TEXT('long'),
                 allowNull: false,
             },
-            postImg: {
-                type: DataTypes.TEXT('long'),
-                allowNull: true,
-            },
-            postViews: {
+            commCount: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
-            postCategory: {
-                type: DataTypes.STRING(30),
-                allowNull: false,
-            },
-            postTag: {
-                type: DataTypes.STRING(30),
-                allowNull: true,
-            },
         },
         {
-            tableName: 'community',
+            tableName: 'comment',
             freezeTableName: true,
             timestamps: false,
         }
@@ -50,4 +34,4 @@ const Community = function (Sequelize, DataTypes) {
     return model;
 };
 
-module.exports = Community;
+module.exports = Comment;
