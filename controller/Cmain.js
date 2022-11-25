@@ -114,7 +114,12 @@ exports.getUserDelete = (req, res) => {
 };
 
 exports.postImgUpload = async (req, res) => {
-  res.send({ path: req.file.path });
+  if (req.file === undefined) {
+
+  }
+  else {
+    res.send({ path: req.file.path });
+  }
 };
 
 exports.postSignup = (req, res) => {
@@ -157,6 +162,7 @@ exports.getMyPage = (req, res) => {
       where: { userName: userSession.userName },
     })
       .then((result) => {
+        console.log(result);
         res.render("mypage", {
           result: true,
           userId: userSession.userId,

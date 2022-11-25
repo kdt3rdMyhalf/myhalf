@@ -77,12 +77,11 @@ function likesOff() {
     },
   }).then((result) => {
     console.log(result);
-    document.querySelector(".resultLikes").innerText =
-      parseInt(document.querySelector(".resultLikes").innerText, 10) - 1;
+    document.querySelector(".postLikes").innerText =
+      parseInt(document.querySelector(".postLikes").innerText, 10) - 1;
   });
 }
 function likesOn() {
-  let totalLikes = document.querySelector(".resultLikes").innerText;
   let btn = document.querySelector(".btn");
   let postId = parseInt(document.querySelector(".postId").innerText);
   btn.innerHTML =
@@ -95,8 +94,8 @@ function likesOn() {
     },
   }).then((result) => {
     console.log(result);
-    document.querySelector(".resultLikes").innerText =
-      parseInt(document.querySelector(".resultLikes").innerText, 10) + 1;
+    document.querySelector(".postLikes").innerText =
+      parseInt(document.querySelector(".postLikes").innerText, 10) + 1;
   });
 }
 

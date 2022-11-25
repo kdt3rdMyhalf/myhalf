@@ -56,6 +56,24 @@ db.Likes.belongsTo(db.User, {
   foreignKey: 'userName',
   targetKey: 'userName',
 });
+// user - comment
+db.User.hasMany(db.Comment, {
+  foreignKey: 'userName',
+  sourceKey: 'userName',
+});
+db.Comment.belongsTo(db.User, {
+  foreignKey: 'userName',
+  targetKey: 'userName',
+});
+// community - comment
+db.Community.hasMany(db.Comment, {
+  foreignKey: 'postId',
+  sourceKey: 'postId',
+});
+db.Comment.belongsTo(db.Community, {
+  foreignKey: 'postId',
+  targetKey: 'postId',
+});
 
 
 module.exports = db;
