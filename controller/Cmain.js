@@ -240,9 +240,8 @@ exports.getCommunityPostId = (req, res) => {
     where: { postId: req.params.postId },
     raw: true,
   }).then((result) => {
-    // res.send(result);
     res.render('commu_post', { result : result})
-    console.log("result console>>>", result);
+    // console.log("result console>>>", result);
   });
 
   // 쿠키 설정
@@ -303,12 +302,32 @@ exports.postCommunityPost = (req, res) => {
     });
 };
 
-exports.getPost = (req, res) => {
-  models.Community.findOne({
-    where: { postId: req.params.postId },
+
+// 커뮤니티 게시글 댓글보기 GET
+exports.getCommentsGet = (req, res) => {
+  const userSession = req.session.user;
+  console.log(userSession);
+  console.log('comment >>>>>>', req.params);
+  models.Comment.findAll().then((result) => {
+    res.send(result)
+  });
+};
+
+// 커뮤니티 게시글 댓글 쓰기 POST
+exports.postCommentPost = (req, res) => {
+  const userSession = req.session.user;
+  let now = new Date().toISOString().slice(0, 19).replace("T", " ");
+  console.log(req.body);
+  models.Comment.create({
+    userName: userSession.userName,
+    commDate: now,
+    commDoc: req.body.doc,
+    commViews: 0,
+    commCount: 0,
   })
     .then((result) => {
-      res.render("post", { data: result });
+      console.log(result);
+      res.send(result);
     })
     .catch((err) => {
       console.log(err);

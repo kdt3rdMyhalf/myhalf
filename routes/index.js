@@ -66,9 +66,12 @@ router.get("/commu/posts/:postId", controller.getCommunityPostId);
 // router.delete('/commu/post/delete', controller.deletePost); // 하나 삭제
 
 // 댓글 쓰기 POST
-router.get("/commu/post/:postId/postcomment", controller.postCommentPostId);
+// router.get("/commu/post/:postId/postcomment", controller.postCommentPostId);
 
-// 댓글 조회 GET
-router.get("/commu/post/:postId/comments", controller.getCommentsPostId)
+// 게시글 댓글 조회 GET
+router.get("/commu/posts/:postId/comments", controller.getCommentsGet);
+
+// 게시글 댓글 쓰기 POST
+router.post("/commu/posts/:postId/postcomment", controller.postCommentPost);
 
 module.exports = router;

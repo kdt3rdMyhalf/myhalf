@@ -48,18 +48,22 @@
 
     <hr />
     <div class="comment">
-      <div class="commentsCount">댓글 1</div>
+      <% for (let i = 0; i < result.length; i++) { %>
+      <div class="commentsCount"><%= result[i].commCount %></div>
       <form name="comment">
         <input type="text" placeholder="댓글을 남겨 주세요." />
         <button type="button">등록</button>
       </form>
       <div class="comments">
+      <% for (let i = 0; i < result.length; i++) { %>
         <div class="commentInfoBox">
-          <div class="commentWriter">댓글 작성자</div>
-          <div class="commentDate">2022-11-23 11:22</div>
+          <div class="commentWriter"><%= result[i].userName %></div>
+          <div class="commentDate"><%= result[i].commDate %></div>
         </div>
         <div class="commentsContent">
-          댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용
+          <%= result[i].commDoc %>
+          <% } %>
+        <% } %>
         </div>
       </div>
     </div>
