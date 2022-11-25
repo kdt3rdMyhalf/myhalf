@@ -342,19 +342,21 @@ exports.getCommunityPostId = (req, res) => {
         .then((post_result) => {
           result['likes'] = post_result.length
           console.log('게시글 좋아요 기록: ', post_result);
-          models.Comment.findAll({ raw: true }).then((db_result) => { // id 조건 추가
+          models.Comment.findAll({ raw: true })
+          .then((db_result) => { // id 조건 추가
           result['commentData'] = db_result
           // 게시글 조회
           models.Community.findOne({
             where: { postId: req.params.postId },
             raw: true,
-          }).then((db_result) => {
-            // res.send(result);
-            result['postInfo'] = db_result,
-            console.log('최종 보내는 result객체: ', result);
-            res.render('commu_post', {result : result});
-          });
-           })
+          })
+            .then((db_result) => {
+              // res.send(result);
+              result['postInfo'] = db_result,
+              console.log('최종 보내는 result객체: ', result);
+              res.render('commu_post', {result : result});
+            });
+          })
         })
       })
   }
