@@ -1,3 +1,4 @@
+const db = require("../models");
 const models = require("../models");
 
 
@@ -283,13 +284,10 @@ function getUserIP(req) {
 
 // 커뮤니티 게시글 상세 조회 GET
 exports.getCommunityPostId = (req, res) => {
-  models.Community.findOne({
-    where: { postId: req.params.postId },
-    raw: true,
-  }).then((result) => {
-    res.render('commu_post', { result : result})
-    // console.log("result console>>>", result);
-  });
+  const userSession = req.session.user
+  let result = {} 
+  
+  // 조회수 기능
 
   // 쿠키 설정
   if (req.cookies['C' + req.params.postId] == undefined) {
@@ -303,11 +301,80 @@ exports.getCommunityPostId = (req, res) => {
       console.log('포스트뷰 증가!: ', result);
       // 조회수 증가 쿼리
     })
-    .catch((err) => {
-      console.log(err);
-    })
-}
+  }
+
+  // 좋아요 기능
+  // 유저 세션이 없으면
+  if ( userSession === undefined) {
+    result['isUserSession'] = false
+    models.Likes.findAll({ where : { postId : req.params.postId }})
+        .then((post_result) => {
+          result['likes'] = post_result.length
+          console.log('게시글 좋아요 기록: ', post_result);
+          models.Community.findOne({
+            where: { postId: req.params.postId },
+            raw: true,
+          }).then((db_result) => {
+            // res.send(result);
+            result['postInfo'] = db_result,
+            console.log('최종 보내는 result객체: ', result);
+            res.render('commu_post', {result : result});
+          });
+        })
+  }
+  //  유저 세션이 존재하면 
+  else {
+    result['isUserSession'] = true;
+      // 접속 유저 좋아요 기록 확인
+      models.Likes.findAll({ where : { userName : userSession.userName,
+        postId : req.params.postId, }})
+      .then((name_result) => {
+        result['userLikes'] = name_result.length
+        console.log("접속 유저 좋아요 기록: ", name_result)
+        // 게시글 좋아요 기록 확인
+        models.Likes.findAll({ where : { postId : req.params.postId }})
+        .then((post_result) => {
+          result['likes'] = post_result.length
+          console.log('게시글 좋아요 기록: ', post_result);
+          // 게시글 조회
+          models.Community.findOne({
+            where: { postId: req.params.postId },
+            raw: true,
+          }).then((db_result) => {
+            // res.send(result);
+            result['postInfo'] = db_result,
+            console.log('최종 보내는 result객체: ', result);
+            res.render('commu_post', {result : result});
+          });
+        })
+      })
+  }
 };
+
+exports.postLikesOff = (req, res) => {
+  const userSession = req.session.user;
+  console.log(req.body, userSession);
+  models.Likes.destroy({ where : {
+    postId : req.body.ClientPostId,
+    userName : userSession.userName,
+  }})
+  .then(() => {
+    res.send('삭제 성공!')
+  })
+}
+
+exports.postLikesOn = (req, res) => {
+  const userSession = req.session.user;
+  console.log(req.body, userSession);
+  models.Likes.create({
+    postId : req.body.ClientPostId,
+    userName : userSession.userName,
+  })
+  .then(() => {
+    res.send('생성 성공!')
+  })
+}
+
 
 // 커뮤니티 게시글 작성 GET
 exports.getCommunityPostWrite = (req, res) => {
@@ -339,12 +406,13 @@ exports.postCommunityPost = (req, res) => {
     postTitle: req.body.title,
     postDoc: req.body.doc,
     postViews: 0,
-    postLikes: 0,
     postCategory: req.body.category,
     postTag: req.body.tag,
     // userImg: ,
   })
-    .then((result) => {})
+    .then((result) => {
+
+    })
     .catch((err) => {
       console.log(err);
     });
