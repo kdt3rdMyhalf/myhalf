@@ -227,14 +227,28 @@ exports.getCommunityPosts = (req, res) => {
 };
 
 // 커뮤니티 게시글 상세 조회 GET
-exports.getCommunityPostId = (req, res) => {
-  models.Community.findOne({
+exports.getCommunityPostId = async (req, res) => {
+  let resultPost = await models.Community.findOne({
     where: { postId: req.params.postId },
     raw: true,
-  }).then((result) => {
-    console.log("result console>>>", result);
-    res.render("commu_post", result);
   });
+  // result2
+  // models.Comment.findAll().then((result) => {
+  // res.send({ commentData: result });
+  let resultComment = await models.Comment.findAll({ raw: true }); // postId 찾아서 조건 걸기
+  console.log(">>>>>>>>", resultComment);
+
+  res.render("commu_post", {
+    postData: resultPost,
+    commentData: resultComment,
+  });
+  //   models.Community.findOne({
+  //     where: { postId: req.params.postId },
+  //     raw: true,
+  //   }).then((result) => {
+  //     // console.log("result console>>>", result);
+  //     res.render("commu_post", { data: result });
+  //   });
 };
 
 // 커뮤니티 게시글 작성 GET
@@ -277,12 +291,33 @@ exports.postCommunityPost = (req, res) => {
     });
 };
 
-exports.getPost = (req, res) => {
-  models.Community.findOne({
-    where: { postId: req.params.postId },
+// 커뮤니티 게시글 댓글보기 GET
+exports.getCommentsGet = (req, res) => {
+  const userSession = req.session.user;
+  console.log(userSession);
+  console.log("comment >>>>>>", req.params);
+
+  models.Comment.findAll().then((result) => {
+    res.send({ commentData: result });
+    // res.render("commu_post", { commentData: result });
+  });
+};
+
+// 커뮤니티 게시글 댓글 쓰기 POST
+exports.postCommentPost = (req, res) => {
+  const userSession = req.session.user;
+  console.log("userSession >>>", userSession);
+  let now = new Date().toISOString().slice(0, 19).replace("T", " ");
+  console.log("req.body >>>> ", req.body.comment);
+  models.Comment.create({
+    userName: userSession.userName,
+    commDate: now,
+    commDoc: req.body.comment,
+    postId: 1,
   })
     .then((result) => {
-      res.render("post", { data: result });
+      console.log(result);
+      res.send(result);
     })
     .catch((err) => {
       console.log(err);
