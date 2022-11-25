@@ -27,16 +27,14 @@
   </head>
   <body>
     <div class="postList">
-      <% for (let i = 0; i < data.length; i++) { %>
-        <div>글번호:<%= data[i].MarketId %></div>
-        <div>작성자:<%= data[i].userName %></div>
-        <div>작성일:<%= data[i].marketDate %></div>
-        <div>조회수:<%= data[i].marketViews %></div>
-          <div>게시글 제목:<%= data[i].marketTitle %></div>
-        <div>이미지:<%= data[i].marketImg %></div>
-          <div>게시글 내용:<%= data[i].marketDoc %></div>
-            <div>카테고리:<%= data[i].marketCategory %></div>
-            <% } %>
+        <div>글번호:<%= data.MarketId %></div>
+        <div>작성자:<%= data.userName %></div>
+        <div>작성일:<%= data.marketDate %></div>
+        <div>조회수:<%= data.marketViews %></div>
+          <div>게시글 제목:<%= data.marketTitle %></div>
+        <div>이미지:<%= data.marketImg %></div>
+          <div>게시글 내용:<%= data.marketDoc %></div>
+            <div>카테고리:<%= data.marketCategory %></div>
         </div>
       <script></script>
     </body>
