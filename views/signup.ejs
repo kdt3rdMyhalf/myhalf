@@ -26,16 +26,17 @@
 
 </form>
 
-<script>
+     <a href="/login">login</a>
+    <script>
 
     function signup() {
-        var userPw = document.getElementById('userPw').value;
-        var userPwCheck = document.getElementById('userPwCheck').value;
-
-
-
-        if (userPw != userPwCheck) {
-
+    var userPw = document.getElementById('userPw').value;
+    var userPwCheck = document.getElementById('userPwCheck').value;
+    
+   
+        
+        if( userPw != userPwCheck ) {
+        
             userPwCheck.setCustomValidity("패스워드 불일치");
 
         }
@@ -49,13 +50,13 @@
 
 
     // <!-- 아이디 중복 체크 axios -->
+    
 
 
 
-
-    function idCheck() {
-        const idValue = document.querySelector('#userId').value
-        if (idValue === '' || idValue.indexOf('@') === -1 || idValue.indexOf('.') === -1) {
+        function idCheck() {
+            const idValue = document.querySelector('#userId').value
+            if(idValue === '' || idValue.indexOf('@') === -1 || idValue.indexOf('.') === -1){
             alert('이메일 형식으로 아이디를 입력해주세요.');
             document.querySelector('#userId').value = '';
             return
