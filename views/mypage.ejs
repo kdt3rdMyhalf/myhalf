@@ -31,6 +31,8 @@
         </li>
     </ul>
     <a href="/mypage-post">내 정보 수정</a>
-    <a href="/user/delete">회원 탈퇴</a>
+    <form action="/user/delete" onsubmit="return confirm('진짜 진짜 탈퇴 하실건가요?')" method="get">
+        <button>회원 탈퇴</button>
+    </form>
 </body>
 </html>
