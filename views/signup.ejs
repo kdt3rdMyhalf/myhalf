@@ -1,9 +1,75 @@
+<style>
+    .btn-login {
+        color: #fbfdff;
+        background: #a7e245;
+        transform: translateX(-30%);
+    }
+    .input-block {
+        margin-bottom: 20px;
+    }
+    .input-block label {
+        font-size: 14px;
+      color: #a1b4b4;
+    }
+    .input-block input {
+        display: block;
+        width: 80%;
+        margin-top: 8px;
+        padding-right: 15px;
+        padding-left: 15px;
+        font-size: 16px;
+        line-height: 40px;
+        color: #3b4465;
+    background: #eef9fe;
+    border: 1px solid #cddbef;
+    border-radius: 2px;
+    }
+    .log-btn{
+    background:#0AC986;
+    
+    width:100%;
+    font-size:16px;
+    height:50px;
+    color:#fff;
+    text-decoration:none;
+    border:none;
+    }
+    .log-btn1{
+    width:100%;
+    font-size:16px;
+    height:50px;
+    color:#fff;
+    text-decoration:none;
+    border:none;
+    }
+    .input-button {
+  padding: 8px 12px;
+  outline: none;
+  border: 0;
+  color: #8FAD96;
+  border-radius: 4px;
+  background: #FFEAC7;
+  font-family: "Nunito", sans-serif;
+  transition: 0.3s;
+  cursor: pointer;
+    }
+    </style>
+
+
+
+
+
+
 <form name="formSignup" action="/user/signup" method="POST" enctype="multipart/form-data">
+  <div class="input-block">
     <label for="userId">ID</label>
     <input id="userId" type="email" name="userId" placeholder="E-mail 주소" required>
-    <button type="button" name="userId" onclick="idCheck()">ID 중복확인</button><br />
+    </div>
+    <button class="input-button" type="button" name="userId" onclick="idCheck()">ID 중복확인</button><br />
     <div class="idCheck"></div>
+     <div class="input-block">
     <label for="password">Password</label>
+    </div>
 
     <input id="userPw" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$"
         title="비밀번호는 최소 8자리에서 최대 16자리까지 숫자, 영문, 특수문자 각 1개 이상 포함시켜 주세요." type="password" name="userPw" required><br />
@@ -13,20 +79,18 @@
 
     <label for="userName">userName</label>
     <input id="userName" type="text" name="userName" required><br />
-    <button type="button" name="userName" onclick="nameCheck()">유저네임 중복확인</button><br />
+    <button class="input-button" type="button" name="userName" onclick="nameCheck()">유저네임 중복확인</button><br />
     <div class="nameCheck"></div>
     <label for="userBirth">userBirth</label>
     <input id="userBirth" type="date" name="userBirth" required><br />
     <label for="userImg">userImg</label>
 
     <input type="file" name="userImg" id="userImg"><br />
-    <button type="button" onclick="fileUpload()">업로드</button><br>
+    <button class="input-button" type="button" onclick="fileUpload()">업로드</button><br>
     <img src="" alt="" width="200">
-    <button type="submit" class="btnSignup" disabled>회원가입</button>
+    <button class="input-button" type="submit" class="btnSignup" disabled>회원가입</button>
 
 </form>
-
-     <a href="/login">login</a>
     <script>
 
     function signup() {
