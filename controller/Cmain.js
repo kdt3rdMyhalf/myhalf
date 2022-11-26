@@ -16,6 +16,7 @@ exports.getMain = (req, res) => {
   }
 };
 
+// flag값을 login.html로 보냄
 exports.getLogin = (req, res) => {
   res.render("login");
 };
@@ -77,10 +78,15 @@ exports.postLogin = (req, res) => {
       userId: req.body.userId,
       userPw: req.body.userPw,
     },
-  })
+  })// "?flag=0 -> flag속성 넣기기"
     .then((db_result) => {
       if (db_result === null) {
-        res.render("login", { result: false });
+        // res.render("index", { result: false});
+        //         console.log('nonononono')
+        res.send(`<script>
+        alert('로그인 실패..')
+        document.location.href = '/'
+        </script>`)
       } else {
         req.session.user = {
           result: true,
@@ -94,6 +100,7 @@ exports.postLogin = (req, res) => {
     })
     .catch((err) => {
       console.log(err);
+
     });
 };
 
@@ -114,7 +121,10 @@ exports.getUserDelete = (req, res) => {
 };
 
 exports.postImgUpload = async (req, res) => {
-  res.send({ path: req.file.path });
+  if (req.file === undefined) {
+  } else {
+    res.send({ path: req.file.path });
+  }
 };
 
 exports.postSignup = (req, res) => {
@@ -151,12 +161,12 @@ exports.postSignup = (req, res) => {
 
 exports.getMyPage = (req, res) => {
   const userSession = req.session.user;
-
   if (userSession !== undefined) {
     models.Community.findAll({
       where: { userName: userSession.userName },
     })
       .then((result) => {
+        console.log(result);
         res.render("mypage", {
           result: true,
           userId: userSession.userId,
@@ -328,6 +338,7 @@ exports.getCommunityPostId = (req, res) => {
   //  유저 세션이 존재하면
   else {
     result["isUserSession"] = true;
+    result['userName'] = userSession.userName;
     // 접속 유저 좋아요 기록 확인
     models.Likes.findAll({
       where: { userName: userSession.userName, postId: req.params.postId },
@@ -339,8 +350,11 @@ exports.getCommunityPostId = (req, res) => {
         (post_result) => {
           result["likes"] = post_result.length;
           console.log("게시글 좋아요 기록: ", post_result);
-          models.Comment.findAll({ raw: true }).then((db_result) => {
-            // id 조건 추가
+          // 댓글 조회
+          models.Comment.findOne({
+            where: { postId: req.params.postId },
+            raw: true,
+          }).then((db_result) => {
             result["commentData"] = db_result;
             // 게시글 조회
             models.Community.findOne({
@@ -357,6 +371,8 @@ exports.getCommunityPostId = (req, res) => {
       );
     });
   }
+  
+
 };
 
 exports.postLikesOff = (req, res) => {
@@ -397,7 +413,7 @@ exports.getCommunityPostWrite = (req, res) => {
     });
   } else {
     models.Community.findAll().then((result) => {
-      res.render("commu_posts", { data: result, result: false });
+      res.redirect("/commu/posts");
     });
   }
 };
@@ -422,6 +438,15 @@ exports.postCommunityPost = (req, res) => {
       console.log(err);
     });
 };
+
+// 커뮤니티 게시글 삭제 POST
+exports.postCommunityDelete = (req, res) => {
+  models.Community.destroy({ where : { postId : req.params.postId}})
+  .then((db_result) => {
+    console.log(db_result);
+    res.redirect('/commu/posts')
+  })
+}
 
 // 커뮤니티 게시글 댓글보기 GET
 // exports.getCommentsGet = (req, res) => {
@@ -448,7 +473,6 @@ exports.getCommentsGet = (req, res) => {
 // 커뮤니티 게시글 댓글 쓰기 POST
 exports.postCommentPost = (req, res) => {
   const userSession = req.session.user;
-  console.log("userSession >>>", userSession);
   let now = new Date().toISOString().slice(0, 19).replace("T", " ");
   console.log("req.body >>>> ", req.body.comment);
   models.Comment.create({

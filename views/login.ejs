@@ -1,4 +1,13 @@
 <style>
+
+  .login-alert {
+    visibility: hidden;
+  }
+  .lg-alert-view {
+    display: flex;
+    color: red;
+  }
+
 .btn-login {
 	color: #fbfdff;
 	background: #a7e245;
@@ -45,6 +54,7 @@
 </style>
 
 
+
 <!-- action 주소지 / method 방법 -->
 <form name="formLogin" action="/user/login" method="POST">
   <div class="input-block">
@@ -54,9 +64,10 @@
   <div class="input-block">
   <label for="userPw2">Password</label>
   <input id="userPw2" type="password" name="userPw" required /><br />
-  </div>
+</div>
 
-  <button type="button" class="log-btn">Login</button>
+  <button class="log-btn">Login</button>
+
 </form>
 
 <!-- 카카오 로그인 버튼 -->
