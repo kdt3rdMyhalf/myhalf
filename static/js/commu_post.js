@@ -104,3 +104,7 @@ function clearInput() {
   const form = document.forms["commentForm"];
   form.commentInput.value = "";
 }
+
+let postDoc = document.querySelector('.postDoc').innerText
+let postContent = document.querySelector('.postContent')
+postContent.innerHTML = postDoc;
