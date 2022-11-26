@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>community Post</title>
+    <!-- quill web editor cdn -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <!-- axios cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h1>community Post</h1>
+    <h3>게시번호 : <span class="postId"><%= postInfo.postId %></span></h3>
+    <form action="/commu/post" name="postForm" method="post">
+    <label for="title">
+        Title: <input type="text" name="title" value="<%= postInfo.postTitle %>" id="title">
+    </label><br>
+    <label for="category">
+        Category:  <input type="text" name="category" value="<%= postInfo.postCategory %>" id="category">
+    </label><br>
+    <div class="postDoc dp-none">
+                <%= postInfo.postDoc %>
+    </div>
+        <div id="editor">
+            
+        </div>
+    <br>
+    <label for="tag">
+        Tag: <input type="text" value="<%= postInfo.postTag %>" name="tag" id="tag">
+    </label>
+    <button type="button" onclick="postUpdate()">게시글 수정</button>
+    </form>
+    <button class="check">check</button>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+
+        var quill = new Quill('#editor', {
+            modules : {
+                toolbar : [
+                    [{header: [1,2,false]}],
+                    ['bold', 'italic', 'underline'],
+                    ['image', 'code-block']
+            ]
+            },
+            placeholder : '여기에 게시글을 작성해주세요',
+            theme : 'snow'
+        }
+        );
+        // quill innercontent 설정
+        postDoc = document.querySelector('.postDoc').textContent
+        quill.root.innerHTML = postDoc;
+
+        // Quill data axios 비동기 통신
+        function postUpdate() {
+            const form = document.forms['postForm'];
+            const postId = document.querySelector('.postId').textContent
+            axios({
+            method: 'post',
+            url: '/commu/update',
+            data: { 
+                postId: postId,
+                title: form.title.value,
+                doc: quill.root.innerHTML,
+                category: form.category.value,
+                tag: form.tag.value,
+            }
+        }).then(() => {
+            alert('수정 완료!');
+        })
+        window.location = '/commu/posts'
+        }
+    </script>
+</body>
+</html>
