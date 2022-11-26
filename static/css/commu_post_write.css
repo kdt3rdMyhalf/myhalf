@@ -1,0 +1,27 @@
+.categoryWrap {
+  margin: 4vw;
+}
+
+input[type="radio"] {
+  position: absolute;
+}
+
+input[type="radio"] + label {
+  width: 100px;
+  padding: 1vw;
+  box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+  border: solid 1px #ddd;
+  background-color: #fff;
+  text-align: center;
+  transition: border-color 0.15s ease-out, color 0.25s ease-out,
+    background-color 0.15s ease-out, box-shadow 0.15s ease-out;
+  cursor: pointer;
+}
+
+input[type="radio"]:checked + label {
+  background-color: #ffeac7;
+  color: #fff;
+  border-color: #ffeac7;
+}

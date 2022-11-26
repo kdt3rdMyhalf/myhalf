@@ -53,8 +53,15 @@ router.post(
 
 // 커뮤니티 게시글 쓰기 GET
 router.get("/commu/post", controller.getCommunityPostWrite);
+
 // 커뮤니티 게시글 쓰기 POST
 router.post("/commu/post", controller.postCommunityPost);
+
+// 커뮤니티 게시글 수정 GET
+router.get("/commu/update/:postId", controller.getCommunityPostUpdate);
+
+// 커뮤니티 게시글 쓰기 POST
+router.post("/commu/update", controller.postCommunityPostUpdate);
 
 // 커뮤니티 게시글 전체 조회 GET
 router.get("/commu/posts", controller.getCommunityPosts);

@@ -338,7 +338,7 @@ exports.getCommunityPostId = (req, res) => {
   //  유저 세션이 존재하면
   else {
     result["isUserSession"] = true;
-    result['userName'] = userSession.userName;
+    result["userName"] = userSession.userName;
     // 접속 유저 좋아요 기록 확인
     models.Likes.findAll({
       where: { userName: userSession.userName, postId: req.params.postId },
@@ -371,8 +371,6 @@ exports.getCommunityPostId = (req, res) => {
       );
     });
   }
-  
-
 };
 
 exports.postLikesOff = (req, res) => {
@@ -439,14 +437,49 @@ exports.postCommunityPost = (req, res) => {
     });
 };
 
+// 커뮤니티 게시글 수정 페이지 로드 GET
+exports.getCommunityPostUpdate = (req, res) => {
+  models.Community.findOne({
+    where: { postId: req.params.postId },
+    raw: true,
+  }).then((db_result) => {
+    console.log(db_result);
+    res.render('commu_post_update', { postInfo : db_result });
+  })
+  
+}
+
+// 커뮤니티 게시글 수정 POST
+exports.postCommunityPostUpdate = (req, res) => {
+  const userSession = req.session.user;
+  let now = new Date().toISOString().slice(0, 19).replace("T", " ");
+
+  models.Community.update({
+    postDate: now,
+    postTitle: req.body.title,
+    postDoc: req.body.doc,
+    postCategory: req.body.category,
+    postTag: req.body.tag,
+    // userImg: ,
+  }, {where : {postId : req.body.postId}})
+    .then((result) => {
+      console.log('게시글 업데이트');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  
+}
+
 // 커뮤니티 게시글 삭제 POST
 exports.postCommunityDelete = (req, res) => {
-  models.Community.destroy({ where : { postId : req.params.postId}})
-  .then((db_result) => {
-    console.log(db_result);
-    res.redirect('/commu/posts')
-  })
-}
+  models.Community.destroy({ where: { postId: req.params.postId } }).then(
+    (db_result) => {
+      console.log(db_result);
+      res.redirect("/commu/posts");
+    }
+  );
+};
 
 // 커뮤니티 게시글 댓글보기 GET
 // exports.getCommentsGet = (req, res) => {
@@ -474,12 +507,12 @@ exports.getCommentsGet = (req, res) => {
 exports.postCommentPost = (req, res) => {
   const userSession = req.session.user;
   let now = new Date().toISOString().slice(0, 19).replace("T", " ");
-  console.log("req.body >>>> ", req.body.comment);
+  console.log("req.body >>>> ", req.body);
   models.Comment.create({
     userName: userSession.userName,
     commDate: now,
     commDoc: req.body.comment,
-    postId: 1,
+    postId: req.body.postId,
   })
     .then((result) => {
       console.log(result);
