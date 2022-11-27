@@ -29,7 +29,6 @@
   clip:rect(0,0,0,0);
   border: 0;
 }
-    
     .input-block input {
         display: block;
         width: 100%;
@@ -43,7 +42,6 @@
     border: 1px solid #cddbef;
     border-radius: 2px;
     }
-    
     .input-button {
     padding: 8px 12px;
     outline: none;
@@ -63,8 +61,14 @@
     color:#fff;
     text-decoration:none;
     border:none;
-
     }
+    .imageBox {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    margin: 20px auto;
+}
     </style>
 
 
@@ -105,7 +109,9 @@
     <label for="userImg">userImg</label><br>
     <input type="file" name="userImg" id="userImg" onclick="fileUpload()">프로파일 이미지 업로드<br />
     </div>
-    <img src="" alt="" width="200"><br><br>
+    <img src="" alt="" width="200" class="imageBox">
+    <br><br>
+    
     <button id="register" type="submit" class="btnSignup" disabled >회원가입</button>
 
 </form>
@@ -135,7 +141,7 @@
 
         function idCheck() {
             const idValue = document.querySelector('#userId').value
-            if(idValue === '' || idValue.indexOf('@') === -1 || idValue.indexOf('.') === -1){
+             if(idValue === '' || idValue.indexOf('@') === -1 || idValue.indexOf('.') === -1){
             alert('이메일 형식으로 아이디를 입력해주세요.');
             document.querySelector('#userId').value = '';
             return
@@ -191,7 +197,21 @@
         const file = document.getElementById('userImg');
         formData.append('userImg', file.files[0]);
         console.log(formData);
+        //
+        // const fileDOM =
+        // document.querySelector('#file');
+        // const previews = 
+        // document.querySelectorAll('.image-box')
 
+        // fileDom.addEventListener('change', () => {
+        //     const reader = new FileReader();
+        //     reader.onload = ({ target }) => {
+        //         previews[0].src = target.result;
+        //     };
+        //     reader.readAsDataURL(fileDOM.files[0]);
+        // });
+        //
+        document.querySelector("div")
         axios({
             method: "POST",
             url: '/signup/imgUpload',
