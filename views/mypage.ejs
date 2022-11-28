@@ -6,6 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>반쪽</title>
     <link rel="stylesheet" href="/static/css/mypage.css" />
+    <!-- bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <div class="userInfoBox">
@@ -18,11 +31,36 @@
         <span class="email">이메일</span>
         <span class="userEmail"><%= userId %></span>
       </div>
+
       <button id="editBtn">
-        <a
-          onclick="window.open('/mypage-post', '_blank', 'width=400 height=670')"
-          >내 정보 수정</a
-        >
+        <div data-bs-toggle="modal" data-bs-target="#firstModal">
+          내 정보 수정
+        </div>      
+      </button>
+      <div
+      class="modal fade"
+      id="firstModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">로그인</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body"><%- include("mypage_post.ejs") %></div>
+        </div>
+      </div>
+    </div>
+    
+
       </button>
       <form
         action="/user/delete"
