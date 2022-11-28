@@ -62,7 +62,7 @@
     text-decoration:none;
     border:none;
     }
-    .imageBox {
+    .preview {
     width: 200px;
     height: 200px;
     object-fit: cover;
@@ -107,9 +107,13 @@
     </div>
     <div class="userImg">
     <label for="userImg">userImg</label><br>
-    <input type="file" name="userImg" id="userImg" onclick="fileUpload()">프로파일 이미지 업로드<br />
+    <input type="file" name="userImg" id="userImg" onclick="fileUpload()" onchange="showPreview(event);">프로파일 이미지 업로드<br />
     </div>
-    <img src="" alt="" width="200" class="imageBox">
+            <div class="preview">
+                <img id="filePreview" src="/static/img/profileImage.png" alt="" width="200" >
+            </div>
+        </div>
+    <!-- <img src="#" alt="" width="200"  alt="your image"> -->
     <br><br>
     
     <button id="register" type="submit" class="btnSignup" disabled >회원가입</button>
@@ -195,22 +199,12 @@
         console.log("uploading~!");
         const formData = new FormData(); // 멀티미디어 데이터는 폼데이터에 넣어서 전달
         const file = document.getElementById('userImg');
+        
+        
         formData.append('userImg', file.files[0]);
         console.log(formData);
-        //
-        // const fileDOM =
-        // document.querySelector('#file');
-        // const previews = 
-        // document.querySelectorAll('.image-box')
-
-        // fileDom.addEventListener('change', () => {
-        //     const reader = new FileReader();
-        //     reader.onload = ({ target }) => {
-        //         previews[0].src = target.result;
-        //     };
-        //     reader.readAsDataURL(fileDOM.files[0]);
-        // });
-        //
+    
+    
         document.querySelector("div")
         axios({
             method: "POST",
@@ -226,5 +220,12 @@
                 document.querySelector('img').src = res.data.path;
             })
     }
-
+    function showPreview(event){
+  if(event.target.files.length > 0){
+    var src = URL.createObjectURL(event.target.files[0]);
+    var preview = document.getElementById("filePreview");
+    preview.src = src;
+    preview.style.display = "block";
+  }
+}
 </script>

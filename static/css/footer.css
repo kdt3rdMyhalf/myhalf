@@ -19,7 +19,8 @@ body {
             position: absolute;
             /* position: absolute; */
             border-top: 1px solid #426A71;
-            padding-top: 15px;
+            /* padding-top: 15px; */
+            padding: 1em;
             color: #628C85;
             font-size: 11px;
             background-color: #FFEAC7;

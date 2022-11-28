@@ -25,6 +25,12 @@
 
     <!-- axios cdn -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- pagination -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
+ 
   </head>
   <body>
     <form class="searchForm">
@@ -111,7 +117,7 @@
         <div class="hotPostWrap"></div>
       </div>
     </div>
-
+    <div id="paginationID">
     <div class="postList">
       <% for (let i = 0; i < data.length; i++) { %>
       <a href="/commu/posts/<%= data[i].postId %>" class="postCard">
@@ -134,7 +140,23 @@
         </div>
       </a>
       <% } %>
-      <div class="postCard">
+    </div>
+    <!-- <div class="container">
+      <div class="text-center">
+        <ul class="pagination pagination-lg">
+          <li><a href="#" onclick="showPages('1')">1</a></li>
+          <li><a href="#" onclick="showPages('1')">1</a></li>
+          <li><a href="#" onclick="showPages('1')">1</a></li>
+          <li><a href="#" onclick="showPages('1')">1</a></li>
+          <li><a href="#" onclick="showPages('1')">1</a></li>
+
+
+        </ul>
+
+      </div>
+    </div> -->
+  
+      <!-- <div class="postCard">
         <img src="/static/img/logo.png" alt="" />
         <div class="postDesc1">
           <div class="postTitle">제목제목</div>
@@ -154,7 +176,7 @@
             <div class="postDescLikes">♥︎ 10</div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="pageList"></div>
     <a href="/commu/post">
@@ -177,10 +199,29 @@
         </svg>
       </button>
     </a>
+  </div>
+<script>
+  function showPages(id){
 
+
+var totalNumberOfPages = 5;
+for(var i=1; i<=totalNumberOfPages; i++){
+
+    if (document.getElementById('page'+i)) {
+
+        document.getElementById('page'+i).style.display='none';
+    }
+
+}
+    if (document.getElementById('page'+id)) {
+
+        document.getElementById('page'+id).style.display='block';
+    }
+};
+</script>
     <script src="/static/js/commu_posts.js"></script>
     <%- include ('footer.ejs') %>
-
-    
+  <script src="/static/js/pagination1.js"></script>
   </body>
+
 </html>
