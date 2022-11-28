@@ -390,9 +390,14 @@ exports.getCommunityPostId = (req, res) => {
             raw: true,
           }).then((db_result) => {
             // res.send(result);
-            (result["postInfo"] = db_result),
+            result["postInfo"] = db_result
+            models.User.findOne({ where: { userName: db_result.userName } }).then((userResult) => {
+              console.log('유저 조회', userResult)
+
+              result['userImg'] = userResult.userImg
               console.log("최종 보내는 result객체: ", result);
-            res.render("commu_post", { result: result });
+              res.render("commu_post", { result: result });
+            })
           });
         });
       }
@@ -425,9 +430,14 @@ exports.getCommunityPostId = (req, res) => {
               raw: true,
             }).then((db_result) => {
               // res.send(result);
-              (result["postInfo"] = db_result),
-                console.log("최종 보내는 result객체: ", result);
-              res.render("commu_post", { result: result });
+              result["postInfo"] = db_result
+              models.User.findOne({ where: { userName: db_result.userName } })
+                .then((userResult) => {
+                  console.log(userResult)
+                  result['userImg'] = userResult.userImg
+                  console.log("최종 보내는 result객체: ", result);
+                  res.render("commu_post", { result: result });
+                });
             });
           });
         }
