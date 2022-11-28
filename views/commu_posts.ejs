@@ -121,7 +121,7 @@
     <div class="postList">
       <% for (let i = 0; i < data.length; i++) { %>
       <a href="/commu/posts/<%= data[i].postId %>" class="postCard">
-        <img src="<%= data[i].postImg %>" alt="게시글 이미지" />
+        <!-- <img src="<%= data[i].postImg %>" alt="게시글 이미지" /> -->
         <div class="postDesc1">
           <div class="postTitle"><%= data[i].postTitle %></div>
           <div class="postDoc"><%= data[i].postDoc.substr(0, 150) %></div>
@@ -132,7 +132,7 @@
           <div class="postDesces2">
             <div class="postDesces2-1">
               <div class="postDescWriter"><%= data[i].userName %></div>
-              <div class="postDescDate"><%= data[i].postDate %></div>
+              <div class="postDescDate"><%= data[i].postDate.toISOString().slice(0, 19).replace("T", " ") %></div>
               <div class="postDescViews"><%= data[i].postViews %></div>
             </div>
             <div class="postDescLikes">♥︎ <%= data[i].postLikes %></div>
@@ -201,7 +201,7 @@ for(var i=1; i<=totalNumberOfPages; i++){
 </script>
     <script src="/static/js/commu_posts.js"></script>
     <%- include ('footer.ejs') %>
-  <script src="/static/js/pagination1.js"></script>
+  <!-- <script src="/static/js/pagination1.js"></script> -->
   </body>
 
 </html>

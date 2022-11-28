@@ -1,10 +1,10 @@
 // 좋아요 눌렀을 때
 const postLikesBox = document.querySelector(".postLikesBox");
 
-const postLikesFill = postLikesBox.addEventListener("click", () => {
-  const postLikesHeart = document.querySelector(".postLikesHeart");
-  postLikesHeart.innerHTML = "♥︎";
-});
+// const postLikesFill = postLikesBox.addEventListener("click", () => {
+//   const postLikesHeart = document.querySelector(".postLikesHeart");
+//   postLikesHeart.innerHTML = "♥︎";
+// });
 
 // comment 목록 조회 GET
 // function commentGet(postId) {
