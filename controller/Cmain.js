@@ -78,15 +78,16 @@ exports.postLogin = (req, res) => {
       userId: req.body.userId,
       userPw: req.body.userPw,
     },
-  })// 
+
+  })
     .then((db_result) => {
       if (db_result === null) {
         // res.render("index", { result: false});
         //         console.log('nonononono')
         res.send(`<script>
-        alert('로그인 실패..')
+        alert('로그인에 실패하였습니다.')
         document.location.href = '/'
-        </script>`)
+        </script>`);
       } else {
         req.session.user = {
           result: true,
@@ -100,7 +101,6 @@ exports.postLogin = (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-
     });
 };
 
@@ -380,7 +380,10 @@ exports.getCommunityPostId = (req, res) => {
     models.Likes.findAll({ where: { postId: req.params.postId } }).then(
       (post_result) => {
         result["likes"] = post_result.length;
-        models.Comment.findAll({ raw: true, where: { postId: req.params.postId } }).then((db_result) => {
+        models.Comment.findAll({
+          raw: true,
+          where: { postId: req.params.postId },
+        }).then((db_result) => {
           result["commentData"] = db_result;
           models.Community.findOne({
             where: { postId: req.params.postId },
@@ -528,10 +531,10 @@ exports.getCommunityPostUpdate = (req, res) => {
     raw: true,
   }).then((db_result) => {
     console.log(db_result);
-    res.render('commu_post_update', { postInfo: db_result });
-  })
+    res.render("commu_post_update", { postInfo: db_result });
+  });
+};
 
-}
 
 // 커뮤니티 게시글 수정 POST
 exports.postCommunityPostUpdate = (req, res) => {
@@ -547,13 +550,13 @@ exports.postCommunityPostUpdate = (req, res) => {
     // userImg: ,
   }, { where: { postId: req.body.postId } })
     .then((result) => {
-      console.log('게시글 업데이트');
+      console.log("게시글 업데이트");
     })
     .catch((err) => {
       console.log(err);
     });
+};
 
-}
 
 // 커뮤니티 게시글 삭제 POST
 exports.postCommunityDelete = (req, res) => {
@@ -616,15 +619,14 @@ exports.postCommentUpdate = (req, res) => {
     });
 };
 
-// 커뮤니티 게시글 댓글 삭제 
+// 커뮤니티 게시글 댓글 삭제
 exports.deleteComment = (req, res) => {
   const userSession = req.session.user;
-
   models.Comment.destroy(
     { where: { commId: req.body.commId } })
     .then((result) => {
-      console.log('destroy >> ', result);
-      res.send('댓글이 삭제되었습니다.');
+      console.log("destroy >> ", result);
+      res.send("댓글이 삭제되었습니다.");
     })
     .catch((err) => {
       console.log(err);
@@ -648,4 +650,3 @@ exports.getMarketId = (req, res) => {
     res.render("market_post", { data: result });
   });
 };
-

@@ -24,35 +24,71 @@
       <button type="submit"></button>
     </form>
     <div class="searchCheckBox">
-      <div class="serachCheckBox1">
-
-        <fieldset>
-          <span class="checkBox2Span">동물 유형</span>
-          <label>
-            <input type="checkbox" name="searchCheckbox" id="searchDog" value="dog" />
-            <span>강아지</span>
-          </label>
-          <label>
-            <input type="checkbox" name="searchCheckbox" id="searchCat" value="cat" />
-            <span>고양이</span>
-          </label>
-          <label>
-            <input type="checkbox" name="searchCheckbox" id="searchSmall" value="small" />
-            <span>소동물</span>
-          </label>
-          <label>
-            <input type="checkbox" name="searchCheckbox" id="searchEtc" value="etc" />
-            <span>기타</span>
-          </label>
-          <button type="button" id="searchCheckBtn" onclick="check()">적용</button>
-        </fieldset>
-      </form>
+      <div class="serachCheckBox2">
+        <form>
+          <fieldset>
+            <span class="checkBox2Span">동물 유형</span>
+            <label>
+              <input
+                type="checkbox"
+                name="searchCheckbox"
+                id="searchDog"
+                value="dog"
+              />
+              <span>강아지</span>
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="searchCheckbox"
+                id="searchCat"
+                value="cat"
+              />
+              <span>고양이</span>
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="searchCheckbox"
+                id="searchSmall"
+                value="small"
+              />
+              <span>소동물</span>
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="searchCheckbox"
+                id="searchEtc"
+                value="etc"
+              />
+              <span>기타</span>
+            </label>
+            <button type="button" id="searchCheckBtn">적용</button>
+          </fieldset>
+        </form>
+      </div>
     </div>
     <div class="hotPostBox">
       <div class="hotPostWrapBox">
-        <% for (let i = 0; i < data.hotPost.length; i++) { %>
+        <div class="hotPostWrap">
+          <div class="hotName">Hot!</div>
+          <div class="hotTitle"><% for (let i = 0; i < data.hotPost.length; i++) { %>
           <div class="hotPostWrap"><%= data.hotPost[i].dataValues.postTitle %></div>
-        <% } %>
+        <% } %></div>
+          <div class="hotDoc">글 내용 100자?</div>
+          <div class="hotPostDiv">
+            <div class="hotComment">댓글 수</div>
+            <div class="hotDate">날짜</div>
+          </div>
+        </div>
+        <div class="hotPostWrap"></div>
+        <div class="hotPostWrap"></div>
+        <div class="hotPostWrap"></div>
+        <div class="hotPostWrap"></div>
+        <div class="hotPostWrap"></div>
+        <div class="hotPostWrap"></div>
+
       </div>
     </div>
   </div>
