@@ -92,10 +92,9 @@ crossorigin="anonymous"
         <div class="hotPostWrap">
           <div class="hotName">Hot!</div>
           <div class="hotTitle"><%= data.hotPost[i].dataValues.postTitle %></div>  
-          <div class="hotDoc">글 내용 100자?</div>
+          <div class="hotDoc"><%= data.hotPost[i].dataValues.postDoc.substr(0, 150) %></div>
           <div class="hotPostDiv">
-            <div class="hotComment">댓글 수</div>
-            <div class="hotDate">날짜</div>
+            <div class="hotViews"><%= data.hotPost[i].dataValues.postViews %></div>
           </div>
         </div></a>
         <% } %>
@@ -112,15 +111,14 @@ crossorigin="anonymous"
           <div class="postDoc"><%= data.ordinaryPost[i].dataValues.postDoc.substr(0, 150) %></div>
           <div class="postDesces1">
             <div class="postHashtag">#<%= data.ordinaryPost[i].dataValues.postCategory %></div>
-            <div class="postDescComment">댓글수 수정</div>
           </div>
           <div class="postDesces2">
             <div class="postDesces2-1">
               <div class="postDescWriter"><%= data.ordinaryPost[i].dataValues.userName %></div>
               <div class="postDescDate"><%= data.ordinaryPost[i].dataValues.postDate.toISOString().slice(0, 19).replace("T", " ") %></div>
-              <div class="postDescViews"><%= data.ordinaryPost[i].dataValues.postViews %></div>
+              <div class="postDescViews"></div>
             </div>
-            <div class="postDescLikes">♥︎ <%= data.ordinaryPost[i].dataValues.postLikes %></div>
+            <div class="postDescLikes">조회수 <%= data.ordinaryPost[i].dataValues.postViews %></div>
           </div>
         </div>
       </a>
