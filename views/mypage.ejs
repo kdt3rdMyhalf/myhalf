@@ -24,7 +24,11 @@
   </head>
   <body>
     <div class="userInfoBox">
-      <img src="<%= userImg %>" alt="유저 프로필 사진" class="userImg" />
+      <% if (userImg !== null) { %>
+      <img src="<%= userImg %>" alt="유저 프로필" class="userImg" />
+      <% } else { %>
+        <img src="/static/img/profileImage.png" class="userImg" />
+      <% } %>
       <div class="nameBox">
         <span class="name">닉네임</span>
         <span class="userName"><%= userName %></span>
