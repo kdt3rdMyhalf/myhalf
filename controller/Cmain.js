@@ -312,8 +312,6 @@ exports.getCommunityPosts = (req, res) => {
       data : result.rows,
       count : result.count
     });
-
-
   });
 };
 
@@ -404,7 +402,27 @@ exports.getCommunityPostId = (req, res) => {
       );
     });
   }
+
 };
+
+// 커뮤니티 게시글 체크박스적용 조회 GET
+exports.getCommunityPostsCheckBox = (req, res) => {
+  models.Community.findAll({
+    where: { postTag: req.body.resultBox },
+    raw: true,
+  }).then((result) => {
+    res.render("commu_posts", { data: result });
+    console.log(result)
+  });
+
+};
+
+// cookie value로 설정할 사용자 ip주소 얻어오는 함수
+function getUserIP(req) {
+  const addr = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+  return addr;
+}
+
 
 exports.postLikesOff = (req, res) => {
   const userSession = req.session.user;
@@ -464,7 +482,7 @@ exports.postCommunityPost = (req, res) => {
     postTag: req.body.tag,
     // userImg: ,
   })
-    .then((result) => {})
+    .then((result) => { })
     .catch((err) => {
       console.log(err);
     });
@@ -477,9 +495,9 @@ exports.getCommunityPostUpdate = (req, res) => {
     raw: true,
   }).then((db_result) => {
     console.log(db_result);
-    res.render('commu_post_update', { postInfo : db_result });
+    res.render('commu_post_update', { postInfo: db_result });
   })
-  
+
 }
 
 // 커뮤니티 게시글 수정 POST
@@ -494,25 +512,25 @@ exports.postCommunityPostUpdate = (req, res) => {
     postCategory: req.body.category,
     postTag: req.body.tag,
     // userImg: ,
-  }, {where : {postId : req.body.postId}})
+  }, { where: { postId: req.body.postId } })
     .then((result) => {
       console.log('게시글 업데이트');
     })
     .catch((err) => {
       console.log(err);
     });
-  
+
 }
 
 // 커뮤니티 게시글 삭제 POST
 exports.postCommunityDelete = (req, res) => {
-  models.Community.destroy({ where: { postId: req.params.postId } }).then(
-    (db_result) => {
+
+  models.Community.destroy({ where: { postId: req.params.postId } })
+    .then((db_result) => {
       console.log(db_result);
-      res.redirect("/commu/posts");
-    }
-  );
-};
+      res.redirect('/commu/posts')
+    })
+}
 
 // 커뮤니티 게시글 댓글 전체 조회 GET
 exports.getCommentsGet = (req, res) => {
