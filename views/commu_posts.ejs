@@ -15,39 +15,50 @@
   </head>
   <body>
     <div class="searchCheckBox">
-      <div class="serachCheckBox1">
-      <form action="/commu/posts/category/p1" method="get">
-        <div class="searchForm">
-          <input
-            name="searchInput"
-            class="searchInput"
-            type="text"
-            maxlength="130"
-            placeholder="찾으시는 글이 있으신가요?"
-          />
-        </div>
-        <fieldset>
-          <span class="checkBox2Span">동물 유형</span>
-          <label>
-            <input type="checkbox" name="searchCheckbox" id="searchDog" value="강아지" />
-            <span>강아지</span>
-          </label>
-          <label>
-            <input type="checkbox" name="searchCheckbox" id="searchCat" value="고양이" />
-            <span>고양이</span>
-          </label>
-          <label>
-            <input type="checkbox" name="searchCheckbox" id="searchSmall" value="소동물" />
-            <span>소동물</span>
-          </label>
-          <label>
-            <input type="checkbox" name="searchCheckbox" id="searchEtc" value="기타" />
-            <span>기타</span>
-          </label>
-          <button type="submit" id="searchCheckBtn">적용</button>
-        </fieldset>
-      </form>
-
+      <div class="serachCheckBox2">
+        <form>
+          <fieldset>
+            <span class="checkBox2Span">동물 유형</span>
+            <label>
+              <input
+                type="checkbox"
+                name="searchCheckbox"
+                id="searchDog"
+                value="dog"
+              />
+              <span>강아지</span>
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="searchCheckbox"
+                id="searchCat"
+                value="cat"
+              />
+              <span>고양이</span>
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="searchCheckbox"
+                id="searchSmall"
+                value="small"
+              />
+              <span>소동물</span>
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="searchCheckbox"
+                id="searchEtc"
+                value="etc"
+              />
+              <span>기타</span>
+            </label>
+            <button type="button" id="searchCheckBtn">적용</button>
+          </fieldset>
+        </form>
+      </div>
     </div>
     <div class="hotPostBox">
       <div class="hotPostWrapBox">
