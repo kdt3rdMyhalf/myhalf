@@ -8,7 +8,7 @@ a:hover {
 }
 
 .searchForm {
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   margin: 1vw;
@@ -78,7 +78,7 @@ fieldset {
 }
 
 #searchCheckBtn {
-  width: 4vw;
+  width: 100px;
   border-radius: 20px;
   background-color: #ffeac7;
   border: none;
@@ -98,14 +98,40 @@ fieldset {
 }
 
 .hotPostWrap {
-  width: 25vw;
-  height: 12vw;
+  width: 100px;
+  height: 120px;
   border: 1px solid #ffeac7;
   border-radius: 20px;
   box-shadow: 0px 4px 10px rgba(113, 113, 113, 0.25);
   min-width: 25vw;
   margin-right: 2vw;
   flex-grow: 1;
+}
+
+.hotName,
+.hotTitle,
+.hotDoc,
+.hotPostDiv {
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.hotName {
+  margin-top: 10px;
+  color: red;
+}
+
+.hotDoc {
+  font-size: 10px;
+  color: rgb(185, 185, 185);
+}
+
+.hotPostDiv {
+  display: flex;
+}
+
+.hotDate {
+  margin-left: 50px;
 }
 
 #postBtn {

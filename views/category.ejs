@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>반쪽</title>
+    <!-- CSS 연결 -->
+    <link rel="stylesheet" href="/static/css/commu_posts.css" />
+    <link rel="stylesheet" href="/static/css/pagination.css">
+    <!-- axios cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+    <form class="searchForm">
+    <input
+        class="searchInput"
+        type="search"
+        maxlength="130"
+        placeholder="찾으시는 글이 있으신가요?"
+    />
+    <button type="submit"></button>
+    </form>
+    <div class="searchCheckBox">
+    <div class="serachCheckBox1">
+
+        <fieldset>
+        <span class="checkBox2Span">동물 유형</span>
+        <label>
+            <input type="checkbox" name="searchCheckbox" id="searchDog" value="dog" />
+            <span>강아지</span>
+        </label>
+        <label>
+            <input type="checkbox" name="searchCheckbox" id="searchCat" value="cat" />
+            <span>고양이</span>
+        </label>
+        <label>
+            <input type="checkbox" name="searchCheckbox" id="searchSmall" value="small" />
+            <span>소동물</span>
+        </label>
+        <label>
+            <input type="checkbox" name="searchCheckbox" id="searchEtc" value="etc" />
+            <span>기타</span>
+        </label>
+        <button type="button" id="searchCheckBtn">적용</button>
+        </fieldset>
+    </form>
+    </div>
+</div>
+
+
+    <div class="postList">
+    <% for (let i = 0; i < data.rows.length; i++) { %>
+    <a href="/commu/posts/<%= data.rows[i].postId %>" class="postCard">
+        <img src="<%= data.rows[i].postImg %>" alt="게시글 이미지" />
+        <div class="postDesc1">
+        <div class="postTitle"><%= data.rows[i].postTitle %></div>
+        <div class="postDoc"><%= data.rows[i].postDoc.substr(0, 150) %></div>
+        <div class="postDesces1">
+            <div class="postHashtag">#<%= data.rows[i].postCategory %></div>
+            <div class="postDescComment">댓글수 수정</div>
+        </div>
+        <div class="postDesces2">
+            <div class="postDesces2-1">
+
+            <div class="postDescWriter"><%= data.rows[i].userName %></div>
+            <div class="postDescDate"><%= data.rows[i].postDate %></div>
+            <div class="postDescViews"><%= data.rows[i].postViews %></div>
+            </div>
+            <div class="postDescLikes">♥︎ <%= data.rows[i].postLikes %></div>
+
+        </div>
+        </div>
+    </a>
+    <% } %>
+    </div>
+
+    <div class="container">
+    <div class="text-center">
+        <ul class="pagination justify-content-center">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+        <% for (let i = 1; i <= parseInt(data.count / 10) + 1 ; i++) { %>
+            <li class="page-item"><a class="page-link" href="/commu/posts/category/p<%= [i] %>"><%= [i] %></a></li>
+        <% } %>
+        </ul>
+
+    </div>
+    </div>
+
+    <div class="pageList"></div>
+    <a href="/commu/post">
+    <button type="button" id="postBtn">
+        <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        fill="currentColor"
+        class="bi bi-pencil-square"
+        viewBox="0 0 16 16"
+        >
+        <path
+            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+        />
+        <path
+            fill-rule="evenodd"
+            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+        />
+        </svg>
+    </button>
+    </a>
+</div>
+
+    <script src="/static/js/category.js"></script>
+    <%- include ('footer.ejs') %>
+</body>
+</html>

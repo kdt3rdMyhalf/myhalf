@@ -83,6 +83,12 @@ router.post('/commu/posts/:postId/delete', controller.postCommunityDelete);
 router.post('/commu/post/likesOn', controller.postLikesOn);
 router.post('/commu/post/likesOff', controller.postLikesOff);
 
+//커뮤니티 체크박스 조회
+router.get('/commu/posts/category/p:pageNum', controller.getCommunityPostsCheckBox)
+
+
+
+
 
 // 반려장터 페이지
 

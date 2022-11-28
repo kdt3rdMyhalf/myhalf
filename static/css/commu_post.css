@@ -1,180 +1,238 @@
-hr {
-  width: 95vw;
-  margin: 0 auto;
-  margin-top: 1vw;
-  margin-bottom: 1vw;
+a {
+  text-decoration: none;
+  color: black;
 }
 
-.dp-none {
+a:hover {
+  color: black;
+}
+
+.searchForm {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  margin: 1vw;
+}
+
+.searchInput {
+  width: 50vw;
+  height: 5vw;
+  border: 3px solid #ffeac7;
+  border-radius: 20px;
+  padding: 1vw;
+  background-repeat: no-repeat;
+}
+
+.searchInput::-webkit-input-placeholder {
+  background-image: url(https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-256.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-align: center;
+  text-indent: 0;
+}
+
+.searchForm > button {
   display: none;
 }
 
-.tagBox {
-  margin: 1vw;
-  margin-left: 4vw;
-  display: flex;
-}
-
-.categoryTag {
-  width: 80px;
-  padding: 5px;
-  text-align: center;
-  background-color: #ffeac7;
-  border-radius: 20px;
-}
-
-.hashTag {
-  width: 80px;
-  padding: 5px;
-  text-align: center;
-  border: 1px solid #ffeac7;
-  border-radius: 20px;
-  margin-left: 1vw;
-}
-
-.postTitle {
-  margin: 1vw;
-  margin-left: 4vw;
-  font-size: 40px;
-}
-
-.postInfoBox {
-  margin-left: 4vw;
-  display: flex;
-  justify-content: space-between;
-}
-
-.infoBoxDiv1 {
-  display: flex;
-}
-
-.postWriterImg {
-  width: 50px;
-  height: 50px;
-  border-radius: 100%;
-  margin-right: 1vw;
-  background-size: cover;
-}
-
-.postDate {
-  font-size: 0.8vw;
-  color: rgb(155, 155, 155);
-}
-
-.postViews {
-  margin-right: 4vw;
-  font-size: 0.8vw;
-  color: rgb(155, 155, 155);
-}
-
-.postContent {
-  margin-left: 4vw;
-  margin-right: 4vw;
-  margin-top: 2vw;
-  margin-bottom: 5vw;
-}
-
-.postLikesDiv {
+fieldset {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 2vw;
+  border: none;
+  margin: 1vw;
 }
 
-.postLikesBox {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 60px;
-  height: 60px;
-  border: 1px solid rgb(155, 155, 155);
-  border-radius: 5vw;
+[type="radio"],
+[type="checkbox"] {
+  vertical-align: middle;
+  appearance: none;
+  border: max(2px, 0.1em) solid gray;
+  border-radius: 50%;
+  width: 1.25em;
+  height: 1.25em;
+  margin: 1vw;
+  transition: border 0.5s ease-in-out;
 }
 
-.postLikesHeart {
-  margin-right: 5px;
+[type="radio"]:checked,
+[type="checkbox"]:checked {
+  border: 0.4em solid #ffeac7;
+}
+
+[type="radio"]:focus-visible,
+[type="checkbox"]:focus-visible {
+  outline-offset: max(2px, 0.1em);
+  outline: max(2px, 0.1em) dotted #ffeac7;
+}
+
+[type="radio"]:hover,
+[type="checkbox"]:hover {
+  box-shadow: 0 0 0 max(4px, 0.2em) lightgray;
   cursor: pointer;
 }
 
-.comment {
-  display: flex;
-  flex-direction: column;
+.checkBox2Span {
+  font-weight: bold;
+  margin-right: 1vw;
 }
 
-.commentsCount {
-  font-size: 25px;
-  margin-left: 4vw;
-  margin-bottom: 1vw;
-}
-
-#commentForm {
-  display: flex;
-  flex-direction: column;
-}
-
-#commentInput {
-  margin-left: 4vw;
-  margin-right: 4vw;
-  margin-bottom: 1vw;
-  padding: 1vw;
-  border: 1px solid rgb(155, 155, 155);
-  border-radius: 10px;
-  height: 10vw;
-}
-
-#commentBtn {
-  border: none;
-  width: 7vw;
-  padding: 5px;
-  text-align: center;
-  background-color: #ffeac7;
+#searchCheckBtn {
+  width: 100px;
   border-radius: 20px;
+  background-color: #ffeac7;
+  border: none;
+  margin-left: 2vw;
+}
+
+.hotPostBox {
+  width: 90vw;
+  margin: 0 auto;
+  overflow-x: scroll;
+}
+
+.hotPostWrapBox {
+  margin: 1vw;
+  display: flex;
+  flex-direction: row;
+}
+
+.hotPostWrap {
+  width: 100px;
+  height: 140px;
+  border: 1px solid #ffeac7;
+  border-radius: 20px;
+  box-shadow: 0px 4px 10px rgba(113, 113, 113, 0.25);
+  min-width: 300px;
+  margin-right: 2vw;
+  flex-grow: 1;
+}
+
+.hotName,
+.hotTitle,
+.hotDoc,
+.hotPostDiv {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.hotName {
+  margin-top: 10px;
+  color: red;
+}
+
+.hotDoc {
+  font-size: 10px;
+  color: rgb(185, 185, 185);
+}
+
+.hotPostDiv {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.hotViews {
+  margin-right: 20px;
+  font-size: 10px;
+  color: rgb(185, 185, 185);
+}
+
+#postBtn {
+  border: none;
+  border-radius: 100%;
+  width: 5vw;
+  height: 5vw;
+  background-color: #ffeac7;
+  position: fixed;
+  bottom: 1vw;
+  right: 1vw;
+}
+
+.postList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 1vw;
+}
+
+.postCard {
+  width: 80vw;
+  display: flex;
+  border-bottom: 1px solid #eee;
+}
+
+.postDesc1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.postTitle {
+  font-size: 2vw;
+  margin-top: 1vw;
   margin-bottom: 1vw;
+  margin-left: 1vw;
 }
 
-.comments {
-  margin-left: 4vw;
-  margin-right: 4vw;
+.postTitle:hover {
+  color: #ffeac7;
 }
 
-.commentInfoBox {
+.postDoc {
+  font-size: 0.5vw;
+  margin-bottom: 1vw;
+  margin-left: 1vw;
+  color: rgb(185, 185, 185);
+}
+
+.postDesces1 {
   display: flex;
   justify-content: space-between;
 }
 
-.commentInfoDiv1,
-.commentInfoDiv2 {
+.postDescComment {
+  margin: 1vw;
+}
+
+.postHashtag {
+  width: 5vw;
+  margin: 1vw;
+  text-align: center;
+  background-color: #ffeac7;
+  color: white;
+  border-radius: 20px;
+  font-size: 0.8vw;
+}
+
+.postDescLikes {
+  font-size: 0.9vw;
   display: flex;
   align-items: center;
-  margin-bottom: 1vw;
 }
 
-.commentEditBtn,
-.commentDeleteBtn {
-  /* display: none; */
-  border: none;
-  background-color: black; /*수정함*/
-  color: white; /*수정함*/
-  font-size: 0.5vw;
-  margin-left: 10px; /* 수정함 */
-}
-
-.display-none {
-  display: none;
-}
-
-.commentDoc{
-  margin-left: 2vw;
-}
-
-.commentDate {
-  color: rgb(155, 155, 155);
-  font-size: 10px;
+.postDesces2 {
   display: flex;
-  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.postDesces2-1 {
+  display: flex;
+  margin-top: 1vw;
+  font-size: 0.8vw;
+}
+
+.postDescWriter,
+.postDescDate,
+.postDescViews,
+.postDescLikes {
   margin-left: 1vw;
+  margin-right: 1vw;
 }
 
-.commentsContent {
-  margin-bottom: 1vw;
+.pagination {
+  color: #ffeac7;
 }

@@ -5,16 +5,16 @@ const postLikesBox = document.querySelector(".postLikesBox");
 
 const postLikesFill = postLikesBox.addEventListener("click", () => {
   const postLikesHeart = document.querySelector(".postLikesHeart");
-  postLikesHeart.innerHTML = "♥︎";
+  postLikesHeart.innerHTML = "";
 });
 
 
 
 // comment 목록 조회 GET
 // function commentGet(postId) {
-//   console.log("click");
+//   console.log("click");`
 //   axios({
-//     method: "GET",
+//     method: "GET",`
 //     url: `/commu/posts/${Number(postId)}`,
 //     // data: data,
 //     success: (data) => {
@@ -26,7 +26,6 @@ const postLikesFill = postLikesBox.addEventListener("click", () => {
 // comment 작성 POST
 function commentPost(postId) {
   console.log("click");
-
   const comments = document.querySelector(".comments");
   const form = document.forms["commentForm"];
   if (!form.commentInput.value.length) {
@@ -52,8 +51,8 @@ function commentPost(postId) {
       const html = `      
       <div class="commentInfoBox id${data.commId}">
         <div class="commentInfoDiv1">
-          <div class="commentWriter">${data.userName}</div>
-          <div class="commentDate">${data.commDate}</div>
+          <div class="commentWriter">&#128054; ${data.userName}</div>
+          <div class="commentDate">${data.commDate.substr(0, 19).replace("T", " ")}</div>
           <div class="commentsContent">${data.commDoc}</div>
         </div>
         <div class="commentInfoDiv2${data.commId}">
@@ -73,7 +72,7 @@ function likesOff() {
   let btn = document.querySelector(".btn");
   let postId = parseInt(document.querySelector(".postId").innerText);
   btn.innerHTML =
-    '<button onclick="likesOn()" class="likesBtn">❤하트 안 누름!</button>';
+    `<button onclick="likesOn()" class="likesBtn">🖤</button><div class="postLikes">${parseInt(document.querySelector(".postLikes").innerText, 10) - 1}</div>`;
   axios({
     method: "post",
     url: "/commu/post/likesOff",
@@ -82,15 +81,15 @@ function likesOff() {
     },
   }).then((result) => {
     console.log(result);
-    document.querySelector(".postLikes").innerText =
-      parseInt(document.querySelector(".postLikes").innerText, 10) - 1;
+    // document.querySelector(".postLikes").innerText =
+    //   parseInt(document.querySelector(".postLikes").innerText, 10) - 1;
   });
 }
 function likesOn() {
   let btn = document.querySelector(".btn");
   let postId = parseInt(document.querySelector(".postId").innerText);
   btn.innerHTML =
-    '<button onclick="likesOff()" class="likesBtn">❤하트 이미 누름!</button>';
+  `<button onclick="likesOff()" class="likesBtn">❤</button><div class="postLikes">${parseInt(document.querySelector(".postLikes").innerText, 10) + 1}</div>`;
   axios({
     method: "post",
     url: "/commu/post/likesOn",
@@ -99,8 +98,8 @@ function likesOn() {
     },
   }).then((result) => {
     console.log(result);
-    document.querySelector(".postLikes").innerText =
-      parseInt(document.querySelector(".postLikes").innerText, 10) + 1;
+  //   document.querySelector(".postLikes").innerText =
+  //     parseInt(document.querySelector(".postLikes").innerText, 10) + 1;
   });
 }
 
