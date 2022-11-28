@@ -123,9 +123,7 @@ a {
   font-weight: 300;
   display: block;
 }
-.main .navbar ul li:hover {
-  background: rgba(0, 0, 0, 0.4);
-}
+
 .main .heading {
   position: absolute;
   height: auto;
