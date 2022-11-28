@@ -156,12 +156,7 @@ fieldset {
 .postCard {
   width: 80vw;
   display: flex;
-}
-
-.postCard > img {
-  width: 15vw;
-  margin: 1vw;
-  border-radius: 20px;
+  border-bottom: 1px solid #eee;
 }
 
 .postDesc1 {
@@ -208,14 +203,16 @@ fieldset {
   font-size: 0.8vw;
 }
 
-.postDescComment,
 .postDescLikes {
   font-size: 0.9vw;
+  display: flex;
+  align-items: center;
 }
 
 .postDesces2 {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 .postDesces2-1 {
