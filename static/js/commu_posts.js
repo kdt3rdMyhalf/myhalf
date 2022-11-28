@@ -1,3 +1,4 @@
+
 // 좋아요 눌렀을 때
 const postLikesBox = document.querySelector(".postLikesBox");
 
@@ -68,3 +69,6 @@ function clearInput() {
   const form = document.forms["commentForm"];
   form.commentInput.value = "";
 }
+
+
+

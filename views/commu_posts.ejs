@@ -22,13 +22,13 @@
 
     <!-- CSS 연결 -->
     <link rel="stylesheet" href="/static/css/commu_posts.css" />
-
+    <link rel="stylesheet" href="/static/css/pagination.css">
     <!-- axios cdn -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- pagination -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
-
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
  
   </head>
@@ -141,20 +141,19 @@
       </a>
       <% } %>
     </div>
-    <!-- <div class="container">
+    
+    <div class="container">
       <div class="text-center">
-        <ul class="pagination pagination-lg">
-          <li><a href="#" onclick="showPages('1')">1</a></li>
-          <li><a href="#" onclick="showPages('1')">1</a></li>
-          <li><a href="#" onclick="showPages('1')">1</a></li>
-          <li><a href="#" onclick="showPages('1')">1</a></li>
-          <li><a href="#" onclick="showPages('1')">1</a></li>
-
-
+        <ul class="pagination justify-content-center">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+          <% for (let i = 1; i <= parseInt(count / 10) + 1 ; i++) { %>
+            <li class="page-item"><a class="page-link" href="/commu/posts/p<%= [i] %>"><%= [i] %></a></li>
+          <% } %>
         </ul>
 
       </div>
-    </div> -->
+    </div>
   
       <!-- <div class="postCard">
         <img src="/static/img/logo.png" alt="" />
@@ -200,28 +199,9 @@
       </button>
     </a>
   </div>
-<script>
-  function showPages(id){
 
-
-var totalNumberOfPages = 5;
-for(var i=1; i<=totalNumberOfPages; i++){
-
-    if (document.getElementById('page'+i)) {
-
-        document.getElementById('page'+i).style.display='none';
-    }
-
-}
-    if (document.getElementById('page'+id)) {
-
-        document.getElementById('page'+id).style.display='block';
-    }
-};
-</script>
     <script src="/static/js/commu_posts.js"></script>
     <%- include ('footer.ejs') %>
-  <script src="/static/js/pagination1.js"></script>
   </body>
 
 </html>
