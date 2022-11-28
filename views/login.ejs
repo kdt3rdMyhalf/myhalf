@@ -1,7 +1,13 @@
+<head>
+  <!-- 1. 카카오SDK로드 -->
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
 <style>
   .login-alert {
     visibility: hidden;
   }
+
   .lg-alert-view {
     display: flex;
     color: red;
@@ -12,13 +18,16 @@
     background: #ffeac7;
     transform: translateX(-30%);
   }
+
   .input-block {
     margin-bottom: 20px;
   }
+
   .input-block label {
     font-size: 14px;
     color: #a1b4b4;
   }
+
   .input-block input {
     display: block;
     width: 100%;
@@ -54,6 +63,7 @@
     text-decoration: none;
     border: none;
   }
+
   .log-btn1 {
     width: 100%;
     font-size: 16px;
@@ -131,7 +141,7 @@
       fail: function (error) {
         alert(
           "카카오 로그인에 실패했습니다. 관리자에게 문의하세요." +
-            JSON.stringify(error)
+          JSON.stringify(error)
         );
       },
     });

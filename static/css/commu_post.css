@@ -9,10 +9,15 @@ hr {
   display: none;
 }
 
+.btnSec {
+  margin-right: 5px;
+  text-align: center;
+}
+
 
 a {
   text-decoration: none;
-  color:rgb(155, 155, 155)
+  color: rgb(155, 155, 155)
 }
 
 .tagBox {
@@ -194,7 +199,7 @@ a {
   margin-left: 10px;
 }
 
-.commentDoc{
+.commentDoc {
   margin-left: 2vw;
 }
 
