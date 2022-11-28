@@ -64,7 +64,13 @@ router.get("/commu/update/:postId", controller.getCommunityPostUpdate);
 router.post("/commu/update", controller.postCommunityPostUpdate);
 
 // 커뮤니티 게시글 전체 조회 GET
-router.get("/commu/posts", controller.getCommunityPosts);
+router.get("/commu/posts/p:pageNum", controller.getCommunityPosts);
+router.get("/commu/posts/p", controller.getCommunityPostsMain);
+router.get("/commu/posts/", controller.getCommunityPostsMain);
+
+// // 커뮤니티 게시글 전체 조회 GET
+// router.get("/commu/posts/p:pageNum", controller.getCommunityPosts);
+
 
 // 커뮤니티 게시글 상세 조회 GET
 router.get("/commu/posts/:postId", controller.getCommunityPostId);
@@ -76,6 +82,11 @@ router.post('/commu/posts/:postId/delete', controller.postCommunityDelete);
 // 커뮤니티 게시글 좋아요 GET
 router.post('/commu/post/likesOn', controller.postLikesOn);
 router.post('/commu/post/likesOff', controller.postLikesOff);
+
+//커뮤니티 체크박스 조회
+router.post('/commu/posts/category', controller.getCommunityPostsCheckBox)
+
+
 
 
 // 반려장터 페이지

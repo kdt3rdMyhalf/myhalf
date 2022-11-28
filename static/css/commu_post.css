@@ -5,6 +5,10 @@ hr {
   margin-bottom: 1vw;
 }
 
+.dp-none {
+  display: none;
+}
+
 .tagBox {
   margin: 1vw;
   margin-left: 4vw;
