@@ -1,12 +1,12 @@
 
 
 // 좋아요 눌렀을 때
-const postLikesBox = document.querySelector(".postLikesBox");
+// const postLikesBox = document.querySelector(".postLikesBox");
 
-const postLikesFill = postLikesBox.addEventListener("click", () => {
-  const postLikesHeart = document.querySelector(".postLikesHeart");
-  postLikesHeart.innerHTML = "";
-});
+// const postLikesFill = postLikesBox.addEventListener("click", () => {
+//   const postLikesHeart = document.querySelector(".postLikesHeart");
+//   postLikesHeart.innerHTML = "";
+// });
 
 
 
@@ -68,11 +68,11 @@ function commentPost(postId) {
 }
 
 // 좋아요, 조회수 기능
+let btnSec = document.querySelector(".btnSec");
 function likesOff() {
-  let btn = document.querySelector(".btn");
   let postId = parseInt(document.querySelector(".postId").innerText);
-  btn.innerHTML =
-    `<button onclick="likesOn()" class="likesBtn">🖤</button><div class="postLikes">${parseInt(document.querySelector(".postLikes").innerText, 10) - 1}</div>`;
+  let decLikes = parseInt(document.querySelector(".postLikes").innerText, 10) - 1
+  btnSec.innerHTML = `<button onclick="likesOn()" class="likesBtn">🖤</button><div class="postLikes">${decLikes}</div>`;
   axios({
     method: "post",
     url: "/commu/post/likesOff",
@@ -86,10 +86,10 @@ function likesOff() {
   });
 }
 function likesOn() {
-  let btn = document.querySelector(".btn");
   let postId = parseInt(document.querySelector(".postId").innerText);
-  btn.innerHTML =
-  `<button onclick="likesOff()" class="likesBtn">❤</button><div class="postLikes">${parseInt(document.querySelector(".postLikes").innerText, 10) + 1}</div>`;
+  let incLikes = parseInt(document.querySelector(".postLikes").innerText, 10) + 1
+
+  btnSec.innerHTML = `<button onclick="likesOff()" class="likesBtn">❤</button><div class="postLikes">${incLikes}</div>`;
   axios({
     method: "post",
     url: "/commu/post/likesOn",
