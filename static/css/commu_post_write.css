@@ -8,6 +8,9 @@
   margin: 4vw;
 }
 
+.dp-none {
+  display: none;
+}
 input[type="radio"] {
   position: absolute;
 }
