@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const PORT = 8000;
+const PORT = 8888;
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 
@@ -23,7 +23,7 @@ app.use(
     saveUninitialized: true,
   })
 );
-// 쿠키 사용 
+// 쿠키 사용
 app.use(cookieParser());
 
 // 라우터 연결
@@ -40,9 +40,6 @@ app.get("*", (req, res) => {
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);
 });
-
-
-
 
 // const server = require('http').Server(app)
 // const io = require('socket.io')(server)
