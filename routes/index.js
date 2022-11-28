@@ -64,7 +64,13 @@ router.get("/commu/update/:postId", controller.getCommunityPostUpdate);
 router.post("/commu/update", controller.postCommunityPostUpdate);
 
 // 커뮤니티 게시글 전체 조회 GET
-router.get("/commu/posts", controller.getCommunityPosts);
+router.get("/commu/posts/p:pageNum", controller.getCommunityPosts);
+router.get("/commu/posts/p", controller.getCommunityPostsMain);
+router.get("/commu/posts/", controller.getCommunityPostsMain);
+
+// // 커뮤니티 게시글 전체 조회 GET
+// router.get("/commu/posts/p:pageNum", controller.getCommunityPosts);
+
 
 // 커뮤니티 게시글 상세 조회 GET
 router.get("/commu/posts/:postId", controller.getCommunityPostId);
@@ -72,11 +78,6 @@ router.get("/commu/posts/:postId", controller.getCommunityPostId);
 // 커뮤니티 게시글 삭제 POST
 router.post('/commu/posts/:postId/delete', controller.postCommunityDelete);
 
-// 커뮤니티 게시글 댓글 전체 조회 GET * 수정해야 함
-router.get("/commu/posts/:postId/comments", controller.getCommentsGet);
-
-// 게시글 댓글 쓰기 POST
-router.post("/commu/posts/:postId/postcomment", controller.postCommentPost);
 
 // 커뮤니티 게시글 좋아요 GET
 router.post('/commu/post/likesOn', controller.postLikesOn);
@@ -90,7 +91,6 @@ router.post('/commu/posts/category', controller.getCommunityPostsCheckBox)
 
 // 반려장터 페이지
 
-
 // router.patch('/commu/post/edit', controller.patchPost); // 하나 수정
 
 // router.delete('/commu/post/delete', controller.deletePost); // 하나 삭제
@@ -98,16 +98,22 @@ router.post('/commu/posts/category', controller.getCommunityPostsCheckBox)
 // 댓글 쓰기 POST
 // router.get("/commu/post/:postId/postcomment", controller.postCommentPostId);
 
-// 게시글 댓글 조회 GET
+// 게시글 댓글 전체 조회 GET
 router.get("/commu/posts/:postId/comments", controller.getCommentsGet);
 
 // 게시글 댓글 쓰기 POST
 router.post("/commu/posts/:postId/postcomment", controller.postCommentPost);
 
+// 게시글 댓글 수정 POST
+router.post("/commu/comment/update", controller.postCommentUpdate);
+
+// 게시글 댓글 삭제 DELETE
+router.delete("/commu/posts/:postId/deletecomment", controller.deleteComment);
+
 // 반려장터 게시글 전체 조회 GET
 router.get("/market/posts", controller.getMarketPosts);
 
 // 반려장터 게시글 상세 조회 GET
-router.get("/market/posts/:marketId", controller.getMarketMarketId);
+router.get("/market/posts/:marketId", controller.getMarketId);
 
 module.exports = router;

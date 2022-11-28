@@ -1,3 +1,12 @@
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: black;
+}
+
 .searchForm {
   display: flex;
   justify-content: center;

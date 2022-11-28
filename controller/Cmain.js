@@ -16,6 +16,7 @@ exports.getMain = (req, res) => {
   }
 };
 
+// flag값을 login.html로 보냄
 exports.getLogin = (req, res) => {
   res.render("login");
 };
@@ -77,10 +78,15 @@ exports.postLogin = (req, res) => {
       userId: req.body.userId,
       userPw: req.body.userPw,
     },
-  })
+  })// 
     .then((db_result) => {
       if (db_result === null) {
-        res.render("index", { result: false });
+        // res.render("index", { result: false});
+        //         console.log('nonononono')
+        res.send(`<script>
+        alert('로그인 실패..')
+        document.location.href = '/'
+        </script>`)
       } else {
         req.session.user = {
           result: true,
@@ -94,6 +100,7 @@ exports.postLogin = (req, res) => {
     })
     .catch((err) => {
       console.log(err);
+
     });
 };
 
@@ -269,11 +276,42 @@ exports.getCommunity = (req, res) => {
   res.render("commu");
 };
 
+
+
 // 커뮤니티 게시글 전체 조회 GET
+exports.getCommunityPostsMain = (req, res) => {
+  let pageNum = 1;
+  let offset = 0;
+  offset = 10 * (pageNum - 1);
+  
+  models.Community.findAndCountAll({
+    offset: offset,
+    limit: 10 
+  }).then((result) => {
+    console.log(result);
+    res.render("commu_posts", { 
+      data : result.rows,
+      count : result.count
+    });
+
+
+  });
+};
+
 exports.getCommunityPosts = (req, res) => {
-  models.Community.findAll().then((result) => {
-    res.render("commu_posts", { data: result });
-    console.log(result)
+  let pageNum = req.params.pageNum;
+  let offset = 0;
+  offset = 10 * (pageNum - 1);
+  
+  models.Community.findAndCountAll({
+    offset: offset,
+    limit: 10 
+  }).then((result) => {
+    console.log(result);
+    res.render("commu_posts", { 
+      data : result.rows,
+      count : result.count
+    });
   });
 };
 
@@ -307,14 +345,13 @@ exports.getCommunityPostId = (req, res) => {
     });
   }
 
-  // 좋아요 기능
   // 유저 세션이 없으면
   if (userSession === undefined) {
     result["isUserSession"] = false;
     models.Likes.findAll({ where: { postId: req.params.postId } }).then(
       (post_result) => {
         result["likes"] = post_result.length;
-        models.Comment.findAll({ raw: true }).then((db_result) => {
+        models.Comment.findAll({ raw: true, where: { postId: req.params.postId } }).then((db_result) => {
           result["commentData"] = db_result;
           models.Community.findOne({
             where: { postId: req.params.postId },
@@ -332,7 +369,7 @@ exports.getCommunityPostId = (req, res) => {
   //  유저 세션이 존재하면
   else {
     result["isUserSession"] = true;
-    result['userName'] = userSession.userName;
+    result["userName"] = userSession.userName;
     // 접속 유저 좋아요 기록 확인
     models.Likes.findAll({
       where: { userName: userSession.userName, postId: req.params.postId },
@@ -345,7 +382,7 @@ exports.getCommunityPostId = (req, res) => {
           result["likes"] = post_result.length;
           console.log("게시글 좋아요 기록: ", post_result);
           // 댓글 조회
-          models.Comment.findOne({
+          models.Comment.findAll({
             where: { postId: req.params.postId },
             raw: true,
           }).then((db_result) => {
@@ -366,7 +403,6 @@ exports.getCommunityPostId = (req, res) => {
     });
   }
 
-
 };
 
 // 커뮤니티 게시글 체크박스적용 조회 GET
@@ -378,6 +414,7 @@ exports.getCommunityPostsCheckBox = (req, res) => {
     res.render("commu_posts", { data: result });
     console.log(result)
   });
+
 };
 
 // cookie value로 설정할 사용자 ip주소 얻어오는 함수
@@ -487,6 +524,7 @@ exports.postCommunityPostUpdate = (req, res) => {
 
 // 커뮤니티 게시글 삭제 POST
 exports.postCommunityDelete = (req, res) => {
+
   models.Community.destroy({ where: { postId: req.params.postId } })
     .then((db_result) => {
       console.log(db_result);
@@ -494,23 +532,14 @@ exports.postCommunityDelete = (req, res) => {
     })
 }
 
-// 커뮤니티 게시글 댓글보기 GET
-// exports.getCommentsGet = (req, res) => {
-//  const userSession = req.session.user;
-//  console.log(userSession);
-//  console.log('comment >>>>>>', req.params);
-//  models.Comment.findAll().then((result) => {
-//    res.send(result)
-//  });
-// };
-
-// 커뮤니티 게시글 댓글보기 GET
+// 커뮤니티 게시글 댓글 전체 조회 GET
 exports.getCommentsGet = (req, res) => {
   const userSession = req.session.user;
   console.log(userSession);
-  console.log("comment >>>>>>", req.params);
+  console.log("comment >>>>>>", req.params.postId);
 
-  models.Comment.findAll().then((result) => {
+  models.Comment.findAll({ where: { postId: req.params.postId } })
+    .then((result) => {
     res.send({ commentData: result });
     // res.render("commu_post", { commentData: result });
   });
@@ -520,16 +549,49 @@ exports.getCommentsGet = (req, res) => {
 exports.postCommentPost = (req, res) => {
   const userSession = req.session.user;
   let now = new Date().toISOString().slice(0, 19).replace("T", " ");
-  console.log("req.body >>>> ", req.body.comment);
+  console.log("req.body >>>> ", req.body);
   models.Comment.create({
     userName: userSession.userName,
     commDate: now,
     commDoc: req.body.comment,
-    postId: 1,
+    postId: req.body.postId,
   })
     .then((result) => {
       console.log(result);
       res.send(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+// 커뮤니티 게시글 댓글 수정 PATCH
+exports.postCommentUpdate = (req, res) => {
+  let now = new Date().toISOString().slice(0, 19).replace("T", " ");
+  models.Comment.update({
+    commDoc: req.body.commValue,
+    commDate: now,
+    
+  },{
+    where : { commId: req.body.commId }
+  })
+    .then((db_result) => {
+      console.log("수정 성공", db_result);
+      res.send('성공 굳');
+  }).catch((err) => {
+    console.log(err);
+  });
+};
+
+// 커뮤니티 게시글 댓글 삭제 
+exports.deleteComment = (req, res) => {
+  const userSession = req.session.user;
+  
+  models.Comment.destroy(
+  { where: { commId: req.body.commId } })
+    .then((result) => {
+      console.log('destroy >> ', result);
+      res.send('댓글이 삭제되었습니다.');
     })
     .catch((err) => {
       console.log(err);
@@ -544,7 +606,7 @@ exports.getMarketPosts = (req, res) => {
 };
 
 // 반려장터 게시글 상세조회 GET
-exports.getMarketMarketId = (req, res) => {
+exports.getMarketId = (req, res) => {
   const userSession = req.session.user;
   models.Market.findOne({
     where: { marketId: req.params.marketId },
@@ -553,3 +615,4 @@ exports.getMarketMarketId = (req, res) => {
     res.render("market_post", { data: result });
   });
 };
+

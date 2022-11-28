@@ -1,0 +1,93 @@
+.notNull {
+  color: red;
+}
+
+.categoryWrap,
+.writeWrap,
+.tagWrap {
+  margin: 4vw;
+}
+
+.dp-none {
+  display: none;
+}
+input[type="radio"] {
+  position: absolute;
+}
+
+input[type="radio"] + label {
+  width: 100px;
+  padding: 0.5vw;
+  box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+  border: solid 1px #ddd;
+  border-radius: 20px;
+  background-color: #fff;
+  text-align: center;
+  transition: border-color 0.15s ease-out, color 0.25s ease-out,
+    background-color 0.15s ease-out, box-shadow 0.15s ease-out;
+  cursor: pointer;
+}
+
+input[type="radio"]:checked + label {
+  background-color: #ffeac7;
+  color: #fff;
+  border-color: #ffeac7;
+}
+
+#title {
+  width: 88vw;
+  height: 1vw;
+  padding: 15px;
+  margin-bottom: 1vw;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+}
+
+.ql-toolbar {
+  width: 90vw;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+#editor {
+  width: 90vw;
+  height: 30vh;
+
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.tag {
+  margin: 4vw;
+}
+
+#tag {
+  width: 88vw;
+  height: 1vw;
+  padding: 15px;
+  margin-bottom: 1vw;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4vw;
+}
+
+#postBtn {
+  width: 200px;
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  background-color: #ffeac7;
+  font-weight: bold;
+}
+
+.check {
+  display: none;
+}

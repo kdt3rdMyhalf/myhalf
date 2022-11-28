@@ -3,6 +3,7 @@ header {
   height: 6vw;
   display: flex;
   justify-content: space-between;
+  
 }
 
 header > a {
