@@ -1,18 +1,81 @@
+<style>
+
+  .login-alert {
+    visibility: hidden;
+  }
+  .lg-alert-view {
+    display: flex;
+    color: red;
+  }
+
+.btn-login {
+	color: #fbfdff;
+	background: #a7e245;
+	transform: translateX(-30%);
+}
+.input-block {
+	margin-bottom: 20px;
+}
+.input-block label {
+	font-size: 14px;
+  color: #a1b4b4;
+}
+.input-block input {
+	display: block;
+	width: 100%;
+	margin-top: 8px;
+	padding-right: 15px;
+	padding-left: 15px;
+	font-size: 16px;
+	line-height: 40px;
+	color: #3b4465;
+  background: #eef9fe;
+  border: 1px solid #cddbef;
+  border-radius: 2px;
+}
+.log-btn{
+  background:#0AC986;
+ 
+  width:100%;
+  font-size:16px;
+  height:50px;
+  color:#fff;
+  text-decoration:none;
+  border:none;
+}
+.log-btn1{
+  width:100%;
+  font-size:16px;
+  height:50px;
+  color:#fff;
+  text-decoration:none;
+  border:none;
+}
+</style>
+
+
+
 <!-- action 주소지 / method 방법 -->
 <form name="formLogin" action="/user/login" method="POST">
+  <div class="input-block">
   <label for="userId2">ID</label>
   <input id="userId2" type="text" name="userId" required /><br />
+  </div>
+  <div class="input-block">
   <label for="userPw2">Password</label>
   <input id="userPw2" type="password" name="userPw" required /><br />
-  <button>Login</button>
+</div>
+
+  <button class="log-btn">Login</button>
+
 </form>
 
 <!-- 카카오 로그인 버튼 -->
 <a id="custom-login-btn" href="javascript:loginWithKakao()">
-  <img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222" />
+  <img class="log-btn1" src="/static/img/kakao_login_large_wide.png" width="222" />
 </a>
 
-<button class="api-btn" onclick="kakaoLogout()">로그아웃</button>
+<!-- <button class="api-btn" onclick="kakaoLogout()">로그아웃</button> -->
 
 <script type="text/javascript">
 
