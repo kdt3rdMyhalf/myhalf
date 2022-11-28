@@ -89,22 +89,22 @@
 
 
     <div class="postList">
-      <% for (let i = 0; i < data.ordinaryPost.length; i++) { %>
-      <a href="/commu/posts/<%= data.ordinaryPost[i].postId %>" class="postCard">
+      <% for (let i = 0; i < data.rows.length; i++) { %>
+      <a href="/commu/posts/<%= data.rows[i].postId %>" class="postCard">
         <div class="postDesc1">
-          <div class="postTitle"><%= data.ordinaryPost[i].dataValues.postTitle %></div>
-          <div class="postDoc"><%= data.ordinaryPost[i].dataValues.postDoc.substr(0, 150) %></div>
+          <div class="postTitle"><%= data.rows[i].dataValues.postTitle %></div>
+          <div class="postDoc"><%= data.rows[i].dataValues.postDoc.substr(0, 150) %></div>
           <div class="postDesces1">
-            <div class="postHashtag">#<%= data.ordinaryPost[i].dataValues.postCategory %></div>
+            <div class="postHashtag">#<%= data.rows[i].dataValues.postCategory %></div>
             <div class="postDescComment">댓글수 수정</div>
           </div>
           <div class="postDesces2">
             <div class="postDesces2-1">
-              <div class="postDescWriter"><%= data.ordinaryPost[i].dataValues.userName %></div>
-              <div class="postDescDate"><%= data.ordinaryPost[i].dataValues.postDate.toISOString().slice(0, 19).replace("T", " ") %></div>
-              <div class="postDescViews"><%= data.ordinaryPost[i].dataValues.postViews %></div>
+              <div class="postDescWriter"><%= data.rows[i].dataValues.userName %></div>
+              <div class="postDescDate"><%= data.rows[i].dataValues.postDate.toISOString().slice(0, 19).replace("T", " ") %></div>
+              <div class="postDescViews"><%= data.rows[i].dataValues.postViews %></div>
             </div>
-            <div class="postDescLikes">♥︎ <%= data.ordinaryPost[i].dataValues.postLikes %></div>
+            <div class="postDescLikes">♥︎ <%= data.rows[i].dataValues.postLikes %></div>
           </div>
         </div>
       </a>

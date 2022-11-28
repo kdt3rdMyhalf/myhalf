@@ -162,9 +162,14 @@ exports.postSignup = (req, res) => {
 
 exports.getMyPage = (req, res) => {
   const userSession = req.session.user;
+  let pageNum = req.params.pageNum
+  let offset = 10 * (pageNum - 1);
+  
   if (userSession !== undefined) {
-    models.Community.findAll({
+    models.Community.findAndCountAll({
       where: { userName: userSession.userName },
+      offset: offset,
+      limit: 10
     })
       .then((result) => {
         res.render("mypage", {
@@ -174,6 +179,8 @@ exports.getMyPage = (req, res) => {
           userBirth: userSession.userBirth,
           userImg: userSession.userImg,
           userPost: result,
+          rows : result.rows,
+          count : result.count
         });
       })
       .catch((err) => {
@@ -329,10 +336,12 @@ exports.getCommunityPosts = (req, res) => {
       result['ordinaryPost'] = db_result
       models.Community.findAndCountAll({
     offset: offset,
-    limit: 10
+    limit: 10,
+    order: [["postId", "ASC"]]
     }).then((db_result) => {
         result['rows'] = db_result.rows;
         result['count'] = db_result.count;
+        console.log("result: ", result);
         res.render("commu_posts", { data: result });
   })
 })
@@ -449,6 +458,7 @@ exports.getCommunityPostsCheckBox = (req, res) => {
   let offset = 0;
   offset = 10 * (pageNum - 1);
   let searchCheck = req.query.searchCheckbox
+  if (searchCheck == undefined) return;
   models.Community.findAndCountAll({
     offset: offset,
     limit: 10,
@@ -510,7 +520,7 @@ exports.getCommunityPostWrite = (req, res) => {
     });
   } else {
     models.Community.findAll().then((result) => {
-      res.redirect("/commu/posts");
+      res.send("<script>alert('로그인 해주세요!');window.location='/commu/posts';</script>");
     });
   }
 };

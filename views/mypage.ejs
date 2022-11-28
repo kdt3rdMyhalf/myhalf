@@ -72,25 +72,28 @@
     </div>
     <div class="postList">
       <div class="postListName">작성한 글</div>
-      <% for (let i = 0; i < userPost.length; i++) { %>
+      <% for (let i = 0; i < rows.length; i++) { %>
       <a
-        href="/commu/posts/<%= userPost[i].dataValues.postId %>"
+        href="/commu/posts/<%= rows[i].dataValues.postId %>"
         class="postCard"
       >
-        <img src="<%= userPost[i].dataValues.postImg %>" alt="게시글 이미지" />
+        <img src="<%= rows[i].dataValues.postImg %>" alt="게시글 이미지" />
         <div class="postDesc1">
-          <div class="postTitle"><%= userPost[i].dataValues.postTitle%></div>
+          <div class="postTitle"><%= rows[i].dataValues.postTitle%></div>
 
           <div class="postDesces2">
             <div class="postDesces2-1">
               <div class="postDescDate">
-                <%= userPost[i].dataValues.postDate.toISOString().slice(0,
+                <%= rows[i].dataValues.postDate.toISOString().slice(0,
                 19).replace("T", " ") %>
               </div>
             </div>
           </div>
         </div>
       </a>
+      <% } %>
+      <% for (let i = 1; i <= parseInt(count / 10) + 1 ; i++) { %>
+        <li class="page-item"><a class="page-link" href="/user/mypage/<%= [i] %>"><%= [i] %></a></li>
       <% } %>
     </div>
   </body>

@@ -43,7 +43,7 @@ router.post(
 // 카카오
 router.post("/kakaologin", controller.getKakao);
 
-router.get("/user/mypage", controller.getMyPage);
+router.get("/user/mypage/:pageNum", controller.getMyPage);
 router.get("/mypage-post", controller.getMyPagePost);
 router.post(
   "/mypage-post",
