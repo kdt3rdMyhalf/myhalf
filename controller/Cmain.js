@@ -283,25 +283,7 @@ exports.getCommunityPostsMain = (req, res) => {
   let offset = 0;
   offset = 10 * (pageNum - 1);
 
-  models.Community.findAndCountAll({
-    offset: offset,
-    limit: 10
-  }).then((result) => {
-    console.log(result);
-    res.render("commu_posts", {
-      data: result.rows,
-      count: result.count
-    });
-
-
-  });
-};
-
-exports.getCommunityPosts = (req, res) => {
   let result = {}
-  let pageNum = req.params.pageNum;
-  let offset = 0;
-  offset = 10 * (pageNum - 1);
   
   models.Community.findAll({
     limit: 9,
@@ -325,7 +307,41 @@ exports.getCommunityPosts = (req, res) => {
         res.render("commu_posts", { data: result });
         console.log('posts result 객체: ', result);
   })
- 
+})
+})
+};
+
+exports.getCommunityPosts = (req, res) => {
+  let pageNum = req.params.pageNum;
+  let offset = 0;
+  offset = 10 * (pageNum - 1);
+
+  let result = {}
+  
+  models.Community.findAll({
+    limit: 9,
+    order : [
+      ['postViews', 'DESC'],
+    ]
+  })
+  .then((db_result) => {
+    console.log(db_result)
+    result['hotPost'] = db_result
+    models.Community.findAll()
+    .then((db_result) => {
+      console.log(db_result)
+      result['ordinaryPost'] = db_result
+      models.Community.findAndCountAll({
+    offset: offset,
+    limit: 10
+    }).then((db_result) => {
+        result['rows'] = db_result.rows;
+        result['count'] = db_result.count;
+        res.render("commu_posts", { data: result });
+        console.log('posts result 객체: ', result);
+  })
+})
+})
 };
 
 // cookie value로 설정할 사용자 ip주소 얻어오는 함수
