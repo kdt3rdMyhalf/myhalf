@@ -32,7 +32,9 @@
     </style>
   </head>
   <body>
+
     <div class="postId dp-none"><%= result.postInfo.postId %></div>
+
     <div class="tagBox">
       <div class="categoryTag"><%= result.postInfo.postCategory %></div>
       <% if (result.postInfo.postTag !== '') { %>
@@ -89,7 +91,6 @@
             <div class="postLikes"><%= result.likes %></div>
           </div>
         <% } %>
-
       </div>
     </div>
     <div class="postBtns">

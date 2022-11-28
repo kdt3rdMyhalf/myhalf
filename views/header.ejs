@@ -1,11 +1,10 @@
 <header>
-  <img src="/static/img/logo.png" alt="" />
+  <img src="" alt="" />
   <div class="userBox">
     <% if(result) { %>
     <div class="userBox">
-      <img src="<%= userImg %>" alt="" width="200" />
-      <a href="/user/mypage" class="mypage">마이페이지</a>
-      <a href="/logout" class="logout">로그아웃</a>
+      <a href="/user/mypage" class="login">마이페이지</a>
+      <a href="/logout" class="signin">로그아웃</a>
     </div>
     <% } else { %>
     <!-- Modal -->
@@ -29,7 +28,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalLabel">로그인</h5>
             <button
               type="button"
               class="btn-close"
@@ -52,7 +51,7 @@
               class="btn btn-secondary"
               data-bs-dismiss="modal"
             >
-              Close
+              닫기
             </button>
           </div>
           <!-- <div class="modal-footer"> -->
@@ -71,7 +70,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">회원가입</h5>
           <button
             type="button"
             class="btn-close"
@@ -97,15 +96,10 @@
             class="btn btn-secondary"
             data-bs-dismiss="modal"
           >
-            Close
+            닫기
           </button>
         </div>
       </div>
     </div>
   </div>
 </header>
-<nav>
-  <a href="/" class="navHome">홈</a>
-  <a href="/commu/posts" class="navCommu">커뮤니티</a>
-  <a href="/market/posts" class="navMarket">반려장터</a>
-</nav>

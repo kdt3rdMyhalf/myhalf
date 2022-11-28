@@ -1,45 +1,12 @@
-header {
-  width: 100%;
-  height: 50px;
-  display: flex;
-  justify-content: space-between;
-  background-color: #ffeac7;
-  display: flex;
-  top: 0;
+body {
+  margin: 0;
+  padding: 0;
+  background: #fafafa;
+  color: #fff;
 }
-
-a {
-  text-decoration: none;
-  color: black;
-}
-
-.userBox {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 1vw;
-}
-
-.userBox > img {
-  width: 50px;
-  height: 50px;
-  background-size: cover;
-  border-radius: 100%;
-}
-
-.signin {
-  cursor: pointer;
-  margin: 1vw;
-}
-
-.login {
-  cursor: pointer;
-  margin: 1vw;
-}
-
 .main {
   position: relative;
-  height: 110vh;
+  height: 100vh;
   width: 100%;
   top: 0;
   left: 0;
@@ -123,7 +90,9 @@ a {
   font-weight: 300;
   display: block;
 }
-
+.main .navbar ul li:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
 .main .heading {
   position: absolute;
   height: auto;
@@ -139,7 +108,6 @@ a {
   font-size: 48px;
   font-weight: 600;
   color: #fff;
-  margin-bottom: 30px;
 }
 .main .heading .head span {
   color: #ffeac7;
