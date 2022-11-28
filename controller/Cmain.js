@@ -448,15 +448,12 @@ exports.getCommunityPostsCheckBox = (req, res) => {
   let pageNum = req.params.pageNum;
   let offset = 0;
   offset = 10 * (pageNum - 1);
-  let searchInput = req.query.searchInput
   let searchCheck = req.query.searchCheckbox
-  console.log('%' + searchInput + '%')
   models.Community.findAndCountAll({
     offset: offset,
     limit: 10,
     // where: { [Op.or]: [{ [Op.like]: '%' + searchInput + '%' }, {postCategory: searchCheck}] },
     where: {postCategory: searchCheck},
-
     raw: true,
   }).then((result) => {
     res.render("category", {
