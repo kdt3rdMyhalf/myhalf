@@ -1,167 +1,179 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>반쪽</title>
 
-    <!-- bootstrap -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-      crossorigin="anonymous"
-    />
-    <!-- JavaScript Bundle with Popper -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-      crossorigin="anonymous"
-    ></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>반쪽</title>
 
-    <!-- axios cdn -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!-- bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
 
-    <!-- CSS 연결 -->
-    <link rel="stylesheet" href="/static/css/commu_post.css" />
-    <link rel="stylesheet" href="/static/css/header.css" />
-    
-    <style>
-      .checked {
-        color: red;
-      }
-    </style>
-  </head>
-  <body>
-    <%- include ('header-result.ejs') %>
+  <!-- axios cdn -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-    <div class="postId dp-none"><%= result.postInfo.postId %></div>
+  <!-- CSS 연결 -->
+  <link rel="stylesheet" href="/static/css/commu_post.css" />
+  <link rel="stylesheet" href="/static/css/header.css" />
+
+  <style>
+    .checked {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <%- include ('header-result.ejs') %>
+
+    <div class="postId dp-none">
+      <%= result.postInfo.postId %>
+    </div>
 
     <div class="tagBox">
-      <div class="categoryTag"><%= result.postInfo.postCategory %></div>
-      <% if (result.postInfo.postTag !== '') { %>
+      <div class="categoryTag">
+        <%= result.postInfo.postCategory %>
+      </div>
+      <% if (result.postInfo.postTag !=='' ) { %>
         <div class="hashTag">
-      <%= result.postInfo.postTag %></div>
+          <%= result.postInfo.postTag %>
         </div>
-      <% } else { %>
-        <div class="dp-none"></div>
+    </div>
+    <% } else { %>
+      <div class="dp-none"></div>
       <% } %>
-    </div>
-    <div class="postTitle"><%= result.postInfo.postTitle %></div>
-    <div class="postInfoBox">
-      <div class="infoBoxDiv1">
-        <% if (result.userImg !== null) { %>
-        <img
-          src="<%= result.userImg %>"
-          alt="작성자 프로필"
-          class="postWriterImg"
-        />
-        <% } else { %>
-          <img
-          src="/static/img/profileImage.png"
-          class="postWriterImg"
-        />
-        <% } %>
-        <div class="postInfoDiv2">
-          <div class="postWriter"><%= result.postInfo.userName %></div>
-          <div class="postDate"><%= result.postInfo.postDate.toISOString().slice(0, 19).replace("T", " ") %></div>
         </div>
-      </div>
-      <div class="postViews">조회수 <%= result.postInfo.postViews %></div>
-    </div>
-    <hr />
-    <div class="postDoc dp-none"><%= result.postInfo.postDoc %></div>
-    <div class="postContent"></div>
-    <div class="postLikesDiv">
-      <div class="postLikesBox">
-        <div class="postLikesHeart"></div>
-        <% if (result.isUserSession) { %>
-          <% if (result.userLikes == 1) { %>
-            <div class="btn">
-              <button onclick="likesOff()" class="likesBtn">❤</button>
-              <div class="postLikes"><%= result.likes %></div>
-            </div>
-          <% } else { %>
-            <div class="btn">
-              <button onclick="likesOn()" class="likesBtn">🖤</button>
-              <div class="postLikes"><%= result.likes %></div>
-            </div>
-          <% } %>
-        <% } else { %>
-          <div class="btn">
-            <button class="likesBtn" disabled>🖤</button>
-            <div class="postLikes"><%= result.likes %></div>
+        <div class="postTitle">
+          <%= result.postInfo.postTitle %>
+        </div>
+        <div class="postInfoBox">
+          <div class="infoBoxDiv1">
+            <% if (result.userImg !==null) { %>
+              <img src="<%= result.userImg %>" alt="작성자 프로필" class="postWriterImg" />
+              <% } else { %>
+                <img src="/static/img/profileImage.png" class="postWriterImg" />
+                <% } %>
+                  <div class="postInfoDiv2">
+                    <div class="postWriter">
+                      <%= result.postInfo.userName %>
+                    </div>
+                    <div class="postDate">
+                      <%= result.postInfo.postDate.toISOString().slice(0, 19).replace("T", " " ) %>
+                    </div>
+                  </div>
           </div>
-        <% } %>
-      </div>
-    </div>
-    <div class="postBtns">
-      <% if (result.isUserSession && result.userName === result.postInfo.userName) { %>
-          <button class="postBtn"><a href="/commu/update/<%= result.postInfo.postId %>">수정</a></button>
-          <form action="/commu/posts/<%= result.postInfo.postId %>/delete" onsubmit="return confirm('삭제하시겠습니까?')" method="post">
-          <button class="postBtn">삭제</button>
-          </form>
-      <% } else { %>
-      <% } %>
-      </div>
-    <hr />
+          <div class="postViews">조회수 <%= result.postInfo.postViews %>
+          </div>
+        </div>
+        <hr />
+        <div class="postDoc dp-none">
+          <%= result.postInfo.postDoc %>
+        </div>
+        <div class="postContent"></div>
+        <div class="postLikesDiv">
+          <div class="postLikesBox">
+            <div class="postLikesHeart"></div>
+            <% if (result.isUserSession) { %>
+              <% if (result.userLikes==1) { %>
+                <div class="btnSec">
+                  <button onclick="likesOff()" class="likesBtn">❤</button>
+                  <div class="postLikes">
+                    <%= result.likes %>
+                  </div>
+                </div>
+                <% } else { %>
+                  <div class="btnSec">
+                    <button onclick="likesOn()" class="likesBtn">🖤</button>
+                    <div class="postLikes">
+                      <%= result.likes %>
+                    </div>
+                  </div>
+                  <% } %>
+                    <% } else { %>
+                      <div class="btnSec">
+                        <button class="likesBtn" disabled>🖤</button>
+                        <div class="postLikes">
+                          <%= result.likes %>
+                        </div>
+                      </div>
+                      <% } %>
+          </div>
+        </div>
+        <div class="postBtns">
+          <% if (result.isUserSession && result.userName===result.postInfo.userName) { %>
+            <button class="postBtn"><a href="/commu/update/<%= result.postInfo.postId %>">수정</a></button>
+            <form action="/commu/posts/<%= result.postInfo.postId %>/delete" onsubmit="return confirm('삭제하시겠습니까?')"
+              method="post">
+              <button class="postBtn">삭제</button>
+            </form>
+            <% } else { %>
+              <% } %>
+        </div>
+        <hr />
 
 
-  <div class="commentsCount">댓글</div>
-      <form name="commentForm" id="commentForm">
-        <input
-          type="textarea"
-          id="commentInput"
-          placeholder="댓글을 작성해주세요!"
-        />
+        <div class="commentsCount">댓글</div>
+        <form name="commentForm" id="commentForm">
+          <input type="textarea" id="commentInput" placeholder="댓글을 작성해주세요!" />
 
-  <% if (result.userName == null) { %>
-    <div class="display-none">
-    </div>
-      <% } else { %>
-      <div class="commentBtn">
-        <button
-        type="button"
-        id="commentBtn"
-        onclick="commentPost(Number('<%= result.postInfo.postId %>'))"
-        >
-        등록
-        </button>
-      </div>
-      <% } %>
-      </form>
+          <% if (result.userName==null) { %>
+            <div class="display-none">
+            </div>
+            <% } else { %>
+              <div class="commentBtn">
+                <button type="button" id="commentBtn" onclick="commentPost(Number('<%= result.postInfo.postId %>'))">
+                  등록
+                </button>
+              </div>
+              <% } %>
+        </form>
 
-      <% if (result.commentData == null) { %>
-        <div class="comments">
+        <% if (result.commentData==null) { %>
+          <div class="comments">
             <div class="commentInfoBox">
-                <div class="commentWriter"></div>
-                <div class="commentDate"></div>
-                <div class="commentsContent"></div>
+              <div class="commentWriter"></div>
+              <div class="commentDate"></div>
+              <div class="commentsContent"></div>
             </div>
-        </div>
-      <% } else { %>
-        <div class="comments">
-        <% for (let i = 0; i < result.commentData.length; i++) { %>
-        <div class="commentInfoBox id<%= result.commentData[i].commId %>">
-          <div class="commentInfoDiv1">
-            <div class="commentWriter">🐶 <%= result.commentData[i].userName %></div>
-            <div class="commentDate"><%= result.commentData[i].commDate.toISOString().slice(0, 19).replace("T", " ") %></div>
-            <div class="commentsContentDiv"><div class="commentsContent"><%= result.commentData[i].commDoc %></div></div>
-            
           </div>
-          <% if (result.userName === result.commentData[i].userName) {%>
-          <div class="commentInfoDiv2<%= result.commentData[i].commId %>">
-            <button type="button" class="commentEditBtn" onclick="editComment('<%= result.commentData[i].commId %>')">수정</button>
-            <button type="button" class="commentDeleteBtn" onclick="deleteComment(this, '<%= result.commentData[i].commId %>')">삭제</button>
-          </div>
-          <% } %>
-        </div>
-        <% } %>
-        </div>
-      <% } %>
-      
-        
-    <script src="/static/js/commu_post.js"></script>
-  </body>
+          <% } else { %>
+            <div class="comments">
+              <% for (let i=0; i < result.commentData.length; i++) { %>
+                <div class="commentInfoBox id<%= result.commentData[i].commId %>">
+                  <div class="commentInfoDiv1">
+                    <div class="commentWriter">🐶 <%= result.commentData[i].userName %>
+                    </div>
+                    <div class="commentDate">
+                      <%= result.commentData[i].commDate.toISOString().slice(0, 19).replace("T", " " ) %>
+                    </div>
+                    <div class="commentsContentDiv">
+                      <div class="commentsContent">
+                        <%= result.commentData[i].commDoc %>
+                      </div>
+                    </div>
+
+                  </div>
+                  <% if (result.userName===result.commentData[i].userName) {%>
+                    <div class="commentInfoDiv2<%= result.commentData[i].commId %>">
+                      <button type="button" class="commentEditBtn"
+                        onclick="editComment('<%= result.commentData[i].commId %>')">수정</button>
+                      <button type="button" class="commentDeleteBtn"
+                        onclick="deleteComment(this, '<%= result.commentData[i].commId %>')">삭제</button>
+                    </div>
+                    <% } %>
+                </div>
+                <% } %>
+            </div>
+            <% } %>
+
+
+              <script src="/static/js/commu_post.js"></script>
+</body>
+
 </html>

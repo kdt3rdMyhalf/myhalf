@@ -162,7 +162,7 @@ exports.getMyPage = (req, res) => {
   const userSession = req.session.user;
   let pageNum = req.params.pageNum
   let offset = 10 * (pageNum - 1);
-  
+
   if (userSession !== undefined) {
     models.Community.findAndCountAll({
       where: { userName: userSession.userName },
@@ -177,8 +177,8 @@ exports.getMyPage = (req, res) => {
           userBirth: userSession.userBirth,
           userImg: userSession.userImg,
           userPost: result,
-          rows : result.rows,
-          count : result.count
+          rows: result.rows,
+          count: result.count
         });
       })
       .catch((err) => {
@@ -338,10 +338,10 @@ exports.getCommunityPosts = (req, res) => {
       result["ordinaryPost"] = db_result;
       models.Community.findAndCountAll({
 
-    offset: offset,
-    limit: 10,
-    order: [["postId", "ASC"]]
-    }).then((db_result) => {
+        offset: offset,
+        limit: 10,
+        order: [["postId", "ASC"]]
+      }).then((db_result) => {
         result['rows'] = db_result.rows;
         result['count'] = db_result.count;
         console.log("result: ", result);
@@ -546,7 +546,7 @@ exports.postCommunityPost = (req, res) => {
     postTag: req.body.tag,
     // userImg: ,
   })
-    .then((result) => {})
+    .then((result) => { })
     .catch((err) => {
       console.log(err);
     });
