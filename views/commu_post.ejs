@@ -32,6 +32,7 @@
     </style>
   </head>
   <body>
+    <div>게시번호: <span class="postId"><%= result.postInfo.postId %></span></div>
     <div class="tagBox">
       <div class="categoryTag"><%= result.postInfo.postCategory %></div>
       <div class="hashTag"><%= result.postInfo.postTag %></div>
@@ -72,18 +73,20 @@
             <button class="likesBtn">❤하트 못 누름!</button>
           </div>
         <% } %>
-        <div class="postLikes">♡<%= result.likes %></div>
+        ♡<div class="postLikes"><%= result.likes %></div>
       </div>
     </div>
-    <hr />
     <div class="comment">
       <% if (result.isUserSession && result.userName === result.postInfo.userName) { %>
-          <button>수정</button>
+          <button><a href="/commu/update/<%= result.postInfo.postId %>">수정</a></button>
           <form action="/commu/posts/<%= result.postInfo.postId %>/delete" onsubmit="return confirm('삭제하시겠습니까?')" method="post">
             <button>삭제</button>
           </form>
       <% } else { %>
       <% } %>
+      </div>
+    <hr />
+
 
 <div class="commentsCount">댓글</div>
       <form name="commentForm" id="commentForm">
@@ -100,41 +103,35 @@
           등록
         </button>
       </form>
-      <% if (result.commentData === null) { %>
+      <% if (result.commentData == null) { %>
         <div class="comments">
-          <div class="commentInfoBox">
-            <div class="commentInfoDiv1">
-              <div class="commentWriter"></div>
-              <div class="commentDate"></div>
+            <div class="commentInfoBox">
+                <div class="commentWriter"></div>
+                <div class="commentDate"></div>
+                <div class="commentsContent"></div>
             </div>
-            <div class="commentInfoDiv2">
-              <button type="button" class="commentEditBtn">수정</button>
-              <button type="button" class="commentDeleteBtn">삭제</button>
-            </div>
-          </div>
-          <div class="commentsContent">
-          </div>
         </div>
-        <% } else { %>
-      <div class="comments">
+      <% } else { %>
+        <div class="comments">
         <% for (let i = 0; i < result.commentData.length; i++) { %>
-        <div class="commentInfoBox">
+        <div class="commentInfoBox id<%= result.commentData[i].commId %>">
           <div class="commentInfoDiv1">
             <div class="commentWriter"><%= result.commentData[i].userName %></div>
-            <div class="commentDate"><%= result.commentData[i].commDate %></div>
+            <div class="commentDate"><%= result.commentData[i].commDate.toISOString().slice(0, 19).replace("T", " ") %></div>
+            <div class="commentsContent"><%= result.commentData[i].commDoc %></div>
           </div>
-          <div class="commentInfoDiv2">
-            <button type="button" class="commentEditBtn">수정</button>
-            <button type="button" class="commentDeleteBtn">삭제</button>
+          <% if (result.userName === result.commentData[i].userName) {%>
+          <div class="commentInfoDiv2<%= result.commentData[i].commId %>">
+            <button type="button" class="commentEditBtn" onclick="editComment('<%= result.commentData[i].commId %>')">수정</button>
+            <button type="button" class="commentDeleteBtn" onclick="deleteComment(this, '<%= result.commentData[i].commId %>')">삭제</button>
           </div>
-        <div class="commentsContent">
-          <%= result.commentData[i].commDoc %>
+          <% } %>
+        </div>
         <% } %>
         </div>
-      </div>
       <% } %>
-    </div>
-    
+      
+        
     <script src="/static/js/commu_post.js"></script>
   </body>
 </html>
