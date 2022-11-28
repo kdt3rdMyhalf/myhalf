@@ -62,8 +62,8 @@
     </div>
     <div class="hotPostBox">
       <div class="hotPostWrapBox">
-        <div class="hotPostWrap">  
         <% for (let i = 0; i < data.hotPost.length; i++) { %>
+        <div class="hotPostWrap"> 
           <div class="hotName">Hot!</div>
           <div class="hotTitle"></div>
           <div class="hotPostWrap"><%= data.hotPost[i].dataValues.postTitle %></div>
@@ -71,12 +71,11 @@
           <div class="hotPostDiv"></div>
           <div class="hotComment">댓글 수</div>
           <div class="hotDate">날짜</div>
-        <% } %>
         </div>
-          
+        <% } %>
+
       </div>
     </div>
-
 
     <div class="postList">
       <% for (let i = 0; i < data.length; i++) { %>
