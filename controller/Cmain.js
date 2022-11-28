@@ -16,6 +16,7 @@ exports.getMain = (req, res) => {
   }
 };
 
+// flag값을 login.html로 보냄
 exports.getLogin = (req, res) => {
   res.render("login");
 };
@@ -77,10 +78,15 @@ exports.postLogin = (req, res) => {
       userId: req.body.userId,
       userPw: req.body.userPw,
     },
-  })
+  })// "?flag=0 -> flag속성 넣기기"
     .then((db_result) => {
       if (db_result === null) {
-        res.render("login", { result: false });
+        // res.render("index", { result: false});
+        //         console.log('nonononono')
+        res.send(`<script>
+        alert('로그인 실패..')
+        document.location.href = '/'
+        </script>`)
       } else {
         req.session.user = {
           result: true,
@@ -94,6 +100,7 @@ exports.postLogin = (req, res) => {
     })
     .catch((err) => {
       console.log(err);
+
     });
 };
 
@@ -524,7 +531,7 @@ exports.getMarketPosts = (req, res) => {
 };
 
 // 반려장터 게시글 상세조회 GET
-exports.getMarketMarketId = (req, res) => {
+exports.getMarketId = (req, res) => {
   const userSession = req.session.user;
   models.Market.findOne({
     where: { marketId: req.params.marketId },

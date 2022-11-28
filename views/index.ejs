@@ -21,13 +21,14 @@
 
   <!-- CSS 연결 -->
   <link rel="stylesheet" href="/static/css/index.css" />
+  <!-- <link rel="stylesheet" href="/static/css/header.css"> -->
 </head>
 
 <body>
   <header>
     <img src="/static/img/logo.png" alt="" />
     <div class="userBox">
-      <% if(result) { %>
+      <% if(result) { %>  
         <img src='<%= userImg %>'' alt="" width="200"> 
           <a href="/user/mypage" class="mypage">마이페이지</a>
           <a href="/logout" class="logout">로그아웃</a>
@@ -44,7 +45,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalLabel">로그인</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -52,22 +53,17 @@
           </div>
           <div class="modal-footer">
             <div class="signin" data-bs-toggle="modal" data-bs-target="#secondModal">회원가입</div>
-
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
           </div>
           <!-- <div class="modal-footer"> -->
-
         </div>
       </div>
     </div>
     </div>
-
     <div class="modal fade" id="secondModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalLabel">회원가입</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -76,8 +72,6 @@
           </div>
           <div class="modal-footer">
             <div class="signin" data-bs-toggle="modal" data-bs-target="#firstModal">로그인</div>
-
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
@@ -326,6 +320,6 @@
         </div>
       </div>
     </article>
+    <%- include ('footer.ejs') %>
 </body>
-
 </html>
