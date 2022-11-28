@@ -1,10 +1,3 @@
-// let quillData =
-// editor Quill 불러오는 코드
-let check = document.querySelector(".check");
-check.addEventListener("click", () => {
-  console.log(quill.root.innerHTML);
-});
-
 var quill = new Quill("#editor", {
   modules: {
     toolbar: [
@@ -13,27 +6,29 @@ var quill = new Quill("#editor", {
       ["image", "code-block"],
     ],
   },
-  placeholder: "글 내용을 작성해 주세요",
+  placeholder: "여기에 게시글을 작성해주세요",
   theme: "snow",
 });
-
-const form = document.forms["postForm"];
+// quill innercontent 설정
+postDoc = document.querySelector(".postDoc").textContent;
+quill.root.innerHTML = postDoc;
 
 // Quill data axios 비동기 통신
-function postPost() {
-  if (!form.title.value.length) {
-    alert("제목을 입력해주세요!");
-    return;
-  }
+function postUpdate() {
+  const form = document.forms["postForm"];
+  const postId = document.querySelector(".postId").textContent;
   axios({
     method: "post",
-    url: "/commu/post",
+    url: "/commu/update",
     data: {
+      postId: postId,
       title: form.title.value,
       doc: quill.root.innerHTML,
       category: form.category.value,
       tag: form.tag.value,
     },
+  }).then(() => {
+    alert("수정 완료!");
   });
   window.location = "/commu/posts";
 }
