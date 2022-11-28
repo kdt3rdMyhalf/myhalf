@@ -303,6 +303,7 @@ exports.getCommunityPostsMain = (req, res) => {
     }).then((db_result) => {
         result['rows'] = db_result.rows;
         result['count'] = db_result.count;
+        console.log("posts result 객체", result);
         res.render("commu_posts", { data: result });
   })
 })
@@ -333,6 +334,7 @@ exports.getCommunityPosts = (req, res) => {
     }).then((db_result) => {
         result['rows'] = db_result.rows;
         result['count'] = db_result.count;
+        console.log("posts result 객체", result);
         res.render("commu_posts", { data: result });
   })
 })

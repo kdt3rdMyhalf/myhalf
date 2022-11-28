@@ -14,7 +14,6 @@
 
   </head>
   <body>
-    
     <div class="searchCheckBox">
       <div class="serachCheckBox1">
       <form action="/commu/posts/category/p1" method="get">
@@ -52,53 +51,43 @@
     </div>
     <div class="hotPostBox">
       <div class="hotPostWrapBox">
-        <div class="hotPostWrap">
+        <div class="hotPostWrap">  
+        <% for (let i = 0; i < data.hotPost.length; i++) { %>
           <div class="hotName">Hot!</div>
-          <div class="hotTitle"><% for (let i = 0; i < data.hotPost.length; i++) { %>
+          <div class="hotTitle"></div>
           <div class="hotPostWrap"><%= data.hotPost[i].dataValues.postTitle %></div>
-        <% } %></div>
           <div class="hotDoc">글 내용 100자?</div>
-          <div class="hotPostDiv">
-            <div class="hotComment">댓글 수</div>
-            <div class="hotDate">날짜</div>
-          </div>
+          <div class="hotPostDiv"></div>
+          <div class="hotComment">댓글 수</div>
+          <div class="hotDate">날짜</div>
+        <% } %>
         </div>
-        <div class="hotPostWrap"></div>
-        <div class="hotPostWrap"></div>
-        <div class="hotPostWrap"></div>
-        <div class="hotPostWrap"></div>
-        <div class="hotPostWrap"></div>
-        <div class="hotPostWrap"></div>
-
+          
       </div>
     </div>
-  </div>
 
 
     <div class="postList">
       <% for (let i = 0; i < data.length; i++) { %>
-      <a href="/commu/posts/<%= data[i].postId %>" class="postCard">
-        <!-- <img src="<%= data[i].postImg %>" alt="게시글 이미지" /> -->
-
-        <div class="postDesc1">
-          <div class="postTitle"><%= data.ordinaryPost[i].dataValues.postTitle %></div>
-          <div class="postDoc"><%= data.ordinaryPost[i].dataValues.postDoc.substr(0, 150) %></div>
-          <div class="postDesces1">
-            <div class="postHashtag">#<%= data.ordinaryPost[i].dataValues.postCategory %></div>
-            <div class="postDescComment">댓글수 수정</div>
-          </div>
-          <div class="postDesces2">
-            <div class="postDesces2-1">
-              <div class="postDescWriter"><%= data[i].userName %></div>
-              <div class="postDescDate"><%= data[i].postDate.toISOString().slice(0, 19).replace("T", " ") %></div>
-              <div class="postDescViews"><%= data[i].postViews %></div>
-
+        <a href="/commu/posts/<%= data.ordinaryPost[i].dataValues.postId %>" class="postCard">
+          <!-- <img src="<%= data[i].postImg %>" alt="게시글 이미지" /> -->
+          <div class="postDesc1">
+            <div class="postTitle"><%= data.ordinaryPost[i].dataValues.postTitle %></div>
+            <div class="postDoc"><%= data.ordinaryPost[i].dataValues.postDoc.substr(0, 150) %></div>
+            <div class="postDesces1">
+              <div class="postHashtag">#<%= data.ordinaryPost[i].dataValues.postCategory %></div>
+              <div class="postDescComment">댓글수 수정</div>
             </div>
-            <div class="postDescLikes">♥︎ <%= data.ordinaryPost[i].dataValues.postLikes %></div>
-
+            <div class="postDesces2">
+              <div class="postDesces2-1">
+                <div class="postDescWriter"><%= data[i].userName %></div>
+                <div class="postDescDate"><%= data[i].postDate.toISOString().slice(0, 19).replace("T", " ") %></div>
+                <div class="postDescViews"><%= data[i].postViews %></div>
+              </div>
+              <div class="postDescLikes">♥︎ <%= data.ordinaryPost[i].dataValues.postLikes %></div>
+            </div>
           </div>
-        </div>
-      </a>
+        </a>
       <% } %>
     </div>
 
@@ -139,7 +128,7 @@
   </div>
 
     <script src="/static/js/commu_posts.js"></script>
-    <%- include ('footer.ejs') %>
+    <!-- <%- include ('footer.ejs') %> -->
 
   <!-- <script src="/static/js/pagination1.js"></script> -->
 
