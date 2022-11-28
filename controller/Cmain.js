@@ -166,7 +166,6 @@ exports.getMyPage = (req, res) => {
       where: { userName: userSession.userName },
     })
       .then((result) => {
-        console.log(result);
         res.render("mypage", {
           result: true,
           userId: userSession.userId,
@@ -278,9 +277,25 @@ exports.getCommunity = (req, res) => {
 
 // 커뮤니티 게시글 전체 조회 GET
 exports.getCommunityPosts = (req, res) => {
-  models.Community.findAll().then((result) => {
-    res.render("commu_posts", { data: result });
-  });
+  let result = {}
+  models.Community.findAll({
+    limit: 9,
+    order : [
+      ['postViews', 'DESC'],
+    ]
+  })
+  .then((db_result) => {
+    console.log(db_result)
+    result['hotPost'] = db_result
+    models.Community.findAll()
+    .then((db_result) => {
+      console.log(db_result)
+      result['ordinaryPost'] = db_result
+      res.render("commu_posts", { data: result });
+      console.log('posts result 객체: ', result);
+    });
+  })
+  
 };
 
 // cookie value로 설정할 사용자 ip주소 얻어오는 함수
