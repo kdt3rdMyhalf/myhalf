@@ -9,6 +9,12 @@ hr {
   display: none;
 }
 
+
+a {
+  text-decoration: none;
+  color:rgb(155, 155, 155)
+}
+
 .tagBox {
   margin: 1vw;
   margin-left: 4vw;
@@ -36,6 +42,7 @@ hr {
   margin: 1vw;
   margin-left: 4vw;
   font-size: 40px;
+  margin-top: 2vw;
 }
 
 .postInfoBox {
@@ -88,7 +95,11 @@ hr {
   width: 60px;
   height: 60px;
   border: 1px solid rgb(155, 155, 155);
-  border-radius: 5vw;
+  border-radius: 50%;
+}
+
+.btn {
+  margin-right: 0.5vw;
 }
 
 .postLikesHeart {
@@ -96,9 +107,19 @@ hr {
   cursor: pointer;
 }
 
-.comment {
+.postBtns {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-right: 3vw;
+  padding: 1vw;
+}
+
+.postBtn {
+  margin-left: 1vw;
+  border: none;
+  background-color: white;
+  color: gray;
 }
 
 .commentsCount {
@@ -110,6 +131,12 @@ hr {
 #commentForm {
   display: flex;
   flex-direction: column;
+}
+
+.likesBtn {
+  border: none;
+  border-radius: 50%;
+  background-color: white;
 }
 
 #commentInput {
@@ -132,6 +159,14 @@ hr {
   margin-bottom: 1vw;
 }
 
+
+.commentBtn {
+  display: flex;
+  justify-content: end;
+  margin-top: 1vw;
+  margin-right: 3vw;
+}
+
 .comments {
   margin-left: 4vw;
   margin-right: 4vw;
@@ -140,27 +175,23 @@ hr {
 .commentInfoBox {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 .commentInfoDiv1,
 .commentInfoDiv2 {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   margin-bottom: 1vw;
 }
 
 .commentEditBtn,
 .commentDeleteBtn {
-  /* display: none; */
   border: none;
-  background-color: black; /*수정함*/
-  color: white; /*수정함*/
-  font-size: 0.5vw;
-  margin-left: 10px; /* 수정함 */
-}
-
-.display-none {
-  display: none;
+  background-color: white;
+  color: gray;
+  font-size: 0.8vw;
+  margin-left: 10px;
 }
 
 .commentDoc{
@@ -172,9 +203,8 @@ hr {
   font-size: 10px;
   display: flex;
   align-items: center;
-  margin-left: 1vw;
 }
 
 .commentsContent {
-  margin-bottom: 1vw;
+  text-align: left;
 }

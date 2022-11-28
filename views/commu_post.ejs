@@ -32,22 +32,37 @@
     </style>
   </head>
   <body>
-    <div>게시번호: <span class="postId"><%= result.postInfo.postId %></span></div>
+
+    <div class="postId dp-none"><%= result.postInfo.postId %></div>
+
     <div class="tagBox">
       <div class="categoryTag"><%= result.postInfo.postCategory %></div>
-      <div class="hashTag"><%= result.postInfo.postTag %></div>
+      <% if (result.postInfo.postTag !== '') { %>
+        <div class="hashTag">
+      <%= result.postInfo.postTag %></div>
+        </div>
+      <% } else { %>
+        <div class="dp-none"></div>
+      <% } %>
     </div>
     <div class="postTitle"><%= result.postInfo.postTitle %></div>
     <div class="postInfoBox">
       <div class="infoBoxDiv1">
+        <% if (result.userImg !== null) { %>
         <img
-          src="<%= result.postInfo.postImg %>"
-          alt="작성자 프로필 사진"
+          src="<%= result.userImg %>"
+          alt="작성자 프로필"
           class="postWriterImg"
         />
+        <% } else { %>
+          <img
+          src="/static/img/profileImage.png"
+          class="postWriterImg"
+        />
+        <% } %>
         <div class="postInfoDiv2">
           <div class="postWriter"><%= result.postInfo.userName %></div>
-          <div class="postDate"><%= result.postInfo.postDate %></div>
+          <div class="postDate"><%= result.postInfo.postDate.toISOString().slice(0, 19).replace("T", " ") %></div>
         </div>
       </div>
       <div class="postViews">조회수 <%= result.postInfo.postViews %></div>
@@ -57,30 +72,32 @@
     <div class="postContent"></div>
     <div class="postLikesDiv">
       <div class="postLikesBox">
-        <div class="postLikesHeart">♡</div>
+        <div class="postLikesHeart"></div>
         <% if (result.isUserSession) { %>
           <% if (result.userLikes == 1) { %>
             <div class="btn">
-              <button onclick="likesOff()" class="likesBtn">❤하트 이미 누름!</button>
+              <button onclick="likesOff()" class="likesBtn">❤</button>
+              <div class="postLikes"><%= result.likes %></div>
             </div>
           <% } else { %>
             <div class="btn">
-              <button onclick="likesOn()" class="likesBtn">❤하트 안 누름!</button>
+              <button onclick="likesOn()" class="likesBtn">🖤</button>
+              <div class="postLikes"><%= result.likes %></div>
             </div>
           <% } %>
         <% } else { %>
           <div class="btn">
-            <button class="likesBtn">❤하트 못 누름!</button>
+            <button class="likesBtn" disabled>🖤</button>
+            <div class="postLikes"><%= result.likes %></div>
           </div>
         <% } %>
-        ♡<div class="postLikes"><%= result.likes %></div>
       </div>
     </div>
-    <div class="comment">
+    <div class="postBtns">
       <% if (result.isUserSession && result.userName === result.postInfo.userName) { %>
-          <button><a href="/commu/update/<%= result.postInfo.postId %>">수정</a></button>
+          <button class="postBtn"><a href="/commu/update/<%= result.postInfo.postId %>">수정</a></button>
           <form action="/commu/posts/<%= result.postInfo.postId %>/delete" onsubmit="return confirm('삭제하시겠습니까?')" method="post">
-            <button>삭제</button>
+          <button class="postBtn">삭제</button>
           </form>
       <% } else { %>
       <% } %>
@@ -88,21 +105,30 @@
     <hr />
 
 
-<div class="commentsCount">댓글</div>
+  <div class="commentsCount">댓글</div>
       <form name="commentForm" id="commentForm">
         <input
           type="textarea"
           id="commentInput"
-          placeholder="댓글을 작성해 주세요"
+          placeholder="댓글을 작성해주세요!"
         />
+
+  <% if (result.userName == null) { %>
+    <div class="display-none">
+    </div>
+      <% } else { %>
+      <div class="commentBtn">
         <button
-          type="button"
-          id="commentBtn"
-          onclick="commentPost(Number('<%= result.postInfo.postId %>'))"
+        type="button"
+        id="commentBtn"
+        onclick="commentPost(Number('<%= result.postInfo.postId %>'))"
         >
-          등록
+        등록
         </button>
+      </div>
+      <% } %>
       </form>
+
       <% if (result.commentData == null) { %>
         <div class="comments">
             <div class="commentInfoBox">
@@ -116,9 +142,10 @@
         <% for (let i = 0; i < result.commentData.length; i++) { %>
         <div class="commentInfoBox id<%= result.commentData[i].commId %>">
           <div class="commentInfoDiv1">
-            <div class="commentWriter"><%= result.commentData[i].userName %></div>
+            <div class="commentWriter">🐶 <%= result.commentData[i].userName %></div>
             <div class="commentDate"><%= result.commentData[i].commDate.toISOString().slice(0, 19).replace("T", " ") %></div>
-            <div class="commentsContent"><%= result.commentData[i].commDoc %></div>
+            <div class="commentsContentDiv"><div class="commentsContent"><%= result.commentData[i].commDoc %></div></div>
+            
           </div>
           <% if (result.userName === result.commentData[i].userName) {%>
           <div class="commentInfoDiv2<%= result.commentData[i].commId %>">
