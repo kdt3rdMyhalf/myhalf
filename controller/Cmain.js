@@ -1,5 +1,6 @@
-const db = require("../models");
+
 const models = require("../models");
+const { Op } = require("sequelize");
 
 exports.getMain = (req, res) => {
   const userSession = req.session.user;
@@ -292,11 +293,9 @@ exports.getCommunityPostsMain = (req, res) => {
     ]
   })
   .then((db_result) => {
-    console.log(db_result)
     result['hotPost'] = db_result
     models.Community.findAll()
     .then((db_result) => {
-      console.log(db_result)
       result['ordinaryPost'] = db_result
       models.Community.findAndCountAll({
     offset: offset,
@@ -305,7 +304,6 @@ exports.getCommunityPostsMain = (req, res) => {
         result['rows'] = db_result.rows;
         result['count'] = db_result.count;
         res.render("commu_posts", { data: result });
-        console.log('posts result 객체: ', result);
   })
 })
 })
@@ -325,11 +323,9 @@ exports.getCommunityPosts = (req, res) => {
     ]
   })
   .then((db_result) => {
-    console.log(db_result)
     result['hotPost'] = db_result
     models.Community.findAll()
     .then((db_result) => {
-      console.log(db_result)
       result['ordinaryPost'] = db_result
       models.Community.findAndCountAll({
     offset: offset,
@@ -338,7 +334,6 @@ exports.getCommunityPosts = (req, res) => {
         result['rows'] = db_result.rows;
         result['count'] = db_result.count;
         res.render("commu_posts", { data: result });
-        console.log('posts result 객체: ', result);
   })
 })
 })
@@ -449,19 +444,29 @@ exports.getCommunityPostId = (req, res) => {
 
 // 커뮤니티 게시글 체크박스적용 조회 GET
 exports.getCommunityPostsCheckBox = (req, res) => {
-  models.Community.findAll({
-    where: { postTag: req.body.resultBox },
+  console.log(req.query);
+  let pageNum = req.params.pageNum;
+  let offset = 0;
+  offset = 10 * (pageNum - 1);
+  let searchInput = req.query.searchInput
+  let searchCheck = req.query.searchCheckbox
+  console.log('%' + searchInput + '%')
+  models.Community.findAndCountAll({
+    offset: offset,
+    limit: 10,
+    // where: { [Op.or]: [{ [Op.like]: '%' + searchInput + '%' }, {postCategory: searchCheck}] },
+    where: {postCategory: searchCheck},
+
     raw: true,
   }).then((result) => {
-    console.log(result.length)
-    res.render("commu_posts", {
+    res.render("category", {
       data: result,
-      count: result.length
     });
-    console.log(result)
+    console.log("data: ", result)
   });
 
 };
+
 
 // cookie value로 설정할 사용자 ip주소 얻어오는 함수
 function getUserIP(req) {
