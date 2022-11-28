@@ -34,6 +34,7 @@
     </style>
   </head>
   <body>
+
     <%- include ('header-result.ejs') %>
 
     <div class="postId dp-none"><%= result.postInfo.postId %></div>
@@ -78,18 +79,18 @@
         <div class="postLikesHeart"></div>
         <% if (result.isUserSession) { %>
           <% if (result.userLikes == 1) { %>
-            <div class="btn">
+            <div class="btnSec">
               <button onclick="likesOff()" class="likesBtn">❤</button>
               <div class="postLikes"><%= result.likes %></div>
             </div>
           <% } else { %>
-            <div class="btn">
+            <div class="btnSec">
               <button onclick="likesOn()" class="likesBtn">🖤</button>
               <div class="postLikes"><%= result.likes %></div>
             </div>
           <% } %>
         <% } else { %>
-          <div class="btn">
+          <div class="btnSec">
             <button class="likesBtn" disabled>🖤</button>
             <div class="postLikes"><%= result.likes %></div>
           </div>
@@ -161,7 +162,6 @@
         </div>
       <% } %>
       
-        
     <script src="/static/js/commu_post.js"></script>
   </body>
 </html>
