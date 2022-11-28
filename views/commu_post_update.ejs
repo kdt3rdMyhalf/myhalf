@@ -12,11 +12,18 @@
     />
     <!-- axios cdn -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        .dp-none {
+            display: none;
+        }
+    </style>
+
     <link rel="stylesheet" href="/static/css/commu_post_write.css" />
   </head>
   <body>
     <div class="dp-none">
       <h3>게시번호 : <span class="postId"><%= postInfo.postId %></span></h3>
+
     </div>
     <form action="/commu/post" name="postForm" method="post">
       <!-- <label for="category">

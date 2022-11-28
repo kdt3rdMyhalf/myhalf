@@ -32,6 +32,7 @@
     </style>
   </head>
   <body>
+    <div>게시번호: <span class="postId"><%= result.postInfo.postId %></span></div>
     <div class="tagBox">
       <div class="categoryTag"><%= result.postInfo.postCategory %></div>
       <div class="hashTag"><%= result.postInfo.postTag %></div>
@@ -72,7 +73,7 @@
             <button class="likesBtn">❤하트 못 누름!</button>
           </div>
         <% } %>
-        <div class="postLikes">♡<%= result.likes %></div>
+        ♡<div class="postLikes"><%= result.likes %></div>
       </div>
     </div>
     <div class="comment">
