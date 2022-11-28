@@ -13,13 +13,18 @@ var quill = new Quill("#editor", {
       ["image", "code-block"],
     ],
   },
-  placeholder: "여기에 게시글을 작성해주세요",
+  placeholder: "글 내용을 작성해 주세요",
   theme: "snow",
 });
+
+const form = document.forms["postForm"];
+
 // Quill data axios 비동기 통신
 function postPost() {
-  const form = document.forms["postForm"];
-
+  if (!form.title.value.length) {
+    alert("제목을 입력해주세요!");
+    return;
+  }
   axios({
     method: "post",
     url: "/commu/post",

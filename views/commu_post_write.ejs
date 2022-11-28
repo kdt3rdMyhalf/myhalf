@@ -20,7 +20,7 @@
         Category: <input type="text" name="category" id="category" /> </label
       ><br /> -->
       <div class="categoryWrap">
-        <h3 class="divName">카테고리</h3>
+        <h3 class="divName">카테고리 <span class="notNull">*</span></h3>
         <input
           type="radio"
           name="category"
@@ -34,24 +34,36 @@
         <input type="radio" name="category" id="소동물" value="소동물" />
         <label for="소동물">소동물</label>
         <input type="radio" name="category" id="기타" value="기타" />
-        <label for="기타">강아지</label>
+        <label for="기타">기타</label>
       </div>
-      <div class="title">
-        <h3 class="divName">글 작성</h3>
+      <div class="writeWrap">
+        <h3 class="divName">글 작성 <span class="notNull">*</span></h3>
         <label for="title">
           <input
             type="text"
             name="title"
             id="title"
-            placeholder="글 제목을 입력하세요."
+            placeholder="글 제목을 입력해 주세요"
+          />
+        </label>
+        <div id="editor"></div>
+      </div>
+      <div class="tagWrap">
+        <h3 class="divName">태그 입력</h3>
+        <label for="tag">
+          <input
+            type="text"
+            name="tag"
+            id="tag"
+            placeholder="태그를 입력해 주세요"
           />
         </label>
       </div>
-
-      <div id="editor"></div>
-      <br />
-      <label for="tag"> Tag: <input type="text" name="tag" id="tag" /> </label>
-      <button type="button" onclick="postPost()">게시글 작성</button>
+      <div class="btn">
+        <button type="button" onclick="postPost()" id="postBtn">
+          게시글 작성
+        </button>
+      </div>
     </form>
     <button class="check">check</button>
     <!-- quill CDN -->
@@ -60,4 +72,3 @@
     <script src="/static/js/commu_post_write.js"></script>
   </body>
 </html>
-
