@@ -313,14 +313,13 @@ exports.getCommunityPostId = (req, res) => {
     });
   }
 
-  // 좋아요 기능
   // 유저 세션이 없으면
   if (userSession === undefined) {
     result["isUserSession"] = false;
     models.Likes.findAll({ where: { postId: req.params.postId } }).then(
       (post_result) => {
         result["likes"] = post_result.length;
-        models.Comment.findAll({ raw: true }).then((db_result) => {
+        models.Comment.findAll({ raw: true, where: { postId: req.params.postId } }).then((db_result) => {
           result["commentData"] = db_result;
           models.Community.findOne({
             where: { postId: req.params.postId },
@@ -351,7 +350,7 @@ exports.getCommunityPostId = (req, res) => {
           result["likes"] = post_result.length;
           console.log("게시글 좋아요 기록: ", post_result);
           // 댓글 조회
-          models.Comment.findOne({
+          models.Comment.findAll({
             where: { postId: req.params.postId },
             raw: true,
           }).then((db_result) => {
@@ -481,23 +480,14 @@ exports.postCommunityDelete = (req, res) => {
   );
 };
 
-// 커뮤니티 게시글 댓글보기 GET
-// exports.getCommentsGet = (req, res) => {
-//  const userSession = req.session.user;
-//  console.log(userSession);
-//  console.log('comment >>>>>>', req.params);
-//  models.Comment.findAll().then((result) => {
-//    res.send(result)
-//  });
-// };
-
-// 커뮤니티 게시글 댓글보기 GET
+// 커뮤니티 게시글 댓글 전체 조회 GET
 exports.getCommentsGet = (req, res) => {
   const userSession = req.session.user;
   console.log(userSession);
-  console.log("comment >>>>>>", req.params);
+  console.log("comment >>>>>>", req.params.postId);
 
-  models.Comment.findAll().then((result) => {
+  models.Comment.findAll({ where: { postId: req.params.postId } })
+    .then((result) => {
     res.send({ commentData: result });
     // res.render("commu_post", { commentData: result });
   });
@@ -523,6 +513,39 @@ exports.postCommentPost = (req, res) => {
     });
 };
 
+// 커뮤니티 게시글 댓글 수정 PATCH
+exports.postCommentUpdate = (req, res) => {
+  let now = new Date().toISOString().slice(0, 19).replace("T", " ");
+  models.Comment.update({
+    commDoc: req.body.commValue,
+    commDate: now,
+    
+  },{
+    where : { commId: req.body.commId }
+  })
+    .then((db_result) => {
+      console.log("수정 성공", db_result);
+      res.send('성공 굳');
+  }).catch((err) => {
+    console.log(err);
+  });
+};
+
+// 커뮤니티 게시글 댓글 삭제 
+exports.deleteComment = (req, res) => {
+  const userSession = req.session.user;
+  
+  models.Comment.destroy(
+  { where: { commId: req.body.commId } })
+    .then((result) => {
+      console.log('destroy >> ', result);
+      res.send('댓글이 삭제되었습니다.');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 // 반려장터 게시글 전체조회 GET
 exports.getMarketPosts = (req, res) => {
   models.Market.findAll().then((result) => {
@@ -540,3 +563,4 @@ exports.getMarketId = (req, res) => {
     res.render("market_post", { data: result });
   });
 };
+
