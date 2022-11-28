@@ -1,12 +1,12 @@
 
 
 // 좋아요 눌렀을 때
-const postLikesBox = document.querySelector(".postLikesBox");
+// const postLikesBox = document.querySelector(".postLikesBox");
 
-const postLikesFill = postLikesBox.addEventListener("click", () => {
-  const postLikesHeart = document.querySelector(".postLikesHeart");
-  postLikesHeart.innerHTML = "";
-});
+// const postLikesFill = postLikesBox.addEventListener("click", () => {
+//   const postLikesHeart = document.querySelector(".postLikesHeart");
+//   postLikesHeart.innerHTML = "";
+// });
 
 
 // comment 목록 조회 GET
@@ -67,6 +67,7 @@ function commentPost(postId) {
 }
 
 // 좋아요, 조회수 기능
+let btnSec = document.querySelector(".btnSec");
 function likesOff() {
   let btnSec = document.querySelector(".btnSec");
   let postId = parseInt(document.querySelector(".postId").innerText);
