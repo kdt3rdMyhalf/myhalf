@@ -147,10 +147,20 @@ hr {
 
 .commentEditBtn,
 .commentDeleteBtn {
-  display: none;
+  /* display: none; */
   border: none;
-  background-color: white;
+  background-color: black; /*수정함*/
+  color: white; /*수정함*/
   font-size: 0.5vw;
+  margin-left: 10px; /* 수정함 */
+}
+
+.display-none {
+  display: none;
+}
+
+.commentDoc{
+  margin-left: 2vw;
 }
 
 .commentDate {
