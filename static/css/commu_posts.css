@@ -99,11 +99,11 @@ fieldset {
 
 .hotPostWrap {
   width: 100px;
-  height: 120px;
+  height: 140px;
   border: 1px solid #ffeac7;
   border-radius: 20px;
   box-shadow: 0px 4px 10px rgba(113, 113, 113, 0.25);
-  min-width: 25vw;
+  min-width: 300px;
   margin-right: 2vw;
   flex-grow: 1;
 }
@@ -112,7 +112,7 @@ fieldset {
 .hotTitle,
 .hotDoc,
 .hotPostDiv {
-  margin-left: 10px;
+  margin-left: 20px;
   margin-bottom: 10px;
 }
 
@@ -128,10 +128,14 @@ fieldset {
 
 .hotPostDiv {
   display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
 }
 
-.hotDate {
-  margin-left: 50px;
+.hotViews {
+  margin-right: 20px;
+  font-size: 10px;
+  color: rgb(185, 185, 185);
 }
 
 #postBtn {
@@ -227,4 +231,8 @@ fieldset {
 .postDescLikes {
   margin-left: 1vw;
   margin-right: 1vw;
+}
+
+.pagination {
+  color: #ffeac7;
 }

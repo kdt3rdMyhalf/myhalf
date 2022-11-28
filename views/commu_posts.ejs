@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>반쪽</title>
 
-<!-- bootstrap -->
+<!-- bootstrap --> 
 <link
 href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
 rel="stylesheet"
@@ -92,9 +92,10 @@ crossorigin="anonymous"
         <div class="hotPostWrap">
           <div class="hotName">Hot!</div>
           <div class="hotTitle"><%= data.hotPost[i].dataValues.postTitle %></div>  
-          <div class="hotDoc"><%= data.hotPost[i].dataValues.postDoc.substr(0, 150) %></div>
+          <div class="hotDoc"><%= data.hotPost[i].dataValues.postDoc.substr(0, 30) %>...</div>
           <div class="hotPostDiv">
-            <div class="hotViews"><%= data.hotPost[i].dataValues.postViews %></div>
+            <div></div>
+            <div class="hotViews">조회수 <%= data.hotPost[i].dataValues.postViews %></div>
           </div>
         </div></a>
         <% } %>
@@ -112,21 +113,19 @@ crossorigin="anonymous"
           <div class="postDesces1">
 
             <div class="postHashtag">#<%= data.rows[i].dataValues.postCategory %></div>
-            <div class="postDescComment">댓글수 수정</div>
           </div>
           <div class="postDesces2">
             <div class="postDesces2-1">
               <div class="postDescWriter"><%= data.rows[i].dataValues.userName %></div>
               <div class="postDescDate"><%= data.rows[i].dataValues.postDate.toISOString().slice(0, 19).replace("T", " ") %></div>
-              <div class="postDescViews"><%= data.rows[i].dataValues.postViews %></div>
             </div>
-            <div class="postDescLikes">♥︎ <%= data.rows[i].dataValues.postLikes %></div>
+            <div class="postDescLikes">조회수 <%= data.rows[i].dataValues.postViews %></div>
           </div>
         </div>
       </a>
       <% } %>
     </div>
-
+    <br>
     <div class="container">
       <div class="text-center">
         <ul class="pagination justify-content-center">
