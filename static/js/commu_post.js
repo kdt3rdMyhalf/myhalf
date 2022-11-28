@@ -6,6 +6,8 @@ const postLikesFill = postLikesBox.addEventListener("click", () => {
   postLikesHeart.innerHTML = "♥︎";
 });
 
+
+
 // comment 목록 조회 GET
 // function commentGet(postId) {
 //   console.log("click");
