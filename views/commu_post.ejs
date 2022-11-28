@@ -25,6 +25,8 @@
 
     <!-- CSS 연결 -->
     <link rel="stylesheet" href="/static/css/commu_post.css" />
+    <link rel="stylesheet" href="/static/css/header.css" />
+    
     <style>
       .checked {
         color: red;
@@ -32,6 +34,7 @@
     </style>
   </head>
   <body>
+    <%- include ('header-result.ejs') %>
 
     <div class="postId dp-none"><%= result.postInfo.postId %></div>
 

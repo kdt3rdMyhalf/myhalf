@@ -1,4 +1,3 @@
-
 const models = require("../models");
 const { Op } = require("sequelize");
 
@@ -8,12 +7,12 @@ exports.getMain = (req, res) => {
 
   if (userSession !== undefined) {
     res.render("index", {
-      result: true,
+      isUserSession: true,
       userName: userSession.userName,
       userImg: userSession.userImg,
     });
   } else {
-    res.render("index", { result: false });
+    res.render("index", { isUserSession: false });
   }
 };
 
@@ -57,7 +56,7 @@ exports.getKakao = (req, res) => {
         });
       } else {
         req.session.user = {
-          result: true,
+          isUserSession: true,
           userName: db_result.userName,
           userImg: db_result.userImg,
           userId: db_result.userId,
@@ -79,7 +78,6 @@ exports.postLogin = (req, res) => {
       userId: req.body.userId,
       userPw: req.body.userPw,
     },
-
   })
     .then((db_result) => {
       if (db_result === null) {
@@ -91,7 +89,7 @@ exports.postLogin = (req, res) => {
         </script>`);
       } else {
         req.session.user = {
-          result: true,
+          isUserSession: true,
           userName: db_result.userName,
           userImg: db_result.userImg,
           userId: db_result.userId,
@@ -173,7 +171,7 @@ exports.getMyPage = (req, res) => {
     })
       .then((result) => {
         res.render("mypage", {
-          result: true,
+          isUserSession: true,
           userId: userSession.userId,
           userName: userSession.userName,
           userBirth: userSession.userBirth,
@@ -187,7 +185,7 @@ exports.getMyPage = (req, res) => {
         console.log(err);
       });
   } else {
-    res.render("index", { result: false });
+    res.render("index", { isUserSession: false });
   }
 };
 
@@ -195,7 +193,7 @@ exports.getMyPagePost = (req, res) => {
   const userSession = req.session.user;
   if (userSession !== undefined) {
     res.render("mypage_post", {
-      result: true,
+      isUserSession: true,
       userId: userSession.userId,
       userName: userSession.userName,
       userBirth: userSession.userBirth,
@@ -283,58 +281,63 @@ exports.getCommunity = (req, res) => {
   res.render("commu");
 };
 
-
-
 // 커뮤니티 게시글 전체 조회 GET
 exports.getCommunityPostsMain = (req, res) => {
+  let userSession = req.session.user;
   let pageNum = 1;
   let offset = 0;
   offset = 10 * (pageNum - 1);
 
-  let result = {}
-  
+  let result = {};
+
+  if (userSession) {
+    result["isUserSession"] = true;
+  } else {
+    result["isUserSession"] = false;
+  }
+
   models.Community.findAll({
     limit: 9,
-    order : [
-      ['postViews', 'DESC'],
-    ]
-  })
-  .then((db_result) => {
-    result['hotPost'] = db_result
-    models.Community.findAll()
-    .then((db_result) => {
-      result['ordinaryPost'] = db_result
+    order: [["postViews", "DESC"]],
+  }).then((db_result) => {
+    result["hotPost"] = db_result;
+    models.Community.findAll().then((db_result) => {
+      result["ordinaryPost"] = db_result;
       models.Community.findAndCountAll({
-    offset: offset,
-    limit: 10
-    }).then((db_result) => {
-        result['rows'] = db_result.rows;
-        result['count'] = db_result.count;
+        offset: offset,
+        limit: 10,
+      }).then((db_result) => {
+        result["rows"] = db_result.rows;
+        result["count"] = db_result.count;
+        console.log("result obj: ", result);
         res.render("commu_posts", { data: result });
-  })
-})
-})
+      });
+    });
+  });
 };
 
 exports.getCommunityPosts = (req, res) => {
   let pageNum = req.params.pageNum;
   let offset = 0;
   offset = 10 * (pageNum - 1);
+  let userSession = req.session.user;
+  let result = {};
 
-  let result = {}
-  
+  if (userSession) {
+    result["isUserSession"] = true;
+  } else {
+    result["isUserSession"] = false;
+  }
+
   models.Community.findAll({
     limit: 9,
-    order : [
-      ['postViews', 'DESC'],
-    ]
-  })
-  .then((db_result) => {
-    result['hotPost'] = db_result
-    models.Community.findAll()
-    .then((db_result) => {
-      result['ordinaryPost'] = db_result
+    order: [["postViews", "DESC"]],
+  }).then((db_result) => {
+    result["hotPost"] = db_result;
+    models.Community.findAll().then((db_result) => {
+      result["ordinaryPost"] = db_result;
       models.Community.findAndCountAll({
+
     offset: offset,
     limit: 10,
     order: [["postId", "ASC"]]
@@ -342,10 +345,11 @@ exports.getCommunityPosts = (req, res) => {
         result['rows'] = db_result.rows;
         result['count'] = db_result.count;
         console.log("result: ", result);
+
         res.render("commu_posts", { data: result });
-  })
-})
-})
+      });
+    });
+  });
 };
 
 // cookie value로 설정할 사용자 ip주소 얻어오는 함수
@@ -394,14 +398,16 @@ exports.getCommunityPostId = (req, res) => {
             raw: true,
           }).then((db_result) => {
             // res.send(result);
-            result["postInfo"] = db_result
-            models.User.findOne({ where: { userName: db_result.userName } }).then((userResult) => {
-              console.log('유저 조회', userResult)
+            result["postInfo"] = db_result;
+            models.User.findOne({
+              where: { userName: db_result.userName },
+            }).then((userResult) => {
+              console.log("유저 조회", userResult);
 
-              result['userImg'] = userResult.userImg
+              result["userImg"] = userResult.userImg;
               console.log("최종 보내는 result객체: ", result);
               res.render("commu_post", { result: result });
-            })
+            });
           });
         });
       }
@@ -434,21 +440,21 @@ exports.getCommunityPostId = (req, res) => {
               raw: true,
             }).then((db_result) => {
               // res.send(result);
-              result["postInfo"] = db_result
-              models.User.findOne({ where: { userName: db_result.userName } })
-                .then((userResult) => {
-                  console.log(userResult)
-                  result['userImg'] = userResult.userImg
-                  console.log("최종 보내는 result객체: ", result);
-                  res.render("commu_post", { result: result });
-                });
+              result["postInfo"] = db_result;
+              models.User.findOne({
+                where: { userName: db_result.userName },
+              }).then((userResult) => {
+                console.log(userResult);
+                result["userImg"] = userResult.userImg;
+                console.log("최종 보내는 result객체: ", result);
+                res.render("commu_post", { result: result });
+              });
             });
           });
         }
       );
     });
   }
-
 };
 
 // 커뮤니티 게시글 체크박스적용 조회 GET
@@ -457,30 +463,30 @@ exports.getCommunityPostsCheckBox = (req, res) => {
   let pageNum = req.params.pageNum;
   let offset = 0;
   offset = 10 * (pageNum - 1);
+
   let searchCheck = req.query.searchCheckbox
   if (searchCheck == undefined) return;
+
+
   models.Community.findAndCountAll({
     offset: offset,
     limit: 10,
     // where: { [Op.or]: [{ [Op.like]: '%' + searchInput + '%' }, {postCategory: searchCheck}] },
-    where: {postCategory: searchCheck},
+    where: { postCategory: searchCheck },
     raw: true,
   }).then((result) => {
     res.render("category", {
       data: result,
     });
-    console.log("data: ", result)
+    console.log("data: ", result);
   });
-
 };
-
 
 // cookie value로 설정할 사용자 ip주소 얻어오는 함수
 function getUserIP(req) {
   const addr = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
   return addr;
 }
-
 
 exports.postLikesOff = (req, res) => {
   const userSession = req.session.user;
@@ -512,7 +518,7 @@ exports.getCommunityPostWrite = (req, res) => {
   console.log(userSession);
   if (userSession !== undefined) {
     res.render("commu_post_write", {
-      result: true,
+      isUserSession: true,
       userId: userSession.userId,
       userName: userSession.userName,
       userBirth: userSession.userBirth,
@@ -540,7 +546,7 @@ exports.postCommunityPost = (req, res) => {
     postTag: req.body.tag,
     // userImg: ,
   })
-    .then((result) => { })
+    .then((result) => {})
     .catch((err) => {
       console.log(err);
     });
@@ -548,29 +554,48 @@ exports.postCommunityPost = (req, res) => {
 
 // 커뮤니티 게시글 수정 페이지 로드 GET
 exports.getCommunityPostUpdate = (req, res) => {
-  models.Community.findOne({
-    where: { postId: req.params.postId },
-    raw: true,
-  }).then((db_result) => {
-    console.log(db_result);
-    res.render("commu_post_update", { postInfo: db_result });
-  });
+  const userSession = req.session.user;
+  if (userSession !== undefined) {
+    models.Community.findOne({
+      where: { postId: req.params.postId },
+      raw: true,
+    }).then((db_result) => {
+      console.log(db_result);
+      res.render("commu_post_update", {
+        postInfo: db_result,
+        isUserSession: true,
+      });
+    });
+  } else {
+    models.Community.findOne({
+      where: { postId: req.params.postId },
+      raw: true,
+    }).then((db_result) => {
+      console.log(db_result);
+      res.render("commu_post_update", {
+        postInfo: db_result,
+        isUserSession: false,
+      });
+    });
+  }
 };
-
 
 // 커뮤니티 게시글 수정 POST
 exports.postCommunityPostUpdate = (req, res) => {
   const userSession = req.session.user;
   let now = new Date().toISOString().slice(0, 19).replace("T", " ");
 
-  models.Community.update({
-    postDate: now,
-    postTitle: req.body.title,
-    postDoc: req.body.doc,
-    postCategory: req.body.category,
-    postTag: req.body.tag,
-    // userImg: ,
-  }, { where: { postId: req.body.postId } })
+  models.Community.update(
+    {
+      postDate: now,
+      postTitle: req.body.title,
+      postDoc: req.body.doc,
+      postCategory: req.body.category,
+      postTag: req.body.tag,
+      // userImg: ,
+    },
+    { where: { postId: req.body.postId } }
+  )
     .then((result) => {
       console.log("게시글 업데이트");
     })
@@ -579,16 +604,15 @@ exports.postCommunityPostUpdate = (req, res) => {
     });
 };
 
-
 // 커뮤니티 게시글 삭제 POST
 exports.postCommunityDelete = (req, res) => {
-
-  models.Community.destroy({ where: { postId: req.params.postId } })
-    .then((db_result) => {
+  models.Community.destroy({ where: { postId: req.params.postId } }).then(
+    (db_result) => {
       console.log(db_result);
-      res.redirect('/commu/posts')
-    })
-}
+      res.redirect("/commu/posts");
+    }
+  );
+};
 
 // 커뮤니티 게시글 댓글 전체 조회 GET
 exports.getCommentsGet = (req, res) => {
@@ -596,11 +620,12 @@ exports.getCommentsGet = (req, res) => {
   console.log(userSession);
   console.log("comment >>>>>>", req.params.postId);
 
-  models.Comment.findAll({ where: { postId: req.params.postId } })
-    .then((result) => {
+  models.Comment.findAll({ where: { postId: req.params.postId } }).then(
+    (result) => {
       res.send({ commentData: result });
       // res.render("commu_post", { commentData: result });
-    });
+    }
+  );
 };
 
 // 커뮤니티 게시글 댓글 쓰기 POST
@@ -626,17 +651,20 @@ exports.postCommentPost = (req, res) => {
 // 커뮤니티 게시글 댓글 수정 PATCH
 exports.postCommentUpdate = (req, res) => {
   let now = new Date().toISOString().slice(0, 19).replace("T", " ");
-  models.Comment.update({
-    commDoc: req.body.commValue,
-    commDate: now,
-
-  }, {
-    where: { commId: req.body.commId }
-  })
+  models.Comment.update(
+    {
+      commDoc: req.body.commValue,
+      commDate: now,
+    },
+    {
+      where: { commId: req.body.commId },
+    }
+  )
     .then((db_result) => {
       console.log("수정 성공", db_result);
-      res.send('성공 굳');
-    }).catch((err) => {
+      res.send("성공 굳");
+    })
+    .catch((err) => {
       console.log(err);
     });
 };
@@ -644,8 +672,7 @@ exports.postCommentUpdate = (req, res) => {
 // 커뮤니티 게시글 댓글 삭제
 exports.deleteComment = (req, res) => {
   const userSession = req.session.user;
-  models.Comment.destroy(
-    { where: { commId: req.body.commId } })
+  models.Comment.destroy({ where: { commId: req.body.commId } })
     .then((result) => {
       console.log("destroy >> ", result);
       res.send("댓글이 삭제되었습니다.");
