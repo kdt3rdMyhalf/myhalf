@@ -78,7 +78,7 @@ exports.postLogin = (req, res) => {
       userId: req.body.userId,
       userPw: req.body.userPw,
     },
-  })// "?flag=0 -> flag속성 넣기기"
+  })// 
     .then((db_result) => {
       if (db_result === null) {
         // res.render("index", { result: false});
@@ -276,10 +276,44 @@ exports.getCommunity = (req, res) => {
   res.render("commu");
 };
 
+
+
 // 커뮤니티 게시글 전체 조회 GET
+exports.getCommunityPostsMain = (req, res) => {
+  let pageNum = 1;
+  let offset = 0;
+  offset = 10 * (pageNum - 1);
+  
+  models.Community.findAndCountAll({
+    offset: offset,
+    limit: 10 
+  }).then((result) => {
+    console.log(result);
+    res.render("commu_posts", { 
+      data : result.rows,
+      count : result.count
+    });
+
+
+  });
+};
+
 exports.getCommunityPosts = (req, res) => {
-  models.Community.findAll().then((result) => {
-    res.render("commu_posts", { data: result });
+  let pageNum = req.params.pageNum;
+  let offset = 0;
+  offset = 10 * (pageNum - 1);
+  
+  models.Community.findAndCountAll({
+    offset: offset,
+    limit: 10 
+  }).then((result) => {
+    console.log(result);
+    res.render("commu_posts", { 
+      data : result.rows,
+      count : result.count
+    });
+
+
   });
 };
 

@@ -22,9 +22,10 @@
 
     <!-- CSS 연결 -->
     <link rel="stylesheet" href="/static/css/commu_posts.css" />
-
+    <link rel="stylesheet" href="/static/css/pagination.css">
     <!-- axios cdn -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
   </head>
   <body>
     <form class="searchForm">
@@ -135,6 +136,22 @@
       </a>
       <% } %>
     </div>
+
+    
+    <div class="container">
+      <div class="text-center">
+        <ul class="pagination justify-content-center">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+          <% for (let i = 1; i <= parseInt(count / 10) + 1 ; i++) { %>
+            <li class="page-item"><a class="page-link" href="/commu/posts/p<%= [i] %>"><%= [i] %></a></li>
+          <% } %>
+        </ul>
+
+      </div>
+    </div>
+  
+      
     <div class="pageList"></div>
     <a href="/commu/post">
       <button type="button" id="postBtn">
@@ -156,9 +173,9 @@
         </svg>
       </button>
     </a>
+  </div>
 
     <script src="/static/js/commu_posts.js"></script>
     <%- include ('footer.ejs') %>
-
   </body>
 </html>
