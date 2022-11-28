@@ -48,48 +48,36 @@
         </fieldset>
       </form>
     </div>
-  </div>
-  <div class="hotPostBox">
-    <div class="hotPostWrapBox">
-      <div class="hotPostWrap"></div>
-      <div class="hotPostWrap"></div>
-      <div class="hotPostWrap"></div>
-      <div class="hotPostWrap"></div>
-      <div class="hotPostWrap"></div>
-      <div class="hotPostWrap"></div>
-      <div class="hotPostWrap"></div>
+    <div class="hotPostBox">
+      <div class="hotPostWrapBox">
+        <% for (let i = 0; i < data.hotPost.length; i++) { %>
+          <div class="hotPostWrap"><%= data.hotPost[i].dataValues.postTitle %></div>
+        <% } %>
+      </div>
     </div>
   </div>
 
-  <div class="postList">
-    <% for (let i=0; i < data.length; i++) { %>
-      <a href="/commu/posts/<%= data[i].postId %>" class="postCard">
-        <img src="<%= data[i].postImg %>" alt="게시글 이미지" />
+
+    <div class="postList">
+      <% for (let i = 0; i < data.ordinaryPost.length; i++) { %>
+      <a href="/commu/posts/<%= data.ordinaryPost[i].postId %>" class="postCard">
+        <img src="<%= data.ordinaryPost[i].postImg %>" alt="게시글 이미지" />
         <div class="postDesc1">
-          <div class="postTitle">
-            <%= data[i].postTitle %>
-          </div>
-          <div class="postDoc">
-            <%= data[i].postDoc.substr(0, 150) %>
-          </div>
+          <div class="postTitle"><%= data.ordinaryPost[i].dataValues.postTitle %></div>
+          <div class="postDoc"><%= data.ordinaryPost[i].dataValues.postDoc.substr(0, 150) %></div>
           <div class="postDesces1">
-            <div class="postHashtag">#<%= data[i].postCategory %></div>
+            <div class="postHashtag">#<%= data.ordinaryPost[i].dataValues.postCategory %></div>
             <div class="postDescComment">댓글수 수정</div>
           </div>
           <div class="postDesces2">
             <div class="postDesces2-1">
-              <div class="postDescWriter">
-                <%= data[i].userName %>
-              </div>
-              <div class="postDescDate">
-                <%= data[i].postDate %>
-              </div>
-              <div class="postDescViews">
-                <%= data[i].postViews %>
-              </div>
+
+              <div class="postDescWriter"><%= data.ordinaryPost[i].dataValues.userName %></div>
+              <div class="postDescDate"><%= data.ordinaryPost[i].dataValues.postDate %></div>
+              <div class="postDescViews"><%= data.ordinaryPost[i].dataValues.postViews %></div>
             </div>
-            <div class="postDescLikes">♥︎ <%= data[i].postLikes %>
-            </div>
+            <div class="postDescLikes">♥︎ <%= data.ordinaryPost[i].dataValues.postLikes %></div>
+
           </div>
         </div>
       </a>
@@ -101,7 +89,7 @@
         <ul class="pagination justify-content-center">
           <nav aria-label="Page navigation example">
             <ul class="pagination">
-          <% for (let i = 1; i <= parseInt(count / 10) + 1 ; i++) { %>
+          <% for (let i = 1; i <= parseInt(result.count / 10) + 1 ; i++) { %>
             <li class="page-item"><a class="page-link" href="/commu/posts/p<%= [i] %>"><%= [i] %></a></li>
           <% } %>
         </ul>
