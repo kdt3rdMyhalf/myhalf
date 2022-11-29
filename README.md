@@ -1,9 +1,9 @@
 # 반려인들을 위한 커뮤니티, 반쪽♡
-<a href="https://imgbb.com/"><img src="https://i.ibb.co/gVQ0mZH/logo.png" alt="logo" border="0"></a>
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/gVQ0mZH/logo.png" alt="logo" border="0" width="100"></a>
 
 
 ## ✔️ 프로젝트 소개
-* [반쪽 바로가기](http://118.67.142.45:8888/)
+* [🐶 반쪽 바로가기 🐱](http://118.67.142.45:8888/)
 
 반려인들을 위한 커뮤니티 반쪽입니다. 편안한 분위기에서 반려동물을 자랑해 봐요!
 
