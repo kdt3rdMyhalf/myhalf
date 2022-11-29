@@ -76,7 +76,8 @@ node app.js
 - **게시글 조회수**: Session 과 Cookie를 이용한 조회 조건 설정 및 Community table 이용을 통한 조회수 기능 구현
 - **게시글 좋아요**: Community table 과 User table을 참조하는 Likes 생성 테이블 생성 및 이용과 Session을 이용한 좋아요 기능 구현
 - **카테고리 모아보기**: sqeulize 문법을 이용한 카테고리 별 검색기능 구현
-
+- **페이지네이션**: routes의 url 변수 선언과 Community table 조회를 이용한 페이지네이션 구현
+  
 ## 👨‍💻 팀원소개
 | Name                 | GitHub / Contact                          
 | -------------------- | --------------------------------------   
