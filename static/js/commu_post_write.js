@@ -1,9 +1,5 @@
 // let quillData =
 // editor Quill 불러오는 코드
-let check = document.querySelector(".check");
-check.addEventListener("click", () => {
-  console.log(quill.root.innerHTML);
-});
 
 var quill = new Quill("#editor", {
   modules: {
