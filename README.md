@@ -69,13 +69,13 @@ node app.js
 
 
 ## 👨‍💻 팀원소개
-| Name                 | GitHub / Contact                          | Position    |
-| -------------------- | --------------------------------------    | ----------- |
-| 강민선             |  https://github.com/MinseonKang             | FE  |
-| 문준영               | https://github.com/mooonne              | FE / BE  |
-| 오성인              | https://github.com/dhtjddls                | FE / BE |
-| 임태욱               | https://github.com/Teabag225                 | FE / BE |
-| 최재인                | https://github.com/JaeinChoii                 | BE |
+| Name                 | GitHub / Contact                          
+| -------------------- | --------------------------------------   
+| 강민선             |  https://github.com/MinseonKang             
+| 문준영               | https://github.com/mooonne              
+| 오성인              | https://github.com/dhtjddls                
+| 임태욱               | https://github.com/Teabag225                 
+| 최재인                | https://github.com/JaeinChoii                 
 
 
 ## ⚙ 주요 기능
