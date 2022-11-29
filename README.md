@@ -57,26 +57,25 @@ node app.js
 ```
 - localhost:8888 접속
 
-## ⚒ 와이어프레임
+## 와이어프레임
 * [피그마 바로가기](https://www.figma.com/file/NbS5EkDU4qstReHy6DNPcH/kdt3rd-%EB%B0%98%EC%AA%BD?node-id=105%3A99&t=x0YO4VpBEcKiLYnE-0</details>
 )
 
-## ⚒ API 설계
+## API 설계
 * [노션 바로가기](https://www.notion.so/API-cdbc942835c740b8a9562acc1c3ca33c)
 
-## ⚒ DB 설계
-<a href="https://ibb.co/2v5NGqk"><img src="https://i.ibb.co/QPXdy9K/2022-11-29-3-01-56.png" border="0"></a>
+## DB 설계
 * [구글 문서 바로가기](https://docs.google.com/document/d/1j0UiyXMxIIHUVO5oTggXwkXNKa_D6jp0McmH5kPJtVg/edit)
 
 ## ⚙ 주요 기능
-- **회원가입**:
-- **로그인**:
-- **카카오 로그인**:
-- **게시글 작성/삭제/수정**:
-- **댓글 작성/삭제/수정**:
-- **게시글 조회수**:
-- **게시글 좋아요**:
-- **카테고리 모아보기**:
+- **회원가입**: 정규식 사용과 mysql User table 생성 및 지정, multer을 통한 프로필 이미지 업로드 기능을 통한 회원가입 기능 구현
+- **로그인**: 정규식 사용 과 mysql User table 생성 및 지정, Session을 통한 로그인 기능 구현
+- **카카오 로그인**: 카카오 api 사용을 통한 카카오 로그인 기능 구현
+- **게시글 작성/삭제/수정**: WebEditor Quill, mysql User table 과 Community table 사이의 외래키 설정과 Community table 생성 및 지정을 통한 게시글 기능 구현
+- **댓글 작성/삭제/수정**: User table을 참조하는 Community table을 참조하는 Comment table의 생성 및 지정을 통한 댓글 기능 구현 // 모든 참조 외래키에는 CASCADE ON UPDATE, DELETE 조건 있음!!
+- **게시글 조회수**: Session 과 Cookie를 이용한 조회 조건 설정 및 Community table 이용을 통한 조회수 기능 구현
+- **게시글 좋아요**: Community table 과 User table을 참조하는 Likes 생성 테이블 생성 및 이용과 Session을 이용한 좋아요 기능 구현
+- **카테고리 모아보기**: sqeulize 문법을 이용한 카테고리 별 검색기능 구현
 
 ## 👨‍💻 팀원소개
 | Name                 | GitHub / Contact                          
@@ -87,12 +86,6 @@ node app.js
 | 임태욱               | https://github.com/Teabag225                 
 | 최재인                | https://github.com/JaeinChoii                 
 
-## 🥺 개선할 점
-- quill Editor 사용에 의한 html 태그들을 보이지 않도록 개선
-- 댓글 수정을 더 깔끔하게
-- 홈 로고 만들기
-- 게시글 목록을 최신순으로
-- ...
-  
-  
+
+
 
