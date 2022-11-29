@@ -1,24 +1,3 @@
-// 좋아요 눌렀을 때
-// const postLikesBox = document.querySelector(".postLikesBox");
-
-// const postLikesFill = postLikesBox.addEventListener("click", () => {
-//   const postLikesHeart = document.querySelector(".postLikesHeart");
-//   postLikesHeart.innerHTML = "";
-// });
-
-// comment 목록 조회 GET
-// function commentGet(postId) {
-//   console.log("click");
-//   axios({
-//     method: "GET",
-//     url: `/commu/posts/${Number(postId)}`,
-//     // data: data,
-//     success: (data) => {
-//       console.log(data);
-//     },
-//   });
-// }
-
 // comment 작성 POST
 function commentPost(postId) {
   console.log("click");
