@@ -14,10 +14,9 @@ hr {
   text-align: center;
 }
 
-
 a {
   text-decoration: none;
-  color: rgb(155, 155, 155)
+  color: rgb(155, 155, 155);
 }
 
 .tagBox {
@@ -27,7 +26,7 @@ a {
 }
 
 .categoryTag {
-  width: 80px;
+  width: 100px;
   padding: 5px;
   text-align: center;
   background-color: #ffeac7;
@@ -35,7 +34,7 @@ a {
 }
 
 .hashTag {
-  width: 80px;
+  width: 100px;
   padding: 5px;
   text-align: center;
   border: 1px solid #ffeac7;
@@ -163,7 +162,6 @@ a {
   border-radius: 20px;
   margin-bottom: 1vw;
 }
-
 
 .commentBtn {
   display: flex;
