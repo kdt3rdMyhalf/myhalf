@@ -67,6 +67,18 @@ node app.js
 ## DB 설계
 * [구글 문서 바로가기](https://docs.google.com/document/d/1j0UiyXMxIIHUVO5oTggXwkXNKa_D6jp0McmH5kPJtVg/edit)
 
+## 기능구현
+<a href="https://ibb.co/N1S0ZgK"><img src="https://i.ibb.co/jVRCg9D/1.png" alt="1" border="0"></a>
+<a href="https://ibb.co/71ND51V"><img src="https://i.ibb.co/gRF8pRw/2.png" alt="2" border="0"></a>
+<a href="https://ibb.co/Ms5MRjZ"><img src="https://i.ibb.co/s2JyFDb/3.png" alt="3" border="0"></a>
+<a href="https://ibb.co/xMwWG5J"><img src="https://i.ibb.co/Bgvbjsq/4.png" alt="4" border="0"></a>
+<a href="https://ibb.co/mRbrd7r"><img src="https://i.ibb.co/grmbQCb/5.png" alt="5" border="0"></a>
+<a href="https://ibb.co/RyPpbjD"><img src="https://i.ibb.co/xHGSLF7/6.png" alt="6" border="0"></a>
+<a href="https://ibb.co/kQ3kVyb"><img src="https://i.ibb.co/V2Hr0Nn/7.png" alt="7" border="0"></a>
+<a href="https://ibb.co/RQkChJD"><img src="https://i.ibb.co/p4B3WkL/8.png" alt="8" border="0"></a>
+<a href="https://ibb.co/HgjMqzz"><img src="https://i.ibb.co/tC9NDss/9.png" alt="9" border="0"></a>
+
+
 ## ⚙ 주요 기능
 - **회원가입**: 정규식 사용과 mysql User table 생성 및 지정, multer을 통한 프로필 이미지 업로드 기능을 통한 회원가입 기능 구현
 - **로그인**: 정규식 사용 과 mysql User table 생성 및 지정, Session을 통한 로그인 기능 구현
