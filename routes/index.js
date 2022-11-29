@@ -71,30 +71,21 @@ router.get("/commu/posts/", controller.getCommunityPostsMain);
 // // 커뮤니티 게시글 전체 조회 GET
 // router.get("/commu/posts/p:pageNum", controller.getCommunityPosts);
 
-
 // 커뮤니티 게시글 상세 조회 GET
 router.get("/commu/posts/:postId", controller.getCommunityPostId);
 
 // 커뮤니티 게시글 삭제 POST
-router.post('/commu/posts/:postId/delete', controller.postCommunityDelete);
-
+router.post("/commu/posts/:postId/delete", controller.postCommunityDelete);
 
 // 커뮤니티 게시글 좋아요 GET
-router.post('/commu/post/likesOn', controller.postLikesOn);
-router.post('/commu/post/likesOff', controller.postLikesOff);
+router.post("/commu/post/likesOn", controller.postLikesOn);
+router.post("/commu/post/likesOff", controller.postLikesOff);
 
 //커뮤니티 체크박스 조회
-router.get('/commu/posts/category/p:pageNum', controller.getCommunityPostsCheckBox)
-
-
-
-
-
-// 반려장터 페이지
-
-// router.patch('/commu/post/edit', controller.patchPost); // 하나 수정
-
-// router.delete('/commu/post/delete', controller.deletePost); // 하나 삭제
+router.get(
+  "/commu/posts/category/p:pageNum",
+  controller.getCommunityPostsCheckBox
+);
 
 // 댓글 쓰기 POST
 // router.get("/commu/post/:postId/postcomment", controller.postCommentPostId);

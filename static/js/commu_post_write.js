@@ -1,7 +1,4 @@
-// let quillData =
-// editor Quill 불러오는 코드
-
-var quill = new Quill("#editor", {
+let quill = new Quill("#editor", {
   modules: {
     toolbar: [
       [{ header: [1, 2, false] }],

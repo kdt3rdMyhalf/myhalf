@@ -1,67 +1,104 @@
 <!DOCTYPE html>
 <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>반쪽</title>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/static/img/favicon.ico" />
+    <link rel="stylesheet" href="/static/css/mypage_post.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <title>반쪽</title>
-  <link rel="stylesheet" href="/static/css/mypage_post.css" />
-</head>
+  <body>
+    <div class="containerBox">
+      <form
+        name="formSignup"
+        action="/mypage-post"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <div class="img">
+          <img src="<%= userImg %>" alt="유저 프로필 사진" class="userImg" />
+          <label for="userImg" class="name">프로필 이미지</label>
 
-<body>
-  <div class="containerBox">
-    <form name="formSignup" action="/mypage-post" method="POST" enctype="multipart/form-data">
-      <div class="img">
-        <img src="<%= userImg %>" alt="유저 프로필 사진" class="userImg" />
-        <label for="userImg" class="name">프로필 이미지</label>
-
-        <button type="button" onclick="fileUpload()" id="imgBtn">
-          <input type="file" name="userImg" value="<%= userImg %>" id="userImg" />
-          <div class="imgUpload">업로드</div>
-        </button>
-      </div>
-
-      <div class="id">
-        <label for="userId" class="name">이메일</label>
-
-        <div class="idBox">
-          <input id="userId" type="email" name="userId" value="<%= userId %>" placeholder="email 주소" required />
-          <button type="button" name="userId" id="userBtn" onclick="idCheck()">
-            중복확인
+          <button type="button" onclick="fileUpload()" id="imgBtn">
+            <input
+              type="file"
+              name="userImg"
+              value="<%= userImg %>"
+              id="userImg"
+            />
+            <div class="imgUpload">업로드</div>
           </button>
         </div>
-        <div class="idCheck"></div>
-      </div>
 
-      <div class="userName">
-        <label for="userName" class="name">이름</label>
-        <div class="userNameBox">
-          <input id="userName" type="text" name="userName" value="<%= userName %>" required />
-          <button type="button" name="userName" id="userBtn" onclick="nameCheck()">
-            중복확인
-          </button>
+        <div class="id">
+          <label for="userId" class="name">이메일</label>
+
+          <div class="idBox">
+            <input
+              id="userId"
+              type="email"
+              name="userId"
+              value="<%= userId %>"
+              placeholder="email 주소"
+              required
+            />
+            <button
+              type="button"
+              name="userId"
+              id="userBtn"
+              onclick="idCheck()"
+            >
+              중복확인
+            </button>
+          </div>
+          <div class="idCheck"></div>
         </div>
-        <div class="nameCheck"></div>
-      </div>
 
-      <div class="birth">
-        <label class="name" for="userBirth">생년월일</label>
-        <input id="userBirth" type="date" name="userBirth" value="<%= userBirth %>" required />
-      </div>
+        <div class="userName">
+          <label for="userName" class="name">이름</label>
+          <div class="userNameBox">
+            <input
+              id="userName"
+              type="text"
+              name="userName"
+              value="<%= userName %>"
+              required
+            />
+            <button
+              type="button"
+              name="userName"
+              id="userBtn"
+              onclick="nameCheck()"
+            >
+              중복확인
+            </button>
+          </div>
+          <div class="nameCheck"></div>
+        </div>
 
-      <div class="btn">
-        <button type="submit" class="btnSignup">
-          정보 수정
-        </button>
-      </div>
+        <div class="birth">
+          <label class="name" for="userBirth">생년월일</label>
+          <input
+            id="userBirth"
+            type="date"
+            name="userBirth"
+            value="<%= userBirth %>"
+            required
+          />
+        </div>
 
-      <!-- disabled -->
-    </form>
-  </div>
+        <div class="btn">
+          <button type="submit" class="btnSignup">정보 수정</button>
+        </div>
 
-  <script src="/static/js/mypage_post.js"></script>
-</body>
+        <!-- disabled -->
+      </form>
+    </div>
 
+    <script src="/static/js/mypage_post.js"></script>
+  </body>
 </html>

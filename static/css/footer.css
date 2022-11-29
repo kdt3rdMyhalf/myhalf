@@ -6,17 +6,14 @@ body {
 }
 
 footer {
-  /* 내용물에 따라 알맞는 값 설정요구 */
   width: 100%;
   height: 100px;
   bottom: 0;
   position: absolute;
   border-top: 1px solid #426a71;
-  /* padding-top: 15px; */
   padding: 1em;
   font-size: 11px;
   background-color: #ffeac7;
-  /* transform: translateY(-100%); */
 }
 footer a {
   display: inline-block;
@@ -36,6 +33,5 @@ footer p span {
   margin-left: 20px;
 }
 section {
-  /* footer의 height값과 동일해야함함 */
   padding-bottom: 100px;
 }
