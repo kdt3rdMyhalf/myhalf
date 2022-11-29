@@ -65,6 +65,7 @@ node app.js
 * [노션 바로가기](https://www.notion.so/API-cdbc942835c740b8a9562acc1c3ca33c)
 
 ## DB 설계
+<a href="https://ibb.co/2v5NGqk"><img src="https://i.ibb.co/QPXdy9K/2022-11-29-3-01-56.png" border="0"></a>
 * [구글 문서 바로가기](https://docs.google.com/document/d/1j0UiyXMxIIHUVO5oTggXwkXNKa_D6jp0McmH5kPJtVg/edit)
 
 ## ⚙ 주요 기능
