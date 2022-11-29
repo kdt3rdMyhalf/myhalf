@@ -3,7 +3,6 @@ const { Op } = require("sequelize");
 
 exports.getMain = (req, res) => {
   const userSession = req.session.user;
-  console.log("main userSession: ", userSession);
 
   if (userSession !== undefined) {
     res.render("index", {
@@ -27,7 +26,6 @@ exports.getSignup = (req, res) => {
 
 // 카카오
 exports.getKakao = (req, res) => {
-  console.log(req.body);
   models.User.findOne({
     where: {
       userId: req.body.userId,
@@ -72,7 +70,6 @@ exports.getKakao = (req, res) => {
 };
 
 exports.postLogin = (req, res) => {
-  console.log(req.body);
   models.User.findOne({
     where: {
       userId: req.body.userId,
@@ -81,8 +78,6 @@ exports.postLogin = (req, res) => {
   })
     .then((db_result) => {
       if (db_result === null) {
-        // res.render("index", { result: false});
-        //         console.log('nonononono')
         res.send(`<script>
         alert('로그인에 실패하였습니다.')
         document.location.href = '/'
@@ -206,8 +201,6 @@ exports.getMyPagePost = (req, res) => {
 // mypage의 유저 정보 수정 POST
 exports.postMyPagePost = (req, res) => {
   const userSession = req.session.user;
-  console.log("req.body", req.body);
-  console.log("req.file", req.file);
   if (req.file === undefined) {
     models.User.update(
       {
@@ -261,7 +254,6 @@ exports.getIdCheck = (req, res) => {
 };
 
 exports.getNameCheck = (req, res) => {
-  console.log(req.query);
   models.User.findOne({
     where: { userName: req.query.nameValue },
   })
@@ -309,7 +301,6 @@ exports.getCommunityPostsMain = (req, res) => {
       }).then((db_result) => {
         result["rows"] = db_result.rows;
         result["count"] = db_result.count;
-        console.log("result obj: ", result);
         res.render("commu_posts", { data: result });
       });
     });
@@ -377,7 +368,6 @@ exports.getCommunityPostId = (req, res) => {
       { postViews: 1 },
       { where: { postId: req.params.postId } }
     ).then((result) => {
-      console.log("포스트뷰 증가!: ", result);
       // 조회수 증가 쿼리
     });
   }
@@ -402,10 +392,8 @@ exports.getCommunityPostId = (req, res) => {
             models.User.findOne({
               where: { userName: db_result.userName },
             }).then((userResult) => {
-              console.log("유저 조회", userResult);
 
               result["userImg"] = userResult.userImg;
-              console.log("최종 보내는 result객체: ", result);
               res.render("commu_post", { result: result });
             });
           });
@@ -422,12 +410,10 @@ exports.getCommunityPostId = (req, res) => {
       where: { userName: userSession.userName, postId: req.params.postId },
     }).then((name_result) => {
       result["userLikes"] = name_result.length;
-      console.log("접속 유저 좋아요 기록: ", name_result);
       // 게시글 좋아요 기록 확인
       models.Likes.findAll({ where: { postId: req.params.postId } }).then(
         (post_result) => {
           result["likes"] = post_result.length;
-          console.log("게시글 좋아요 기록: ", post_result);
           // 댓글 조회
           models.Comment.findAll({
             where: { postId: req.params.postId },
@@ -444,9 +430,7 @@ exports.getCommunityPostId = (req, res) => {
               models.User.findOne({
                 where: { userName: db_result.userName },
               }).then((userResult) => {
-                console.log(userResult);
                 result["userImg"] = userResult.userImg;
-                console.log("최종 보내는 result객체: ", result);
                 res.render("commu_post", { result: result });
               });
             });
@@ -459,7 +443,6 @@ exports.getCommunityPostId = (req, res) => {
 
 // 커뮤니티 게시글 체크박스적용 조회 GET
 exports.getCommunityPostsCheckBox = (req, res) => {
-  console.log(req.query);
   let pageNum = req.params.pageNum;
   let offset = 0;
   offset = 10 * (pageNum - 1);
@@ -478,7 +461,6 @@ exports.getCommunityPostsCheckBox = (req, res) => {
     res.render("category", {
       data: result,
     });
-    console.log("data: ", result);
   });
 };
 
@@ -490,7 +472,6 @@ function getUserIP(req) {
 
 exports.postLikesOff = (req, res) => {
   const userSession = req.session.user;
-  console.log(req.body, userSession);
   models.Likes.destroy({
     where: {
       postId: req.body.ClientPostId,
@@ -503,7 +484,6 @@ exports.postLikesOff = (req, res) => {
 
 exports.postLikesOn = (req, res) => {
   const userSession = req.session.user;
-  console.log(req.body, userSession);
   models.Likes.create({
     postId: req.body.ClientPostId,
     userName: userSession.userName,
@@ -515,7 +495,6 @@ exports.postLikesOn = (req, res) => {
 // 커뮤니티 게시글 작성 GET
 exports.getCommunityPostWrite = (req, res) => {
   const userSession = req.session.user;
-  console.log(userSession);
   if (userSession !== undefined) {
     res.render("commu_post_write", {
       isUserSession: true,
@@ -560,7 +539,6 @@ exports.getCommunityPostUpdate = (req, res) => {
       where: { postId: req.params.postId },
       raw: true,
     }).then((db_result) => {
-      console.log(db_result);
       res.render("commu_post_update", {
         postInfo: db_result,
         isUserSession: true,
@@ -571,7 +549,6 @@ exports.getCommunityPostUpdate = (req, res) => {
       where: { postId: req.params.postId },
       raw: true,
     }).then((db_result) => {
-      console.log(db_result);
       res.render("commu_post_update", {
         postInfo: db_result,
         isUserSession: false,
@@ -597,7 +574,6 @@ exports.postCommunityPostUpdate = (req, res) => {
     { where: { postId: req.body.postId } }
   )
     .then((result) => {
-      console.log("게시글 업데이트");
     })
     .catch((err) => {
       console.log(err);
@@ -608,7 +584,6 @@ exports.postCommunityPostUpdate = (req, res) => {
 exports.postCommunityDelete = (req, res) => {
   models.Community.destroy({ where: { postId: req.params.postId } }).then(
     (db_result) => {
-      console.log(db_result);
       res.redirect("/commu/posts");
     }
   );
@@ -617,8 +592,6 @@ exports.postCommunityDelete = (req, res) => {
 // 커뮤니티 게시글 댓글 전체 조회 GET
 exports.getCommentsGet = (req, res) => {
   const userSession = req.session.user;
-  console.log(userSession);
-  console.log("comment >>>>>>", req.params.postId);
 
   models.Comment.findAll({ where: { postId: req.params.postId } }).then(
     (result) => {
@@ -632,7 +605,6 @@ exports.getCommentsGet = (req, res) => {
 exports.postCommentPost = (req, res) => {
   const userSession = req.session.user;
   let now = new Date().toISOString().slice(0, 19).replace("T", " ");
-  console.log("req.body >>>> ", req.body);
   models.Comment.create({
     userName: userSession.userName,
     commDate: now,
@@ -640,7 +612,6 @@ exports.postCommentPost = (req, res) => {
     postId: req.body.postId,
   })
     .then((result) => {
-      console.log(result);
       res.send(result);
     })
     .catch((err) => {
@@ -661,7 +632,6 @@ exports.postCommentUpdate = (req, res) => {
     }
   )
     .then((db_result) => {
-      console.log("수정 성공", db_result);
       res.send("성공 굳");
     })
     .catch((err) => {
@@ -674,7 +644,6 @@ exports.deleteComment = (req, res) => {
   const userSession = req.session.user;
   models.Comment.destroy({ where: { commId: req.body.commId } })
     .then((result) => {
-      console.log("destroy >> ", result);
       res.send("댓글이 삭제되었습니다.");
     })
     .catch((err) => {

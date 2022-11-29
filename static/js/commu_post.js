@@ -24,7 +24,6 @@
 
 // comment 작성 POST
 function commentPost(postId) {
-  console.log("click");
   const comments = document.querySelector(".comments");
   const form = document.forms["commentForm"];
   if (!form.commentInput.value.length) {
@@ -45,7 +44,6 @@ function commentPost(postId) {
       return res.data;
     })
     .then((data) => {
-      console.log("data>>>", data);
 
       const html = `      
       <div class="commentInfoBox id${data.commId}">
@@ -80,7 +78,7 @@ function likesOff() {
       ClientPostId: postId,
     },
   }).then((result) => {
-    console.log(result);
+
     // document.querySelector(".postLikes").innerText =
     //   parseInt(document.querySelector(".postLikes").innerText, 10) - 1;
   });
@@ -98,7 +96,6 @@ function likesOn() {
       ClientPostId: postId,
     },
   }).then((result) => {
-    console.log(result);
     //   document.querySelector(".postLikes").innerText =
     //     parseInt(document.querySelector(".postLikes").innerText, 10) + 1;
   });
@@ -117,10 +114,8 @@ postContent.innerHTML = postDoc;
 
 // 게시글 댓글 수정
 function editComment(commId) {
-  console.log('수정버튼 클릭!');
   let commBtnBox = document.querySelector(`.commentInfoDiv2${commId}`);
   let commText = document.querySelector(`.id${commId} .commentsContent`).textContent;
-  console.log(commText)
   const html = `<br>
   <input type="text" class="edit${commId}" value='${commText}'>
   <button type="button" class="commentEditBtn" onclick="editCommentDo('${commId}')">등록</button>
@@ -154,7 +149,6 @@ function editCommentDo(commId) {
     let commBtnBox = document.querySelector(`.commentInfoDiv2${commId}`);
     let commText = document.querySelector(`.id${commId} .commentsContent`);
     let commentDate = document.querySelector(`.id${commId} .commentDate`);
-    console.log(commValue);
     commText.innerText = `${commValue}`;
     commentDate.innerText = `${now}`;
     commBtnBox.innerHTML = `
@@ -167,9 +161,6 @@ function editCommentDo(commId) {
 
 // 게시글 댓글 삭제
 async function deleteComment(obj, commId) {
-  console.log('삭제버튼 클릭!');
-  console.log('obj', obj);
-  console.log('commId', commId);
   if (!confirm('댓글을 삭제하시겠습니까?')) {
     return;
   }

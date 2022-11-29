@@ -15,7 +15,6 @@ function idCheck() {
     url: "/signup/idcheck",
     params: { idValue: idValue },
   }).then((res) => {
-    console.log(res.data.result);
     if (res.data.result === false) {
       document.querySelector(".idCheck").textContent = "사용 가능합니다!";
       document.querySelector(".idCheck").style.color = "green";
@@ -30,7 +29,6 @@ function idCheck() {
 // 유저네임 중복 체크 axios
 function nameCheck() {
   const nameValue = document.querySelector("#userName").value;
-  console.log(nameValue);
   if (nameValue === "") {
     alert("이름을 입력해주세요.");
     document.querySelector(".nameCheck").textContent = "";
@@ -42,7 +40,6 @@ function nameCheck() {
     url: "/signup/namecheck",
     params: { nameValue: nameValue },
   }).then((res) => {
-    console.log(res.data.result);
     if (res.data.result === false) {
       document.querySelector(".nameCheck").textContent = "사용 가능합니다!";
       document.querySelector(".nameCheck").style.color = "green";
@@ -58,7 +55,6 @@ function fileUpload() {
   const formData = new FormData(); // 멀티미디어 데이터는 폼데이터에 넣어서 전달
   const file = document.getElementById("userImg");
   formData.append("userImg", file.files[0]);
-  console.log(formData);
 
   axios({
     method: "POST",
@@ -69,7 +65,6 @@ function fileUpload() {
       "Content-Type": "multipart/form-data",
     },
   }).then(function (res) {
-    console.log(res);
     document.querySelector("img").src = res.data.path;
   });
 }
