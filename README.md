@@ -57,14 +57,14 @@ node app.js
 ```
 - localhost:8888 접속
 
-## 와이어프레임
+## ⚒ 와이어프레임
 * [피그마 바로가기](https://www.figma.com/file/NbS5EkDU4qstReHy6DNPcH/kdt3rd-%EB%B0%98%EC%AA%BD?node-id=105%3A99&t=x0YO4VpBEcKiLYnE-0</details>
 )
 
-## API 설계
+## ⚒ API 설계
 * [노션 바로가기](https://www.notion.so/API-cdbc942835c740b8a9562acc1c3ca33c)
 
-## DB 설계
+## ⚒ DB 설계
 <a href="https://ibb.co/2v5NGqk"><img src="https://i.ibb.co/QPXdy9K/2022-11-29-3-01-56.png" border="0"></a>
 * [구글 문서 바로가기](https://docs.google.com/document/d/1j0UiyXMxIIHUVO5oTggXwkXNKa_D6jp0McmH5kPJtVg/edit)
 
@@ -87,6 +87,12 @@ node app.js
 | 임태욱               | https://github.com/Teabag225                 
 | 최재인                | https://github.com/JaeinChoii                 
 
-
-
+## 🥺 개선할 점
+- quill Editor 사용에 의한 html 태그들을 보이지 않도록 개선
+- 댓글 수정을 더 깔끔하게
+- 홈 로고 만들기
+- 게시글 목록을 최신순으로
+- ...
+  
+  
 
