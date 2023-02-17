@@ -66,6 +66,17 @@ node app.js
 
 ## DB 설계
 * [구글 문서 바로가기](https://docs.google.com/document/d/1j0UiyXMxIIHUVO5oTggXwkXNKa_D6jp0McmH5kPJtVg/edit)
+  
+## ⚙ 주요 기능
+- **회원가입**: 정규식 사용과 mysql User table 생성 및 지정, multer을 통한 프로필 이미지 업로드 기능을 통한 회원가입 기능 구현
+- **로그인**: 정규식 사용 과 mysql User table 생성 및 지정, Session을 통한 로그인 기능 구현
+- **카카오 로그인**: 카카오 api 사용을 통한 카카오 로그인 기능 구현
+- **게시글 작성/삭제/수정**: WebEditor Quill, mysql User table 과 Community table 사이의 외래키 설정과 Community table 생성 및 지정을 통한 게시글 기능 구현
+- **댓글 작성/삭제/수정**: User table을 참조하는 Community table을 참조하는 Comment table의 생성 및 지정을 통한 댓글 기능 구현 // 모든 참조 외래키에는 CASCADE ON UPDATE, DELETE 조건 있음!!
+- **게시글 조회수**: Session 과 Cookie를 이용한 조회 조건 설정 및 Community table 이용을 통한 조회수 기능 구현
+- **게시글 좋아요**: Community table 과 User table을 참조하는 Likes 생성 테이블 생성 및 이용과 Session을 이용한 좋아요 기능 구현
+- **카테고리 모아보기**: sqeulize 문법을 이용한 카테고리 별 검색기능 구현
+- **페이지네이션**: routes의 url 변수 선언과 Community table 조회를 이용한 페이지네이션 구현  
 
 ## 기능구현
 <a href="https://ibb.co/N1S0ZgK"><img src="https://i.ibb.co/jVRCg9D/1.png" alt="1" border="0"></a>
@@ -79,16 +90,7 @@ node app.js
 <a href="https://ibb.co/HgjMqzz"><img src="https://i.ibb.co/tC9NDss/9.png" alt="9" border="0"></a>
 
 
-## ⚙ 주요 기능
-- **회원가입**: 정규식 사용과 mysql User table 생성 및 지정, multer을 통한 프로필 이미지 업로드 기능을 통한 회원가입 기능 구현
-- **로그인**: 정규식 사용 과 mysql User table 생성 및 지정, Session을 통한 로그인 기능 구현
-- **카카오 로그인**: 카카오 api 사용을 통한 카카오 로그인 기능 구현
-- **게시글 작성/삭제/수정**: WebEditor Quill, mysql User table 과 Community table 사이의 외래키 설정과 Community table 생성 및 지정을 통한 게시글 기능 구현
-- **댓글 작성/삭제/수정**: User table을 참조하는 Community table을 참조하는 Comment table의 생성 및 지정을 통한 댓글 기능 구현 // 모든 참조 외래키에는 CASCADE ON UPDATE, DELETE 조건 있음!!
-- **게시글 조회수**: Session 과 Cookie를 이용한 조회 조건 설정 및 Community table 이용을 통한 조회수 기능 구현
-- **게시글 좋아요**: Community table 과 User table을 참조하는 Likes 생성 테이블 생성 및 이용과 Session을 이용한 좋아요 기능 구현
-- **카테고리 모아보기**: sqeulize 문법을 이용한 카테고리 별 검색기능 구현
-- **페이지네이션**: routes의 url 변수 선언과 Community table 조회를 이용한 페이지네이션 구현
+
   
 ## 👨‍💻 팀원소개
 | Name                 | GitHub / Contact                          
